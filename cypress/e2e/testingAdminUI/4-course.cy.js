@@ -14,11 +14,10 @@ describe('Create course', () => {
             "eligendi harum hic quidem. Aliquam amet architecto, id illum laboriosam maxime nobis omnis perspiciatis " +
             "porro provident, quidem reiciendis sequi voluptate voluptatem.")
         // Set course as active
-        cy.xpath("(//button[@role='switch'])[1]").click();
 
         // Add lessons for course
-        cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonTextCheckboxRadio'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonTextCheckboxRadio') + "']").click();
+        cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonCheckboxRadio2'));
+        cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio2') + "']").click();
         cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonCheckboxRadio'));
         cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "']").click();
         cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonText'));

@@ -32,7 +32,7 @@ describe('Search courses', () => {
     it('search course by name', function () {
         cy.xpath("//input[@id='search']").type('Планирование').clear();
         cy.xpath("//input[@id='search']").type('Тестовое задание').clear();
-        cy.xpath("//input[@id='search']").type('Дизайн').clear();
+        cy.xpath("//input[@id='search']").type(Cypress.env('courseName')).clear();
     });
 
     it('go to curriculums', function () {
