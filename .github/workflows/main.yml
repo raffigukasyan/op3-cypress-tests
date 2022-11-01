@@ -24,7 +24,7 @@ jobs:
           npx cypress cache list
       - name: Run Cypress
         continue-on-error: true
-        run: npm run cy:run
+        run: DEBUG=allure-plugin* npx cypress run --env allure=true --browser chrome
         env:
           CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
 
