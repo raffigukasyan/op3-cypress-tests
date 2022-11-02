@@ -5,7 +5,6 @@ describe('Create course', () => {
 
     it('should create course', function () {
         // Go to add courses page
-        cy.wait(1500);
         cy.xpath("//a[text()='Courses']").click();
         cy.xpath("//button[text()='Add Course']").click();
 
@@ -16,8 +15,6 @@ describe('Create course', () => {
         // Set course as active
 
         // Add lessons for course
-        cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonCheckboxRadio2'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio2') + "']").click();
         cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonCheckboxRadio'));
         cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "']").click();
         cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonText'));

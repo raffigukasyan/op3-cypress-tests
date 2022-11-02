@@ -15,29 +15,20 @@ describe('Complete the course which we have created in previous tests', () => {
             .click();
 
         //// FIRST LESSON ////
-        // Assert we're in the first lesson
+        // Assert we're in the second lesson
         cy.xpath("//h1[text()='" + Cypress.env('lessonCheckboxRadio') + "']");
         // Select correct radio answer
         cy.xpath("(//input[@type='radio'])[1]").click();
         // Select correct checkbox answer
         cy.xpath("(//input[@type='checkbox'])[1]").click();
         // Go to the next lesson
-        cy.xpath("//button[@type='submit']").click();
+        cy.wait(2000)
+        cy.xpath("//button[@type='submit']").dblclick();
 
         //// SECOND LESSON ////
-        // Assert we're in the second lesson
-        cy.xpath("//h1[text()='" + Cypress.env('lessonCheckboxRadio2') + "']");
-        // Select correct radio answer
-        cy.xpath("(//input[@type='radio'])[1]").click();
-        // Select correct checkbox answer
-        cy.xpath("(//input[@type='checkbox'])[1]").click();
-        // Go to the next lesson
-        cy.xpath("//button[@type='submit']").click();
-
-        //// THIRD LESSON ////
-        // Assert we're in the first lesson
-        cy.xpath("//h1[text()='" + Cypress.env('lessonCheckboxRadio') + "']");
-        // Select incorrect radio answer
+        // Assert we're in the third lesson
+        cy.xpath("//h1[text()='" + Cypress.env('lessonText') + "']");
+        // Input answer
         cy.xpath("//div[@contenteditable='true']").click().type("Lorem ipsum dolor sit amet, consectetur " +
             "adipisicing elit. Accusamus aspernatur dolorem dolorum eligendi esse facilis impedit ipsa maxime minus " +
             "molestiae nostrum odit provident quam ratione, sequi similique, tempore. Nemo, sunt?");

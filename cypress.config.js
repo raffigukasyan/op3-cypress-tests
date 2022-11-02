@@ -3,13 +3,14 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 module.exports = defineConfig({
   env: {
+    userName: "QA DON T TOUCH",
+    lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email: "qa-headuser@robot-mail.com",
     password: "159159",
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
     courseName: "QA Test Course",
-    lessonCheckboxRadio2: "QA Test lesson (checkbox + radio)2",
     lessonCheckboxRadio: "QA Test lesson (checkbox + radio)",
     lessonText: "QA Test lesson (text)",
     questionRadio: "radio question",

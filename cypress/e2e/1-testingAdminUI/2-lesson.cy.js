@@ -39,6 +39,7 @@ describe("Create lessons", () => {
         cy.xpath("//button[text()='Add lesson']").click();
 
         cy.xpath("//input[@type='text']").type(Cypress.env('lessonText'));
+        cy.xpath("//button[@role='switch']").click();
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
@@ -56,36 +57,4 @@ describe("Create lessons", () => {
         cy.xpath("//span[text()='Active']").should('be.visible');
     });
 
-    it('should create lesson(text + checkbox + radio)', function () {
-        //// Create lesson ////
-        cy.xpath("//a[text()='Lessons']").click()
-        cy.xpath("//button[text()='Add lesson']").click();
-
-        cy.xpath("//input[@type='text']").type(Cypress.env('lessonCheckboxRadio2'));
-        cy.xpath("//button[@role='switch']").click();
-        cy.xpath("//button[text()='Save']").should('be.visible').click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
-
-        //// Edit lesson ////
-        // Getting access to lesson
-        cy.xpath("//button[text()='4']").click({force:true});
-        cy.wait(1500);
-        cy.xpath("(//div[text()='" + Cypress.env('lessonCheckboxRadio2') + "'])[1]").click();
-
-        // Create radio question
-        cy.question(Cypress.env('questionRadio'), 2);
-        cy.addAnswers(1);
-
-        // Create checkbox question
-        cy.question(Cypress.env('questionCheckbox'), 3);
-        cy.addAnswers(2);
-
-        // Assert question added
-        cy.xpath("//span[text()='Active']").should('be.visible');
-    });
-
-    // TODO: Delete lesson after test
-    it('should ', function () {
-
-    });
 });
