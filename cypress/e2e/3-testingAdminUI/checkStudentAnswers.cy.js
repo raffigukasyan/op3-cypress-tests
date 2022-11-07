@@ -1,4 +1,4 @@
-describe('Check student answers', () => {
+describe('10. Check student answers', () => {
     before(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });

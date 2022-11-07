@@ -1,4 +1,4 @@
-describe('Complete the course which we have created in previous tests', () => {
+describe('8. Complete the course which we have created in previous tests', () => {
     before(() => {
         cy.login(Cypress.env('email'), Cypress.env('password'))
     });

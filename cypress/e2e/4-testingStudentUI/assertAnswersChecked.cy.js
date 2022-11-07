@@ -1,4 +1,4 @@
-describe('Assert answers were checked by teacher', () => {
+describe('11. Assert answers were checked by teacher', () => {
     before(() => {
         cy.login(Cypress.env('email'), Cypress.env('password'))
     })

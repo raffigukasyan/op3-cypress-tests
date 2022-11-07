@@ -1,4 +1,4 @@
-describe('Create course', () => {
+describe('4. Create course', () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
@@ -6,7 +6,8 @@ describe('Create course', () => {
     it('should create course', function () {
         // Go to add courses page
         cy.xpath("//a[text()='Courses']").click();
-        cy.xpath("//button[text()='Add Course']").click();
+        cy.xpath("//button[@class='max-w-xs mr-2 justify-center rounded-md border border-transparent shadow-sm px-4 py-auto text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm bg-indigo-500 hover:bg-indigo-700']")
+            .click();
 
         cy.xpath("(//input[@type='text'])[1]").type(Cypress.env('courseName'));
         cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci " +

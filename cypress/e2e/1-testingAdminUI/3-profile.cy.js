@@ -1,11 +1,11 @@
-describe("Profile editing", () => {
+describe("3. Profile editing", () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
 
     it('should assert profile page', function () {
         // Go to editing profile page
-        cy.xpath("(//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])[1]").click();
+        cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
         cy.xpath("//a[@href='https://itdelta.learn.company-policy.com/profile']").click();
 
         // Input credentials

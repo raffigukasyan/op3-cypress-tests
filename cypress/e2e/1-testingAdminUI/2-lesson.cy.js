@@ -1,4 +1,4 @@
-describe("Create lessons", () => {
+describe("2. Create lessons", () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
@@ -15,8 +15,7 @@ describe("Create lessons", () => {
 
         //// Edit lesson ////
         // Getting access to lesson
-        cy.xpath("//button[text()='4']").click({force:true});
-        cy.wait(1500);
+        cy.accessAllItems();
         cy.xpath("(//div[text()='" + Cypress.env('lessonCheckboxRadio') + "'])[1]").click();
 
         // Create radio question
@@ -45,9 +44,7 @@ describe("Create lessons", () => {
 
         //// Edit lesson ////
         // Getting access to lesson
-        cy.wait(1500);
-        cy.xpath("//button[text()='4']").click({force:true});
-        cy.wait(1500);
+        cy.accessAllItems();
         cy.xpath("(//div[text()='" + Cypress.env('lessonText') + "'])[1]").click();
 
         // Create text question

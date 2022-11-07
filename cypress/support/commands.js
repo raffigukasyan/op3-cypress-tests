@@ -68,3 +68,11 @@ Cypress.Commands.add('addAnswers', (answer) => {
     cy.xpath("//button[text()='Cancel']").click();
     cy.xpath("//*[text()='Edit lesson']");
 });
+
+Cypress.Commands.add('accessAllItems', () => {
+    cy.wait(3000);
+    cy.xpath("(//button[@class='relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm'])[last()]")
+    .click();
+    cy.wait(3000);
+    cy.xpath("(//li)[last()]").click();
+});

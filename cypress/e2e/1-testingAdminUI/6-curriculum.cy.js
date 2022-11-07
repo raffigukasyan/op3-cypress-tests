@@ -1,4 +1,4 @@
-describe('Create curriculum', () => {
+describe('6. Create curriculum', () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });

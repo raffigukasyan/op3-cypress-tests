@@ -1,4 +1,4 @@
-describe('Create course group', () => {
+describe('5. Create course group', () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
