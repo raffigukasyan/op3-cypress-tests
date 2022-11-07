@@ -1,5 +1,6 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+const makeEmailAccount = require('./cypress/plugins/email-account')
 
 module.exports = defineConfig({
   env: {
@@ -25,7 +26,21 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: "https://itdelta.learn.company-policy.com/",
-    setupNodeEvents(on, config) {
+    setupNodeEvents: async (on, config) => {
+      const emailAccount = await makeEmailAccount()
+
+      on('task', {
+        getUserEmail() {
+          return emailAccount.user
+        },
+        getLastEmail() {
+          return emailAccount.getLastEmail()
+        },
+        sendEmail() {
+          return emailAccount.sendEmail()
+        }
+      });
+
       allureWriter(on, config);
       return config;
     },

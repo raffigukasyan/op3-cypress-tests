@@ -23,7 +23,7 @@ Cypress.Commands.add('login', (email, password) => {
 
     cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
 
-    cy.xpath("//h2[text()='Learning center']").should('be.visible');
+    cy.xpath("//h2[text()='Learning center']").click();
 });
 
 Cypress.Commands.add('admin', (email, password) => {

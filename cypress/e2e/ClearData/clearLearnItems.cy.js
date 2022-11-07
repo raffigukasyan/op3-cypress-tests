@@ -3,18 +3,18 @@ describe('N. Clear all created learning items', () => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
 
-    // it('delete QA lessons', function () {
-    //     // Go to Admin Lessons page
-    //     cy.xpath("//a[text()='Lessons']").click();
-    //     cy.accessAllItems();
-    //
-    //     // Delete lesson
-    //     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-    //     cy.wait(500);
-    //     cy.xpath("//p[text()='Success!']").should('be.visible');
-    //     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-    //     cy.logout();
-    // });
+    it('delete QA lessons', function () {
+        // Go to Admin Lessons page
+        cy.xpath("//a[text()='Lessons']").click();
+        cy.accessAllItems();
+
+        // Delete lesson
+        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
+        cy.wait(500);
+        cy.xpath("//p[text()='Success!']").should('be.visible');
+        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
+        cy.logout();
+    });
 
     it('delete QA course', function () {
         // Go to Admin Lessons page

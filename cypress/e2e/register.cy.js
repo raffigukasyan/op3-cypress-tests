@@ -1,51 +1,52 @@
 const {MailSlurp} = require("mailslurp-client");
+const {recurse} = require("cypress-recurse");
 
 describe('B. Register user', () => {
-    // Create inbox for testing invite
-    let inboxId;
-    let emailAddress;
+    let userEmail;
+    let userName;
+    let confirmationLink;
+
+    before(() => {
+        cy.task("getUserEmail").then((user) => {
+            cy.log(user.email);
+            cy.log(user.pass);
+            expect(user.email).to.be.a("string");
+            userEmail = user.email;
+            userName = user.email.replace("@ethereal.email", "");
+        })
+    })
+
     it('can generate a new email address and sign up', () => {
-        cy.createInbox().then(inbox => {
-            assert.isDefined(inbox)
+        cy.visit(Cypress.config().baseUrl);
 
-            inboxId = inbox.id
-            emailAddress = inbox.emailAddress;
+        // Click on register button
+        cy.xpath("//a[@href='/register']").click();
 
-            cy.visit(Cypress.config().baseUrl);
+        // Type credentials
+        cy.xpath("//input[@id='name']").type(String(Math.random() * 100));
+        cy.xpath("//input[@id='email']").type(userEmail);
+        cy.xpath("//input[@id='password']").type(Cypress.env('password'));
+        cy.xpath("//input[@id='password_confirmation']").type(Cypress.env('password'));
 
-            // Click on register button
-            cy.xpath("//a[@href='/register']").click();
-
-            // Type credentials
-            cy.xpath("//input[@id='name']").type(String(Math.random() * 100));
-            cy.xpath("//input[@id='email']").type(emailAddress);
-            cy.xpath("//input[@id='password']").type(Cypress.env('password'));
-            cy.xpath("//input[@id='password_confirmation']").type(Cypress.env('password'));
-
-            // Click on submit button
-            cy.xpath("//button[@type='submit']").click();
-        });
+        // Click on submit button
+        cy.xpath("//button[@type='submit']").click();
     });
 
-    let confirmationLink;
     it('can receive the confirmation email and extract the code', () => {
-        const apiKey = Cypress.env('API_KEY')
-        const mailslurp = new MailSlurp({ apiKey });
-
-        // wait for an email in the inbox
-        cy.waitForLatestEmail(inboxId).then(async email => {
-            // verify we received an email
-            assert.isDefined(email);
-
-            // verify that email contains the code
-
-            const linkResult = await mailslurp.emailController.getEmailLinks({
-                emailId: email.id,
-            });
-
-            confirmationLink = linkResult.links[1];
+        recurse(
+            () => cy.task('getLastEmail'), // Cypress commands to retry
+            Cypress._.isObject, // keep retrying until the task returns an object
+            {
+                timeout: 60000, // retry up to 1 minute
+                delay: 5000, // wait 5 seconds between attempts
+            },
+        )
+        .its('html')
+        .then((html) => {
+            cy.document({ log: false }).invoke({ log: false }, 'write', html)
+        })
+        cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
+            confirmationLink = href;
         });
-
-        cy.visit(confirmationLink);
     });
 });
