@@ -1,4 +1,4 @@
-describe("3. Profile editing", () => {
+describe("E. Profile editing", () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });

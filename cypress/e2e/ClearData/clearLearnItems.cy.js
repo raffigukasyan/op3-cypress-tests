@@ -1,4 +1,4 @@
-describe('12. Clear all created learning items', () => {
+describe('N. Clear all created learning items', () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });
@@ -8,12 +8,12 @@ describe('12. Clear all created learning items', () => {
     //     cy.xpath("//a[text()='Lessons']").click();
     //     cy.accessAllItems();
     //
-    //     // Delete lessons
+    //     // Delete lesson
     //     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
     //     cy.wait(500);
     //     cy.xpath("//p[text()='Success!']").should('be.visible');
     //     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-    //     cy.xpath("//p[text()='Success!']").should('be.visible');
+    //     cy.logout();
     // });
 
     it('delete QA course', function () {
@@ -23,9 +23,9 @@ describe('12. Clear all created learning items', () => {
 
         cy.xpath("//div[text()='" + Cypress.env('courseName') + "']").click({force:true});
 
-        // Delete lessons
+        // Delete course
         cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
+        cy.logout();
     });
 
     it('delete QA curriculum', function () {
@@ -35,9 +35,9 @@ describe('12. Clear all created learning items', () => {
 
         cy.xpath("//div[text()='" + Cypress.env('curriculumName') + "']").click({force:true});
 
-        // Delete lessons
+        // Delete curriculum
         cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
+        cy.logout();
     });
 
     it('delete QA course group', function () {
@@ -47,7 +47,7 @@ describe('12. Clear all created learning items', () => {
 
         cy.xpath("//div[text()='" + Cypress.env('courseGroupName') + "']").click({force:true});
 
-        // Delete lessons
+        // Delete group
         cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });

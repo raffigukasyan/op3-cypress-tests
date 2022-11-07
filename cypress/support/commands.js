@@ -76,3 +76,10 @@ Cypress.Commands.add('accessAllItems', () => {
     cy.wait(3000);
     cy.xpath("(//li)[last()]").click();
 });
+
+Cypress.Commands.add('logout', () => {
+    cy.wait(1500);
+    cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
+    cy.xpath("//a[@href='https://itdelta.learn.company-policy.com/logout']").click();
+    cy.wait(1500);
+})

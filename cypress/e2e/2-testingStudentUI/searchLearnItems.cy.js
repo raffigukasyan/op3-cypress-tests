@@ -1,4 +1,4 @@
-describe('9. Search courses', () => {
+describe('K. Search courses', () => {
     beforeEach(() => {
         cy.login(Cypress.env('email'), Cypress.env('password'));
     });

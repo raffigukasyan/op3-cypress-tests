@@ -1,6 +1,6 @@
 const {MailSlurp} = require("mailslurp-client");
 
-describe("1. Invite user by 2 ways", () => {
+describe("C. Invite user by 2 ways", () => {
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'));
     });

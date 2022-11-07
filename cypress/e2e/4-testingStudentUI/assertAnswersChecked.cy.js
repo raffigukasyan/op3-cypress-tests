@@ -1,4 +1,4 @@
-describe('11. Assert answers were checked by teacher', () => {
+describe('M. Assert answers were checked by teacher', () => {
     before(() => {
         cy.login(Cypress.env('email'), Cypress.env('password'))
     })
@@ -18,6 +18,7 @@ describe('11. Assert answers were checked by teacher', () => {
         cy.xpath("//p[text()='" + Cypress.env('lessonText') + "']").click();
         cy.xpath("//div[text()='" + Cypress.env('lessonSuccess') + "']").should('be.visible').click();
         // Go to success page
+        cy.wait(1500);
         cy.xpath("//p[text()='SuccessScreen']").click();
         cy.xpath("//div[text()='Congratulations!']").should('be.visible').click();
     });

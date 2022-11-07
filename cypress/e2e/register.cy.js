@@ -1,6 +1,6 @@
 const {MailSlurp} = require("mailslurp-client");
 
-describe('Register user', () => {
+describe('B. Register user', () => {
     // Create inbox for testing invite
     let inboxId;
     let emailAddress;
