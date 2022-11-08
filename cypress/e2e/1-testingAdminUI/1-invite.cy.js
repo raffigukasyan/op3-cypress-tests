@@ -76,7 +76,7 @@ describe("C. Invite user by 2 ways", () => {
         cy.xpath("//a[text()='Users']").click();
         cy.accessAllItems();
 
-        cy.xpath("//div[text()='QA TEST']").should("be.visible");
+        cy.xpath("//div[text()='QA TEST']");
         cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
     });
 
