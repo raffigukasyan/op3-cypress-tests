@@ -2,7 +2,7 @@
 
 # Getting started
 
-npm install
+npm install 
 
 npx cypress run --env allure=true
 
