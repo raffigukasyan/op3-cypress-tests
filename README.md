@@ -1,4 +1,4 @@
-# Cypress-allure-tests
+# op3-cypress-tests
 
 # Getting started
 
