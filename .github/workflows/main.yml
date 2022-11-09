@@ -11,7 +11,6 @@ jobs:
       - name: Download Cypress
         uses: bahmutov/npm-install@v1
         env:
-          PASSWORD: 159159
           CYPRESS_INSTALL_BINARY: 0
 
       - name: Check Cypress cache
@@ -25,9 +24,12 @@ jobs:
           npx cypress cache list
       - name: Run Cypress
         continue-on-error: true
-        run: DEBUG=allure-plugin* CYPRESS_API_KEY=76bbb8d261cb321c2e89a2064a02dfddd7814f03db7cef2321d9d6cb27d55c21 npx cypress run --env allure=true --browser chrome
+        run: |
+          env
+          DEBUG=allure-plugin* CYPRESS_API_KEY=76bbb8d261cb321c2e89a2064a02dfddd7814f03db7cef2321d9d6cb27d55c21 npx cypress run --env allure=true --browser chrome
         env:
           CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
+          PASSWORD: 159159
 
       - name: Get Allure history
         uses: actions/checkout@v2
