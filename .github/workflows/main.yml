@@ -11,6 +11,7 @@ jobs:
       - name: Download Cypress
         uses: bahmutov/npm-install@v1
         env:
+          PASSWORD: 159159
           CYPRESS_INSTALL_BINARY: 0
 
       - name: Check Cypress cache

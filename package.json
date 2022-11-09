@@ -19,6 +19,7 @@
     "cypress": "^10.10.0",
     "cypress-recurse": "^1.23.0",
     "cypress-xpath": "^2.0.1",
+    "dotenv": "^16.0.3",
     "imapflow": "^1.0.113",
     "mailparser": "^3.5.0",
     "mailslurp-client": "^15.14.1",

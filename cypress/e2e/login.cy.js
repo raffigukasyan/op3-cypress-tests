@@ -18,5 +18,3 @@ describe('A. Login test', () => {
         cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });
 })
-
-// https://itdelta.learn.company-policy.com/

@@ -8,7 +8,7 @@ module.exports = defineConfig({
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email: "qa-headuser@robot-mail.com",
-    password: "159159",
+    password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
     courseName: "QA Test Course",
