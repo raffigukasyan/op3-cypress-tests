@@ -1,6 +1,6 @@
 describe('N. Clear all created learning items', () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'));
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('delete QA lessons', function () {

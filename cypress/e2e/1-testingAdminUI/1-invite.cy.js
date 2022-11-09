@@ -6,7 +6,7 @@ describe("C. Invite user by 2 ways", () => {
     let confirmationLink;
 
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'));
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     before(() => {
@@ -64,8 +64,8 @@ describe("C. Invite user by 2 ways", () => {
 
         cy.xpath("//*[@id='first-name']").type('QA');
         cy.xpath("//*[@id='last-name']").type('TEST')
-        cy.xpath("//*[@id='password']").type(Cypress.env('password'));
-        cy.xpath("//*[@id='new_password']").type(Cypress.env('password'));
+        cy.xpath("//*[@id='password']").type(Cypress.env('password'), { log: false });
+        cy.xpath("//*[@id='new_password']").type(Cypress.env('password'), { log: false });
 
         cy.xpath("(//button[@type='submit'])[1]").click();
 
@@ -90,8 +90,8 @@ describe("C. Invite user by 2 ways", () => {
         cy.xpath("(//input[@type='text'])[2]").type("QA");
         cy.xpath("//input[@type='email']").type("testAddUser+" + Math.random() * 100 + "@lc.com");
         cy.xpath("//input[@type='tel']").type("+7999" + Math.random() * 100);
-        cy.xpath("(//input[@type='password'])[1]").type(Cypress.env('password'));
-        cy.xpath("(//input[@type='password'])[2]").type(Cypress.env('password'));
+        cy.xpath("(//input[@type='password'])[1]").type(Cypress.env('password'), { log: false });
+        cy.xpath("(//input[@type='password'])[2]").type(Cypress.env('password'), { log: false });
 
         // Click on submit button
         cy.xpath("//button[text()='Save']").click();

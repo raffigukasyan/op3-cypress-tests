@@ -1,6 +1,6 @@
 describe("E. Profile editing", () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'));
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('should assert profile page', function () {

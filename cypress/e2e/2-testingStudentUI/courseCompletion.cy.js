@@ -1,6 +1,6 @@
 describe('J. Complete the course which we have created in previous tests', () => {
     before(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'))
+        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false })
     });
 
     it('should ', function () {

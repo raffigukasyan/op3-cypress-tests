@@ -1,6 +1,6 @@
 describe('F. Create course', () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'));
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('should create course', function () {

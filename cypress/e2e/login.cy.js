@@ -11,7 +11,7 @@ describe('A. Login test', () => {
         cy.xpath("//a[@class='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900']").click();
 
         cy.xpath("//input[@id='email']", { timeout: 10000 }).type(Cypress.env('email'));
-        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(Cypress.env('password'));
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(Cypress.env('password'), { log: false });
 
         cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
 

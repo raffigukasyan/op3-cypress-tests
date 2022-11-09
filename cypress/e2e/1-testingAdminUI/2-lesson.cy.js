@@ -1,6 +1,6 @@
 describe("D. Create lessons", () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'));
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('should create lesson(checkbox + radio)', function () {

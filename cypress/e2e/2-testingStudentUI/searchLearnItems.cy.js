@@ -1,6 +1,6 @@
 describe('K. Search courses', () => {
     beforeEach(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'));
+        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('open and close course lists', function () {
@@ -44,7 +44,7 @@ describe('K. Search courses', () => {
 
 describe('Search curriculums', function () {
     before(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'));
+        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
     it('go to curriculums and search them by name', function () {

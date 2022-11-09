@@ -25,8 +25,8 @@ describe('B. Register user', () => {
         // Type credentials
         cy.xpath("//input[@id='name']").type(String(Math.random() * 100));
         cy.xpath("//input[@id='email']").type(userEmail);
-        cy.xpath("//input[@id='password']").type(Cypress.env('password'));
-        cy.xpath("//input[@id='password_confirmation']").type(Cypress.env('password'));
+        cy.xpath("//input[@id='password']").type(Cypress.env('password'), { log: false });
+        cy.xpath("//input[@id='password_confirmation']").type(Cypress.env('password'), { log: false });
 
         // Click on submit button
         cy.xpath("//button[@type='submit']").click();
