@@ -25,11 +25,7 @@ jobs:
       - name: Run Cypress
         continue-on-error: true
         run: |
-          env
-          DEBUG=allure-plugin* CYPRESS_API_KEY=76bbb8d261cb321c2e89a2064a02dfddd7814f03db7cef2321d9d6cb27d55c21 npx cypress run --env allure=true --browser chrome
-        env:
-          CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
-          PASSWORD: 159159
+          DEBUG=allure-plugin* PASSWORD=${{secrets.EMAIL_PASSWORD}} npx cypress run --env allure=true --browser chrome
 
       - name: Get Allure history
         uses: actions/checkout@v2

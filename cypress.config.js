@@ -3,11 +3,12 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 const makeEmailAccount = require('./cypress/plugins/email-account')
 
 module.exports = defineConfig({
+  chromeWebSecurity: false,
   env: {
-    userName: "QA DON T TOUCH",
+    userName: "prog itdelta",
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
-    email: "qa-headuser@robot-mail.com",
+    email:  "prog@itdelta.agency",
     password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
@@ -25,7 +26,7 @@ module.exports = defineConfig({
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: "https://itdelta.learn.company-policy.com/",
+    baseUrl: "https://qa-testing.learn.company-policy.com/",
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 

@@ -1,9 +1,8 @@
 describe("D. Create lessons", () => {
-    beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
-    });
 
     it('should create lesson(checkbox + radio)', function () {
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()
         cy.xpath("//button[text()='Add lesson']").click();
@@ -26,13 +25,13 @@ describe("D. Create lessons", () => {
         cy.question(Cypress.env('questionCheckbox'), 3);
         cy.addAnswers(2);
 
-        cy.xpath("//p[text()='Success!']").should('be.visible');
-
         // Assert question added
         cy.xpath("//span[text()='Active']").should('be.visible');
     });
 
     it('should create lesson(text)', function () {
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()
         cy.xpath("//button[text()='Add lesson']").click();

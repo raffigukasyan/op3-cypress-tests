@@ -5,10 +5,6 @@ describe("C. Invite user by 2 ways", () => {
     let userName;
     let confirmationLink;
 
-    beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
-    });
-
     before(() => {
         cy.task("getUserEmail").then((user) => {
             cy.log(user.email);
@@ -20,14 +16,16 @@ describe("C. Invite user by 2 ways", () => {
     })
 
     it('should invite by user menu', function () {
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+
         // Go to invite user page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-        cy.xpath("//a[@href='https://itdelta.learn.company-policy.com/invite-user']").click();
+        cy.xpath("//a[@href='https://qa-testing.learn.company-policy.com/invite-user']").click();
 
         // Input credentials
         cy.xpath("//*[@id='email']").type(userEmail);
         cy.xpath("//button[text()='Select groups']").click();
-        cy.xpath("//li[text()='Кандидаты Frontend']").click();
+        cy.xpath("//li[text()='Heads']").click();
         cy.xpath("//button[text()='Save']").click();
 
         // Assert user have role
@@ -57,9 +55,6 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('accept invitation', function () {
-        cy.logout();
-
-        cy.wait(2000);
         cy.visit(confirmationLink);
 
         cy.xpath("//*[@id='first-name']").type('QA');
@@ -73,6 +68,8 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('delete invited user', function () {
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+
         cy.xpath("//a[text()='Users']").click();
         cy.accessAllItems();
 
@@ -81,6 +78,8 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('should invite by admin tools', function () {
+        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+
         // Go to add user page
         cy.xpath("//a[text()='Users']").click();
         cy.xpath("//button[text()='Add user']").click();

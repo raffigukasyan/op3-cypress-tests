@@ -8,9 +8,6 @@ describe('L. Check student answers', () => {
         cy.wait(1500);
         cy.xpath("//a[text()='Student`s answers']").click();
         cy.xpath("//h2[text()=\"Student' answers\"]");
-        cy.wait(1500);
-        cy.xpath("//button[text()='6']").click({force:true});
-        cy.wait(1500);
 
         // Go to the lesson
         cy.xpath("//div[text()='" + Cypress.env('userName') + "']").click();
