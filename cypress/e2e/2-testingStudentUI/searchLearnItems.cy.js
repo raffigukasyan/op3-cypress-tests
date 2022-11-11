@@ -15,7 +15,7 @@ describe('K. Search courses', () => {
 
     it('go to curriculums', function () {
         cy.xpath("//a[@name='Curriculums']").click();
-        cy.xpath("//h3[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
+        cy.xpath("//span[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
     });
 });
 
