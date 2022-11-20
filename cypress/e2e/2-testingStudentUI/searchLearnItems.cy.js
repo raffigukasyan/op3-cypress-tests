@@ -1,6 +1,6 @@
 describe('K. Search courses', () => {
     beforeEach(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.login();
     });
 
     it('select Started Finished and All courses', function () {
@@ -16,6 +16,13 @@ describe('K. Search courses', () => {
     it('go to curriculums', function () {
         cy.xpath("//a[@name='Curriculums']").click();
         cy.xpath("//span[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });
 

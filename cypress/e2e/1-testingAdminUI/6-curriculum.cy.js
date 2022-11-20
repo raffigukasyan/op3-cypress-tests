@@ -1,4 +1,22 @@
 describe('H. Create curriculum', () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
+
+    before(() => {
+        if ( Cypress.browser.isHeaded ) {
+            cy.clearCookie(skipCookie)
+        } else {
+            cy.getCookie(skipCookie).then(cookie => {
+                if (
+                    cookie &&
+                    typeof cookie === 'object' &&
+                    cookie.value === 'true'
+                ) {
+                    Cypress.runner.stop();
+                }
+            });
+        }
+    });
+
     beforeEach(() => {
         cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
@@ -22,5 +40,11 @@ describe('H. Create curriculum', () => {
 
         // Assert curriculum created
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });

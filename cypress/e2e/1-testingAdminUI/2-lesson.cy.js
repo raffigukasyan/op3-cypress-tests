@@ -1,4 +1,5 @@
 describe("D. Create lessons", () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
 
     it('should create lesson(checkbox + radio)', function () {
         cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
@@ -53,4 +54,9 @@ describe("D. Create lessons", () => {
         cy.xpath("//span[text()='Active']").should('be.visible');
     });
 
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            cy.setCookie(skipCookie, 'true');
+        }
+    });
 });

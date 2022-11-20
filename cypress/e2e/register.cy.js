@@ -10,7 +10,6 @@ describe('B. Register user', () => {
         cy.task("getUserEmail").then((user) => {
             cy.log(user.email);
             cy.log(user.pass);
-            expect(user.email).to.be.a("string");
             userEmail = user.email;
             userName = user.email.replace("@ethereal.email", "");
         })
@@ -30,23 +29,6 @@ describe('B. Register user', () => {
 
         // Click on submit button
         cy.xpath("//button[@type='submit']").click();
-    });
-
-    it('can receive the confirmation email and extract the code', () => {
-        recurse(
-            () => cy.task('getLastEmail'), // Cypress commands to retry
-            Cypress._.isObject, // keep retrying until the task returns an object
-            {
-                timeout: 60000, // retry up to 1 minute
-                delay: 5000, // wait 5 seconds between attempts
-            },
-        )
-        .its('html')
-        .then((html) => {
-            cy.document({ log: false }).invoke({ log: false }, 'write', html)
-        })
-        cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
-            confirmationLink = href;
-        });
+        cy.location('pathname').should('eq', '/learning/courses')
     });
 });

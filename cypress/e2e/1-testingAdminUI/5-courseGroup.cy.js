@@ -3,7 +3,7 @@ describe('G. Create course group', () => {
         cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
-    it('should create curriculum', function () {
+    it('should create course program', function () {
         // Go to add curriculums page
         cy.wait(1500);
         cy.xpath("//a[text()='Course groups']").click();

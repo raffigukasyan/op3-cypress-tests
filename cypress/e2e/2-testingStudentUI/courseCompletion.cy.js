@@ -1,6 +1,22 @@
 describe('J. Complete the course which we have created in previous tests', () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
+
     before(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false })
+        if ( Cypress.browser.isHeaded ) {
+            cy.clearCookie(skipCookie)
+        } else {
+            cy.getCookie(skipCookie).then(cookie => {
+                if (
+                    cookie &&
+                    typeof cookie === 'object' &&
+                    cookie.value === 'true'
+                ) {
+                    Cypress.runner.stop();
+                }
+            });
+        }
+
+        cy.login()
     });
 
     it('should ', function () {
@@ -34,5 +50,11 @@ describe('J. Complete the course which we have created in previous tests', () =>
             "molestiae nostrum odit provident quam ratione, sequi similique, tempore. Nemo, sunt?");
         // Go to the next lesson
         cy.xpath("//button[@type='submit']").click();
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });

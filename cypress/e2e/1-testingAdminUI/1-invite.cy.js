@@ -9,7 +9,6 @@ describe("C. Invite user by 2 ways", () => {
         cy.task("getUserEmail").then((user) => {
             cy.log(user.email);
             cy.log(user.pass);
-            expect(user.email).to.be.a("string");
             userEmail = user.email;
             userName = user.email.replace("@ethereal.email", "");
         })
@@ -20,23 +19,20 @@ describe("C. Invite user by 2 ways", () => {
 
         // Go to invite user page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-        cy.xpath("//a[@href='https://qa-testing.learn.company-policy.com/invite-user']").click();
-
+        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
         cy.xpath("//*[@id='email']").type(userEmail);
-        cy.xpath("//button[text()='Select groups']").click();
-        cy.xpath("//li[text()='Heads']").click();
-        cy.xpath("//button[text()='Save']").click();
 
-        // Assert user have role
-        cy.xpath("//li//button").should('be.visible');
 
         // Click on submit button
         cy.xpath("//button[@type='submit']").click();
 
         // Assert user invited
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
 
+    it('getting last email', function () {
+        cy.wait(2500);
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
@@ -97,5 +93,11 @@ describe("C. Invite user by 2 ways", () => {
 
         // Assert user invited
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+        }
     });
 });
