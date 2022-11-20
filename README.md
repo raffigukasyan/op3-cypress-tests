@@ -4,6 +4,8 @@
 
 Node.js
 
+Java 8+ ()
+
 Installed [allure](https://docs.qameta.io/allure/#_installing_a_commandline)
 
 Installed [as-a](https://github.com/bahmutov/as-a)
