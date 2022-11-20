@@ -1,8 +1,11 @@
 Cypress.Commands.add('login', (email, password) => {
+    expect(email, 'username was set').to.be.a('string').and.not.be.empty
+    expect(password, 'password was set').to.be.a('string').and.not.be.empty
+
     cy.visit('https://qa-testing.learn.company-policy.com/login', { timeout: 10000 });
 
-    cy.xpath("//input[@id='email']", { timeout: 10000 }).type(email);
-    cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password);
+    cy.xpath("//input[@id='email']", { timeout: 10000 }).type(username);
+    cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
 
     cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
 
