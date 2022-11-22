@@ -5,7 +5,7 @@ const makeEmailAccount = require('./cypress/plugins/email-account')
 module.exports = defineConfig({
   chromeWebSecurity: false,
   env: {
-    userName: "prog itdelta",
+    userName: "prog1 itdelta",
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email:  "prog@itdelta.agency",
