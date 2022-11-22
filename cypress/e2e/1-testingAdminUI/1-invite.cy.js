@@ -36,7 +36,9 @@ describe("C. Invite user by 2 ways", () => {
 
         // Assert user invited
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
 
+    it('getting last email', function () {
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object

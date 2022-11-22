@@ -33,6 +33,7 @@ describe('B. Register user', () => {
     });
 
     it('can receive the confirmation email and extract the code', () => {
+        cy.wait(1000);
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
