@@ -1,4 +1,21 @@
 describe('F. Create course', () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
+
+    before(() => {
+        if ( Cypress.browser.isHeaded ) {
+            cy.clearCookie(skipCookie)
+        } else {
+            cy.getCookie(skipCookie).then(cookie => {
+                if (
+                    cookie &&
+                    typeof cookie === 'object' &&
+                    cookie.value === 'true'
+                ) {
+                    Cypress.runner.stop();
+                }
+            });
+        }
+    });
 
     it('should create course', function () {
         cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
@@ -25,5 +42,12 @@ describe('F. Create course', () => {
 
         // Assert course created
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });

@@ -1,5 +1,21 @@
 describe('L. Check student answers', () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
+
     before(() => {
+        if ( Cypress.browser.isHeaded ) {
+            cy.clearCookie(skipCookie)
+        } else {
+            cy.getCookie(skipCookie).then(cookie => {
+                if (
+                    cookie &&
+                    typeof cookie === 'object' &&
+                    cookie.value === 'true'
+                ) {
+                    Cypress.runner.stop();
+                }
+            });
+        }
+
         cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
     });
 
@@ -23,5 +39,12 @@ describe('L. Check student answers', () => {
         cy.xpath("//button[text()='Save']").click();
         // Assert answer saved
         // cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });

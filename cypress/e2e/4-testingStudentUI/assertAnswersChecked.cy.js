@@ -1,4 +1,22 @@
 describe('M. Assert answers were checked by teacher', () => {
+    const skipCookie = Cypress.env('shouldSkipEduTests');
+
+    before(() => {
+        if ( Cypress.browser.isHeaded ) {
+            cy.clearCookie(skipCookie)
+        } else {
+            cy.getCookie(skipCookie).then(cookie => {
+                if (
+                    cookie &&
+                    typeof cookie === 'object' &&
+                    cookie.value === 'true'
+                ) {
+                    Cypress.runner.stop();
+                }
+            });
+        }
+    });
+
     before(() => {
         cy.login(Cypress.env('email'), Cypress.env('password'), { log: false })
     })
@@ -21,5 +39,12 @@ describe('M. Assert answers were checked by teacher', () => {
         cy.wait(1500);
         cy.xpath("//p[text()='SuccessScreen']").click();
         cy.xpath("//div[text()='Congratulations!']").should('be.visible').click();
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+            cy.setCookie(skipCookie, 'true');
+        }
     });
 });

@@ -9,7 +9,6 @@ describe("C. Invite user by 2 ways", () => {
         cy.task("getUserEmail").then((user) => {
             cy.log(user.email);
             cy.log(user.pass);
-            expect(user.email).to.be.a("string");
             userEmail = user.email;
             userName = user.email.replace("@ethereal.email", "");
         })
@@ -39,6 +38,7 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('getting last email', function () {
+        cy.wait(2500);
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
@@ -99,5 +99,11 @@ describe("C. Invite user by 2 ways", () => {
 
         // Assert user invited
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+        }
     });
 });

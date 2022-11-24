@@ -17,6 +17,13 @@ describe('K. Search courses', () => {
         cy.xpath("//a[@name='Curriculums']").click();
         cy.xpath("//span[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
     });
+
+    afterEach(function onAfterEach() {
+        if (this.currentTest.state === 'failed') {
+            Cypress.runner.stop();
+            cy.setCookie(skipCookie, 'true');
+        }
+    });
 });
 
 // describe('Search curriculums', function () {

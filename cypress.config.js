@@ -20,6 +20,7 @@ module.exports = defineConfig({
     questionCheckbox: "checkbox question",
     answer1: "answer 1",
     answer2: "answer 2",
+    shouldSkipEduTests: 'shouldSkipEduTests',
   },
   defaultCommandTimeout: 30000,
   requestTimeout: 30000,

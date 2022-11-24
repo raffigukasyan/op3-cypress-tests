@@ -10,7 +10,6 @@ describe('B. Register user', () => {
         cy.task("getUserEmail").then((user) => {
             cy.log(user.email);
             cy.log(user.pass);
-            expect(user.email).to.be.a("string");
             userEmail = user.email;
             userName = user.email.replace("@ethereal.email", "");
         })

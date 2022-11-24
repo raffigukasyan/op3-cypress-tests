@@ -1,7 +1,4 @@
 Cypress.Commands.add('login', (email, password) => {
-    expect(email, 'username was set').to.be.a('string').and.not.be.empty
-    expect(password, 'password was set').to.be.a('string').and.not.be.empty
-
     cy.visit('https://qa-testing.learn.company-policy.com/login', { timeout: 10000 });
 
     cy.xpath("//input[@id='email']", { timeout: 10000 }).type(email);
@@ -68,4 +65,20 @@ Cypress.Commands.add('logout', () => {
     cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
     cy.xpath("//a[@href='https://qa-testing.learn.company-policy.com/logout']").click();
     cy.wait(1500);
-})
+});
+
+Cypress.Commands.add('skipTests', (cookieName) => {
+    if ( Cypress.browser.isHeaded ) {
+        cy.clearCookie(cookieName)
+    } else {
+        cy.getCookie(cookieName).then(cookie => {
+            if (
+                cookie &&
+                typeof cookie === 'object' &&
+                cookie.value === 'true'
+            ) {
+                Cypress.runner.stop();
+            }
+        });
+    }
+});
