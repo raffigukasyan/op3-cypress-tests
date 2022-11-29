@@ -8,7 +8,7 @@ module.exports = defineConfig({
     userName: "prog1 itdelta",
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
-    email:  "prog@itdelta.agency",
+    email:  "user@aa.com",
     password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
@@ -27,7 +27,7 @@ module.exports = defineConfig({
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: "https://qa-testing.learn.company-policy.com/",
+    baseUrl: "https://tenant1.release.company-policy.com/",
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 
