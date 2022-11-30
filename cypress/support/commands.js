@@ -13,7 +13,7 @@ Cypress.Commands.add('admin', (email, password) => {
     cy.login(email, password);
 
     cy.xpath("(//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])[1]").click();
-    cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "/admin']").click();
+    cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "admin']").click();
     cy.wait(1500);
 });
 
@@ -63,7 +63,7 @@ Cypress.Commands.add('accessAllItems', () => {
 Cypress.Commands.add('logout', () => {
     cy.wait(1500);
     cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-    cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "/logout']").click();
+    cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "logout']").click();
     cy.wait(1500);
 });
 

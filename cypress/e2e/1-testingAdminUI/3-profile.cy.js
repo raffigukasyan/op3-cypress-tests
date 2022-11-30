@@ -5,7 +5,7 @@ describe("E. Profile editing", () => {
 
         // Go to editing profile page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "/profile']").click();
+        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "profile']").click();
 
         // Input credentials
         cy.xpath("//h1[text()='User Profile']").should('be.visible');

@@ -19,7 +19,7 @@ describe("C. Invite user by 2 ways", () => {
 
         // Go to invite user page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "/invite-user']").click();
+        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
         cy.xpath("//*[@id='email']").type(userEmail);
 
