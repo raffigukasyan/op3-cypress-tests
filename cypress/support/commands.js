@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', (email, password) => {
-    cy.visit(Cypress.config('baseUrl') + '/login', { timeout: 10000 });
+    cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
 
     cy.xpath("//input[@id='email']", { timeout: 10000 }).type(email);
     cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
