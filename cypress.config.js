@@ -5,10 +5,10 @@ const makeEmailAccount = require('./cypress/plugins/email-account')
 module.exports = defineConfig({
   chromeWebSecurity: false,
   env: {
-    userName: "prog1 itdelta",
+    userName: process.env.AUTHNAME,
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
-    email:  "user@aa.com",
+    email:  process.env.USERNAME,
     password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
@@ -27,7 +27,7 @@ module.exports = defineConfig({
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: "https://tenant1.release.company-policy.com/",
+    baseUrl:process.env.URL,
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 

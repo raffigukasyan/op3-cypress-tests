@@ -29,8 +29,11 @@ describe('N. Clear all created learning items', () => {
         // Delete lesson
         cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
         cy.wait(500);
+        cy.xpath("//button[text()='Delete']").click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
-        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
+        // cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
+        // cy.xpath("//button[text()='Delete']").click();
+        // cy.xpath("//p[text()='Success!']").should('be.visible');
         cy.logout();
     });
 
