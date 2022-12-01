@@ -43,7 +43,7 @@ jobs:
           gh_pages: allure
 
       - name: Clear report allure-results
-        run: npm run allure:clear
+        run: sudo npm run allure:clear
 
       - name: Run Cypress
         continue-on-error: true
