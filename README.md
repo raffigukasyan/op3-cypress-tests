@@ -30,4 +30,4 @@ allure open
 
 [Cypres docs](https://docs.cypress.io/guides/overview/why-cypress)
 
-Command **npx cypress open** opens "Cypress tests runner" 
+Command **npx cypress open** opens "Cypress tests runner"
