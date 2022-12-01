@@ -29,6 +29,7 @@ describe('B. Register user', () => {
 
         // Click on submit button
         cy.xpath("//button[@type='submit']").click();
+        cy.location('pathname').should('eq', '/learning/courses')
     });
 
     it('can receive the confirmation email and extract the code', () => {
