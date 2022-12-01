@@ -3,9 +3,9 @@ name: QA Test prod after merge
 on: [workflow_dispatch, push]
 
 jobs:
-  deploy:
+  Prod-Test:
+    timeout-minutes: 120
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Download Cypress
