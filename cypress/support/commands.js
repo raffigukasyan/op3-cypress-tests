@@ -21,7 +21,7 @@ Cypress.Commands.add('question', (questionName, questionType) => {
     cy.wait(1500);
     cy.xpath("//h2[text()='Edit lesson']").click();
     cy.xpath("//div[@class='flex items-center cursor-pointer mb-3']").click();
-    cy.xpath("//*[text()='Создание вопроса']").should('be.visible');
+    // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
     cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
     cy.xpath("//button[@role='switch']").click();
