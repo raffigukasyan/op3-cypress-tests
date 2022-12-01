@@ -44,7 +44,7 @@ jobs:
 
       - name: Clear report allure-results
         run: |
-          sudo chown -R $USER:$USER /home/github/actions-runner/_work/op3-cypress-tests
+          sudo chown -R $USER:$USER ${{ github.workspace }}
           sudo npm run allure:clear
 
       - name: Run Cypress
