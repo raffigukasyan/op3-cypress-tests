@@ -31,23 +31,4 @@ describe('B. Register user', () => {
         cy.xpath("//button[@type='submit']").click();
         cy.location('pathname').should('eq', '/learning/courses')
     });
-
-    it('can receive the confirmation email and extract the code', () => {
-        cy.wait(1000);
-        recurse(
-            () => cy.task('getLastEmail'), // Cypress commands to retry
-            Cypress._.isObject, // keep retrying until the task returns an object
-            {
-                timeout: 60000, // retry up to 1 minute
-                delay: 5000, // wait 5 seconds between attempts
-            },
-        )
-        .its('html')
-        .then((html) => {
-            cy.document({ log: false }).invoke({ log: false }, 'write', html)
-        })
-        cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
-            confirmationLink = href;
-        });
-    });
 });
