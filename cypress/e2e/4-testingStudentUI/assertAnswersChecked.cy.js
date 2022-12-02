@@ -43,7 +43,6 @@ describe('M. Assert answers were checked by teacher', () => {
 
     afterEach(function onAfterEach() {
         if (this.currentTest.state === 'failed') {
-            Cypress.runner.stop();
             cy.setCookie(skipCookie, 'true');
         }
     });

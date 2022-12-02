@@ -79,7 +79,6 @@ describe('N. Clear all created learning items', () => {
 
     afterEach(function onAfterEach() {
         if (this.currentTest.state === 'failed') {
-            Cypress.runner.stop();
             cy.setCookie(skipCookie, 'true');
         }
     });
