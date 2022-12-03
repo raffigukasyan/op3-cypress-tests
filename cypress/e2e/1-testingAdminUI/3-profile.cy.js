@@ -9,9 +9,9 @@ describe("E. Profile editing", () => {
 
         // Input credentials
         cy.xpath("//h1[text()='User Profile']").should('be.visible');
-        cy.xpath("//input[@id='new_password']").clear().type(Cypress.env("password"));
+        cy.xpath("//input[@id='new_password']").clear().type(Cypress.env("password"), {log:false});
         cy.xpath("//button[@type='submit']").should('be.disabled');
-        cy.xpath("//input[@id='password']").clear().type(Cypress.env("password"));
+        cy.xpath("//input[@id='password']").clear().type(Cypress.env("password"), {log:false});
         cy.xpath("//button[@type='submit']").click();
 
         // Assert user registered
