@@ -16,7 +16,7 @@ describe('J. Complete the course which we have created in previous tests', () =>
             });
         }
 
-        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false })
+        cy.login()
     });
 
     it('should ', function () {

@@ -18,7 +18,7 @@ describe('M. Assert answers were checked by teacher', () => {
     });
 
     before(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false })
+        cy.login()
     })
 
     it('assert that answers were created', function () {

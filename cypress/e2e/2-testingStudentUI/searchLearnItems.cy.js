@@ -1,6 +1,6 @@
 describe('K. Search courses', () => {
     beforeEach(() => {
-        cy.login(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.login();
     });
 
     it('select Started Finished and All courses', function () {
