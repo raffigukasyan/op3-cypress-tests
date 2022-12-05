@@ -32,13 +32,8 @@ Cypress.Commands.add('question', (questionName, questionType) => {
 });
 
 Cypress.Commands.add('addAnswers', (answer) => {
-    if (Cypress.config().baseUrl === 'https://tenant1.release.company-policy.com/') {
-        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-indigo-600 hover:text-indigo-900 cursor-pointer'])[" + answer + "]").click();
-        cy.xpath("//*[text()='Edit question']");
-    } else {
-        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-blue-600 hover:text-red-900 cursor-pointer'])[" + answer + "]").click();
-        cy.xpath("//*[text()='Редактирование вопроса']");
-    }
+    cy.xpath("(//*[@class='w-5 h-5 mx-1 text-indigo-600 hover:text-indigo-900 cursor-pointer'])[" + answer + "]").click();
+    cy.xpath("//*[text()='Edit question']");
 
     cy.xpath("//*[@class='w-6 h-6 mb-1 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
     cy.xpath("//*[text()='Создание ответа']").should('be.visible');
