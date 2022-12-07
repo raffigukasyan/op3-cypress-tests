@@ -15,7 +15,7 @@ describe("C. Invite user by 2 ways", () => {
     })
 
     it('should invite by user menu', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         // Go to invite user page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
@@ -64,7 +64,7 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('delete invited user', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         cy.xpath("//a[text()='Users']").click();
         cy.accessAllItems();
@@ -74,7 +74,7 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('should invite by admin tools', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         // Go to add user page
         cy.xpath("//a[text()='Users']").click();

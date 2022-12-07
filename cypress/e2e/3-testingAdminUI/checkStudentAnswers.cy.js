@@ -16,7 +16,7 @@ describe('L. Check student answers', () => {
             });
         }
 
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
     });
 
     it('Check first answer', function () {

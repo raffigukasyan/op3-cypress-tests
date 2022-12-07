@@ -2,7 +2,7 @@ describe("D. Create lessons", () => {
     const skipCookie = Cypress.env('shouldSkipEduTests');
 
     it('should create lesson(checkbox + radio)', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()
@@ -31,7 +31,7 @@ describe("D. Create lessons", () => {
     });
 
     it('should create lesson(text)', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()

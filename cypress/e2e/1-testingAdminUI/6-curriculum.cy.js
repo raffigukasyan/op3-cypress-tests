@@ -18,7 +18,7 @@ describe('H. Create curriculum', () => {
     });
 
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
     });
 
     it('should create curriculum', function () {

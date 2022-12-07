@@ -1,7 +1,7 @@
 describe("E. Profile editing", () => {
 
     it('should assert profile page', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         // Go to editing profile page
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();

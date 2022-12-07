@@ -18,7 +18,7 @@ describe('F. Create course', () => {
     });
 
     it('should create course', function () {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
 
         // Go to add courses page
         cy.xpath("//a[text()='Courses']").click();
@@ -26,16 +26,14 @@ describe('F. Create course', () => {
             .click();
 
         cy.xpath("(//input[@type='text'])[1]").type(Cypress.env('courseName'));
-        cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci " +
-            "eligendi harum hic quidem. Aliquam amet architecto, id illum laboriosam maxime nobis omnis perspiciatis " +
-            "porro provident, quidem reiciendis sequi voluptate voluptatem.")
+        cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
         // Set course as active
 
         // Add lessons for course
-        cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonCheckboxRadio'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "']").click();
-        cy.xpath("(//input[@type='text'])[last()]").type(Cypress.env('lessonText'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonText') + "']").click();
+        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonCheckboxRadio'));
+        cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "'][1]").click();
+        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonText'));
+        cy.xpath("//*[text()='" + Cypress.env('lessonText') + "'][1]").click();
 
         // Save course
         cy.xpath("//button[text()='Save']").click();

@@ -1,6 +1,6 @@
 describe("I. Create team", () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
     });
 
     it('should create new team', function () {

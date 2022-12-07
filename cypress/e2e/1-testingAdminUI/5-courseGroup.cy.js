@@ -1,6 +1,6 @@
 describe('G. Create course group', () => {
     beforeEach(() => {
-        cy.admin(Cypress.env('email'), Cypress.env('password'), { log: false });
+        cy.admin();
     });
 
     it('should create course program', function () {
