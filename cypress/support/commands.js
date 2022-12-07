@@ -36,14 +36,14 @@ Cypress.Commands.add('addAnswers', (answer) => {
     cy.xpath("//*[text()='Edit question']");
 
     cy.xpath("//*[@class='w-6 h-6 mb-1 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
-    cy.xpath("//*[text()='Создание ответа']").should('be.visible');
+    cy.xpath("//*[text()='Create answer']").should('be.visible');
     cy.xpath("//input[@type='text']").type(Cypress.env('answer1'));
     cy.xpath("(//button[@role='switch'])[1]").click();
     cy.xpath("(//button[@role='switch'])[2]").click();
     cy.xpath("//button[text()='Save']").click();
 
     cy.xpath("//*[@class='w-6 h-6 mb-1 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
-    cy.xpath("//*[text()='Создание ответа']").should('be.visible');
+    cy.xpath("//*[text()='Create answer']").should('be.visible');
     cy.xpath("//input[@type='text']").type(Cypress.env('answer2'));
     cy.xpath("(//button[@role='switch'])[1]").click();
     cy.xpath("//button[text()='Save']").click();
