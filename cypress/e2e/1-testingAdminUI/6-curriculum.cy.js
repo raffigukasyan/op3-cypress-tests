@@ -44,7 +44,7 @@ describe('H. Create curriculum', () => {
         // Go to add curriculums page
         cy.xpath("//a[text()='Curriculums']").click();
 
-        // Save curriculum
+        // delete curriculum
         cy.xpath("//div[text()='QA Test Curriculum']/../../../../following-sibling::th[3]/div/div[2]").last().click();
 
         // Assert curriculum created

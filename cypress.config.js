@@ -22,7 +22,7 @@ module.exports = defineConfig({
     answer2: "answer 2",
     shouldSkipEduTests: 'shouldSkipEduTests',
   },
-  defaultCommandTimeout: 30000,
+  defaultCommandTimeout: 3000,
   requestTimeout: 30000,
   viewportHeight: 800,
   viewportWidth: 800,
