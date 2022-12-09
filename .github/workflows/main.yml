@@ -60,7 +60,7 @@ jobs:
 #           branch: gh-pages
 #           folder: ./allure-history
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@3.1.2
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
           ftp-server: allure1.company-policy.com
           ftp-username: company-policy_1
