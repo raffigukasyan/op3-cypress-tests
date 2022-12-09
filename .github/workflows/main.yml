@@ -63,6 +63,7 @@ jobs:
 #         with:
 #           branch: gh-pages
 #           folder: ./allure-history
+
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
