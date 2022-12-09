@@ -27,6 +27,9 @@ jobs:
         run: |
           DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/login.cy.js --config --env allure=true --browser chrome
 
+      - name: show
+        run: ls
+
 #      - name: Clear report allure-results
 #        run: |
 #          sudo chown -R $USER:$USER ${{ github.workspace }}
