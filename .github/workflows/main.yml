@@ -25,7 +25,7 @@ jobs:
       - name: Run Cypress
         continue-on-error: true
         run: |
-          DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --env allure=true --browser chrome
+          DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/login.cy.js --env allure=true --browser chrome
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -61,12 +61,19 @@ jobs:
 #          allure_report: allure-report
 #          allure_history: ./allure-history/release
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: JamesIves/github-pages-deploy-action@4.2.0
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: JamesIves/github-pages-deploy-action@4.2.0
+#         with:
+#           branch: gh-pages
+#           folder: ./allure-history
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          branch: gh-pages
-          folder: ./allure-history
+          server: allure1.company-policy.com
+          username: company-policy_1
+          password: ${{ secrets.ftp_password }}
+          local-dir: ./allure-history
 
       - name: Show allure
         run: cat ./allure-history/index.html
