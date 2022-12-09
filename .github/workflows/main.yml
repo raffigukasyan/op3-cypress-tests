@@ -13,18 +13,23 @@ jobs:
         env:
           CYPRESS_INSTALL_BINARY: 0
 
-      - name: Check Cypress cache
+      - name: Install dependencies
         run: |
-          npx cypress cache path
-          npx cypress cache list
-      - name: Install Cypress
-        run: |
-          npx cypress install
-          npx cypress cache list
-      - name: Run Cypress
-        continue-on-error: true
-        run: |
-          DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/login.cy.js --env allure=true --browser chrome
+          sudo apt-get update
+          sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          browser: electron
+          spec: cypress/e2e/login.cy.js
+        env:
+          CYPRESS_allure=true
+          PASSWORD=${{secrets.PRODUCTION_PASSWORD}}
+          URL=${{secrets.PRODUCTION_URL}}
+          AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}'
+          USERNAME=${{secrets.PRODUCTION_USERNAME}}
+
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
