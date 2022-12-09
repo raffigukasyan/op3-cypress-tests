@@ -65,6 +65,7 @@ jobs:
           server: allure1.company-policy.com
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
+          local-dir: ./allure-history/
           server-dir: public_html/
 
       - name: Show allure
