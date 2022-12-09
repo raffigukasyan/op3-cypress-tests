@@ -62,9 +62,9 @@ jobs:
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
-          ftp-server: allure1.company-policy.com
-          ftp-username: company-policy_1
-          ftp-password: ${{ secrets.ftp_password }}
+          server: allure1.company-policy.com
+          username: company-policy_1
+          password: ${{ secrets.ftp_password }}
           server-dir: public_html/
 
       - name: Show allure
