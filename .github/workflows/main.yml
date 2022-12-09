@@ -27,8 +27,15 @@ jobs:
         run: |
           DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/login.cy.js --config --env allure=true --browser chrome
 
-      - name: show
-        run: ls
+      - name: show folders
+        run: ls -a
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          gh_pages: allure
 
 #      - name: Clear report allure-results
 #        run: |
