@@ -36,6 +36,7 @@ jobs:
         with:
           allure_results: allure-results
           gh_pages: allure
+          github_run_num: 1
 
 #      - name: Clear report allure-results
 #        run: |
@@ -68,7 +69,7 @@ jobs:
           server: allure1.company-policy.com
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
-          local-dir: ./allure-report/
+          local-dir: ./allure-report/1/
           server-dir: public_html/
           state-name: ../.ftp-deploy-sync-state.json
 
