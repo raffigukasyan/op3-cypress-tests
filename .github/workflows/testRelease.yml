@@ -38,6 +38,4 @@ jobs:
           local-dir: ./allure-history/
           server-dir: public_html/
           state-name: ../.ftp-deploy-sync-state.json
-
-      - name: Show allure
         run: cat ./allure-history/index.html
