@@ -35,16 +35,12 @@ jobs:
           ref: allure
           path: allure
           
-      - name: mkdir
-        run: mkdir prod
-
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
           gh_pages: allure
-          allure_history: ./prod/tested2/
 
 #      - name: Clear report allure-results
 #        run: |
@@ -70,7 +66,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.2.0
         with:
           branch: gh-pages
-          folder: ./prod
+          folder: ./allure-history
 
       - name: Show allure
         run: cat ./allure-history/index.html
