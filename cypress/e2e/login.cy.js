@@ -1,6 +1,7 @@
 describe('A. Login test', () => {
     beforeEach(() => {
         cy.visit('/');
+        console.log(cy.config().baseUrl);
     });
 
     it('should show landing page', function () {
