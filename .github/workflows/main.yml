@@ -34,7 +34,7 @@ jobs:
         if: always()
         with:
           allure_results: release/allure-results
-          gh_pages: gh-pages
+#          gh_pages: gh-pages
           # github_run_num: "release"
 
       - name: FTP Deploy
@@ -44,7 +44,7 @@ jobs:
           server: allure.company-policy.com
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
-          local-dir: ./allure-history/
+          local-dir: ./release/allure-history/
           server-dir: public_html/
           # state-name: ../.ftp-deploy-sync-state.json
 
