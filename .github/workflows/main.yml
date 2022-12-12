@@ -1,6 +1,6 @@
-name: QA Test prod after merge
+name: Test main
 
-on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
 jobs:
   Prod-Test:
@@ -19,7 +19,7 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/login.cy.js
-        end: 
+        env: 
           CYPRESS_allure=true
           CYPRESS_USERNAME=${{secrets.RELEASE_USERNAME}}
           CYPRESS_PASSWORD=${{secrets.RELEASE_PASSWORD}}
