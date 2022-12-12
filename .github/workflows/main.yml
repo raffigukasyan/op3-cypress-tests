@@ -19,7 +19,7 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/login.cy.js
-          env: PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=tenant1.release.company-policy.com, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
+          env: URL=tenant1.release.company-policy.com, PASSWORD=${{secrets.RELEASE_PASSWORD}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
 
           # env: PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
         #   CYPRESS_allure: true
@@ -47,8 +47,8 @@ jobs:
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
           local-dir: allure-report/
-          server-dir: public_html/release/
-          # state-name: ../.ftp-deploy-sync-state.json
+          server-dir: public_html/ttt/
+          state-name: ../.ftp-deploy-sync-state.json
 
 
       # - name: Run Cypress

@@ -1,6 +1,6 @@
 name: QA Test Release server
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, push]
 
 jobs:
   Release-Test:
