@@ -19,7 +19,7 @@ jobs:
       - name: Run Cypress
         continue-on-error: true
         run: |
-          DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/login.cy.js --env allure=true --browser chrome
+          DEBUG=allure-plugin* PASSWORD=${{secrets.PRODUCTION_PASSWORD}} URL=${{secrets.PRODUCTION_URL}} AUTHNAME='${{secrets.PRODUCTION_AUTHNAME}}' USERNAME=${{secrets.PRODUCTION_USERNAME}} npx cypress run --spec ./cypress/e2e/*.cy.js --env allure=true --browser chrome
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -31,7 +31,7 @@ jobs:
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
-          server: allure1.company-policy.com
+          server: allure.company-policy.com
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
           local-dir: ./allure-history/
