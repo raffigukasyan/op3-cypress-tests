@@ -19,7 +19,7 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/login.cy.js
-        env: DEBUG=allure-plugin*, PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
+        env: PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
         #   CYPRESS_allure: true
         #   CYPRESS_USERNAME: ${{secrets.RELEASE_USERNAME}}
         #   CYPRESS_PASSWORD: ${{secrets.RELEASE_PASSWORD}}
