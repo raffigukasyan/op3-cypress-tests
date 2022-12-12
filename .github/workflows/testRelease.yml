@@ -1,4 +1,4 @@
-name: QA Test prod after merge
+name: QA Test Release server
 
 on: [workflow_dispatch]
 
