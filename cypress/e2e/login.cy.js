@@ -1,7 +1,7 @@
 describe('A. Login test', () => {
     beforeEach(() => {
-        cy.visit('/');
-        console.log(cy.config().baseUrl);
+        cy.visit(Cypress.config().baseUrl);
+        console.log(Cypress.config().baseUrl);
     });
 
     it('should show landing page', function () {
