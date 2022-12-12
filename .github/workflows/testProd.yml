@@ -1,4 +1,4 @@
-name: Test Release server
+name: Test Prod server
 
 on: [workflow_dispatch, push]
 
