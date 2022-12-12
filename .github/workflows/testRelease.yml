@@ -29,8 +29,8 @@ jobs:
         if: always()
         with:
           allure_results: allure-results
-          gh_pages: allure
-          github_run_num: "release"
+          # gh_pages: allure
+          # github_run_num: "release"
 
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.1
@@ -39,5 +39,5 @@ jobs:
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
           local-dir: ./allure-history/
-          server-dir: public_html/
-          state-name: /.release_ftp-deploy-sync-state.json
+          server-dir: public_html/release/
+          state-name: ../.release_ftp-deploy-sync-state.json

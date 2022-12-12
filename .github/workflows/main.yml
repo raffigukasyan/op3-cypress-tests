@@ -19,17 +19,12 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/login.cy.js
-  #        env: URL=tenant1.release.company-policy.com, PASSWORD=${{secrets.RELEASE_PASSWORD}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
-        env: #PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
+        env:
           CYPRESS_allure: true
-        #   CYPRESS_USERNAME: ${{secrets.RELEASE_USERNAME}}
-        #   CYPRESS_PASSWORD: ${{secrets.RELEASE_PASSWORD}}
-          URL: tenant1.release.company-policy.com 
-          #${{secrets.RELEASE_URL}}
-        #   URL: ${{secrets.RELEASE_URL}}
-        #   CYPRESS_AUTHNAME: '${{secrets.RELEASE_AUTHNAME}}'
-          
-        #   env:  CYPRESS_DEBUG: allure-plugin*
+          URL: ${{secrets.RELEASE_URL}}
+          CYPRESS_USERNAME: ${{secrets.RELEASE_USERNAME}}
+          CYPRESS_PASSWORD: ${{secrets.RELEASE_PASSWORD}}
+          CYPRESS_AUTHNAME: '${{secrets.RELEASE_AUTHNAME}}'
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
