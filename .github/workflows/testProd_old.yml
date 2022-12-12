@@ -1,4 +1,4 @@
-name: QA Test Production server
+name: QA Test Production server - old
 
 on: [workflow_dispatch]
 
