@@ -18,12 +18,12 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          spec: cypress/e2e/login.cy.js
+          spec: cypress/e2e/*.cy.js
         env:
           CYPRESS_allure: true
           URL: ${{secrets.RELEASE_URL}}
           CYPRESS_username: ${{secrets.RELEASE_USERNAME}}
-          CYPRESS_PASSWORD: ${{secrets.RELEASE_PASSWORD}}
+          CYPRESS_password: ${{secrets.RELEASE_PASSWORD}}
           CYPRESS_AUTHNAME: '${{secrets.RELEASE_AUTHNAME}}'
 
       - name: Generate Allure Report
