@@ -1,6 +1,6 @@
 name: QA Test prod after merge
 
-#on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
 jobs:
   Prod-Release:
@@ -13,14 +13,17 @@ jobs:
         run: |
           npx cypress cache path
           npx cypress cache list
+
       - name: Install Cypress
         run: |
           npx cypress install
           npx cypress cache list
+
       - name: Run Cypress
         continue-on-error: true
         run: |
           DEBUG=allure-plugin* PASSWORD=${{secrets.RELEASE_PASSWORD}} URL=${{secrets.RELEASE_URL}} AUTHNAME='${{secrets.RELEASE_AUTHNAME}}' USERNAME=${{secrets.RELEASE_USERNAME}} npx cypress run --spec ./cypress/e2e/*.cy.js --env allure=true --browser chrome
+     
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -37,5 +40,4 @@ jobs:
           password: ${{ secrets.ftp_password }}
           local-dir: ./allure-history/
           server-dir: public_html/
-          state-name: ../.ftp-deploy-sync-state.json
-        run: cat ./allure-history/index.html
+          state-name: .ftp-deploy-sync-state.json

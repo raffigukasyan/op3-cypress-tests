@@ -1,6 +1,6 @@
 name: QA Test prod after merge
 
-on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
 jobs:
   Prod-Test:
@@ -36,7 +36,4 @@ jobs:
           password: ${{ secrets.ftp_password }}
           local-dir: ./allure-history/
           server-dir: public_html/
-          state-name: ../.ftp-deploy-sync-state.json
-
-      - name: Show allure
-        run: cat ./allure-history/index.html
+          state-name: /.ftp-deploy-sync-state.json
