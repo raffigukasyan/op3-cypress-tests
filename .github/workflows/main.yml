@@ -19,13 +19,14 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/login.cy.js
-          env: URL=tenant1.release.company-policy.com, PASSWORD=${{secrets.RELEASE_PASSWORD}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
+  #        env: URL=tenant1.release.company-policy.com, PASSWORD=${{secrets.RELEASE_PASSWORD}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
 
-          # env: PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
-        #   CYPRESS_allure: true
+        env: #PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
+          CYPRESS_allure: true
         #   CYPRESS_USERNAME: ${{secrets.RELEASE_USERNAME}}
         #   CYPRESS_PASSWORD: ${{secrets.RELEASE_PASSWORD}}
-        #   CYPRESS_URL: ${{secrets.RELEASE_URL}}
+          CYPRESS_URL: tenant1.release.company-policy.com 
+          #${{secrets.RELEASE_URL}}
         #   URL: ${{secrets.RELEASE_URL}}
         #   CYPRESS_AUTHNAME: '${{secrets.RELEASE_AUTHNAME}}'
           
