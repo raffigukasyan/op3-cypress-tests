@@ -7,7 +7,7 @@ jobs:
     timeout-minutes: 120
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Check Cypress cache
         run: |
@@ -40,4 +40,4 @@ jobs:
           password: ${{ secrets.ftp_password }}
           local-dir: ./allure-history/
           server-dir: public_html/
-          state-name: /.ftp-deploy-sync-state.json
+          state-name: ../.ftp-deploy-sync-state.json
