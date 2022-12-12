@@ -1,6 +1,6 @@
 describe('A. Login test', () => {
     beforeEach(() => {
-        console.log(Cypress.config().baseUrl);
+        console.log('1111111: ' + Cypress.config().baseUrl);
         cy.visit(Cypress.config().baseUrl);
     });
 

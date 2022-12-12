@@ -3,7 +3,7 @@ name: Test Release server
 on: [workflow_dispatch, push]
 
 jobs:
-  Prod-Release:
+  ttttt:
     timeout-minutes: 120
     runs-on: ubuntu-latest
     steps:
