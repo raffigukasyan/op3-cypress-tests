@@ -1,6 +1,5 @@
 describe('A. Login test', () => {
     beforeEach(() => {
-        console.log('1111111: ' + Cypress.config().baseUrl);
         cy.visit(Cypress.config().baseUrl);
     });
 
@@ -9,7 +8,7 @@ describe('A. Login test', () => {
     });
 
     it('should move to login page and log in', function () {
-        const username = Cypress.env('email')
+        const username = Cypress.env('username')
         const password = Cypress.env('password')
 
         cy.xpath("//a[@class='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900']").click();
