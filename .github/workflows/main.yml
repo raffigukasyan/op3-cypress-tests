@@ -20,7 +20,6 @@ jobs:
           browser: chrome
           spec: cypress/e2e/login.cy.js
   #        env: URL=tenant1.release.company-policy.com, PASSWORD=${{secrets.RELEASE_PASSWORD}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
-
         env: #PASSWORD=${{secrets.RELEASE_PASSWORD}}, URL=${{secrets.RELEASE_URL}}, AUTHNAME='${{secrets.RELEASE_AUTHNAME}}', USERNAME=${{secrets.RELEASE_USERNAME}}, allure=true
           CYPRESS_allure: true
         #   CYPRESS_USERNAME: ${{secrets.RELEASE_USERNAME}}
