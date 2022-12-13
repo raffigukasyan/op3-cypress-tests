@@ -1,6 +1,6 @@
 name: Test Release server
 
-on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
 jobs:
   test-Release:
@@ -18,7 +18,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          spec: cypress/e2e/*.cy.js
+          spec: cypress/e2e/**/*.cy.js
         env:
           CYPRESS_allure: true
           URL: ${{secrets.RELEASE_URL}}
