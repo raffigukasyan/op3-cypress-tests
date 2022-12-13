@@ -2,12 +2,10 @@ describe("A. Categories List", () => {
     let catName ="Test category 1";
 
     before(() => {
-        Cypress.Cookies.preserveOnce('company_policy_session');
-        cy.login();
     });
 
     beforeEach(() => {
-        Cypress.Cookies.preserveOnce('company_policy_session');
+        cy.login();
     });
 
     it('should create Category)', function () {

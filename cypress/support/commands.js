@@ -1,12 +1,15 @@
-Cypress.Commands.add('login', () => {
-    cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
+Cypress.Commands.add('login', (username = Cypress.env('username'), password = Cypress.env('password')) => {
 
-    cy.xpath("//input[@id='email']", { timeout: 10000 }).type(Cypress.env('username'));
-    cy.xpath("//input[@id='password']", { timeout: 10000 }).type(Cypress.env('password'), { log: false });
+    cy.session([username, password], () => {
+        cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
 
-    cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
-
-    cy.xpath("//h2[text()='Learning center']").click();
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(username);
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
+    
+        cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
+    
+        cy.xpath("//h2[text()='Learning center']").click();
+    });
 });
 
 Cypress.Commands.add('admin', () => {
