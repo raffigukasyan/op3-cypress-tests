@@ -1,6 +1,17 @@
 Cypress.Commands.add('login', (username = Cypress.env('username'), password = Cypress.env('password')) => {
-    let hash = new Date().getTime();
-    cy.session([username, hash], () => {
+
+    const hashCode = function (str) {
+        str = "" + str;
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            var char = str.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
+    cy.session([username, hashCode(password)], () => {
         cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
 
         cy.xpath("//input[@id='email']", { timeout: 10000 }).type(username);
