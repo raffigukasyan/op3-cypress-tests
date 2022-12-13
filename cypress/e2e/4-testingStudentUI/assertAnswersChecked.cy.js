@@ -1,21 +1,21 @@
 describe('M. Assert answers were checked by teacher', () => {
-    const skipCookie = Cypress.env('shouldSkipEduTests');
+    // const skipCookie = Cypress.env('shouldSkipEduTests');
 
-    before(() => {
-        if ( Cypress.browser.isHeaded ) {
-            cy.clearCookie(skipCookie)
-        } else {
-            cy.getCookie(skipCookie).then(cookie => {
-                if (
-                    cookie &&
-                    typeof cookie === 'object' &&
-                    cookie.value === 'true'
-                ) {
-                    Cypress.runner.stop();
-                }
-            });
-        }
-    });
+    // before(() => {
+    //     if ( Cypress.browser.isHeaded ) {
+    //         cy.clearCookie(skipCookie)
+    //     } else {
+    //         cy.getCookie(skipCookie).then(cookie => {
+    //             if (
+    //                 cookie &&
+    //                 typeof cookie === 'object' &&
+    //                 cookie.value === 'true'
+    //             ) {
+    //                 Cypress.runner.stop();
+    //             }
+    //         });
+    //     }
+    // });
 
     before(() => {
         cy.login()
@@ -41,9 +41,9 @@ describe('M. Assert answers were checked by teacher', () => {
         cy.xpath("//div[text()='Congratulations!']").should('be.visible').click();
     });
 
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            cy.setCookie(skipCookie, 'true');
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         cy.setCookie(skipCookie, 'true');
+    //     }
+    // });
 });

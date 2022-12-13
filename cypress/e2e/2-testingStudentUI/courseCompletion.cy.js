@@ -1,22 +1,8 @@
 describe('J. Complete the course which we have created in previous tests', () => {
-    const skipCookie = Cypress.env('shouldSkipEduTests');
 
-    before(() => {
-        if ( Cypress.browser.isHeaded ) {
-            cy.clearCookie(skipCookie)
-        } else {
-            cy.getCookie(skipCookie).then(cookie => {
-                if (
-                    cookie &&
-                    typeof cookie === 'object' &&
-                    cookie.value === 'true'
-                ) {
-                    Cypress.runner.stop();
-                }
-            });
-        }
-
-        cy.login()
+    beforeEach(() => {
+        cy.login();
+        cy.visit('/learning/courses');
     });
 
     it('should ', function () {
@@ -52,9 +38,9 @@ describe('J. Complete the course which we have created in previous tests', () =>
         cy.xpath("//button[@type='submit']").click();
     });
 
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            cy.setCookie(skipCookie, 'true');
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         cy.setCookie(skipCookie, 'true');
+    //     }
+    // });
 });

@@ -17,6 +17,6 @@ describe("E. Profile editing", () => {
         cy.xpath("//button[@type='submit']").click();
 
         // Assert user registered
-        cy.xpath("//*[text()='Success!']", { timeout: 5000 });
+        cy.contains("Success", { timeout: 5000 });
     });
 });

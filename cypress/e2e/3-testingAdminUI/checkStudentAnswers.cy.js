@@ -1,21 +1,25 @@
 describe('L. Check student answers', () => {
-    const skipCookie = Cypress.env('shouldSkipEduTests');
+    // const skipCookie = Cypress.env('shouldSkipEduTests');
 
-    before(() => {
-        if ( Cypress.browser.isHeaded ) {
-            cy.clearCookie(skipCookie)
-        } else {
-            cy.getCookie(skipCookie).then(cookie => {
-                if (
-                    cookie &&
-                    typeof cookie === 'object' &&
-                    cookie.value === 'true'
-                ) {
-                    Cypress.runner.stop();
-                }
-            });
-        }
+    // before(() => {
+    //     if ( Cypress.browser.isHeaded ) {
+    //         cy.clearCookie(skipCookie)
+    //     } else {
+    //         cy.getCookie(skipCookie).then(cookie => {
+    //             if (
+    //                 cookie &&
+    //                 typeof cookie === 'object' &&
+    //                 cookie.value === 'true'
+    //             ) {
+    //                 Cypress.runner.stop();
+    //             }
+    //         });
+    //     }
 
+    //     cy.admin();
+    // });
+
+    beforeEach(() => {
         cy.admin();
     });
 
@@ -41,9 +45,9 @@ describe('L. Check student answers', () => {
         // cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
     });
 
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            cy.setCookie(skipCookie, 'true');
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         cy.setCookie(skipCookie, 'true');
+    //     }
+    // });
 });

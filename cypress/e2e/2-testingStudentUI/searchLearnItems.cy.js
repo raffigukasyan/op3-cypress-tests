@@ -1,6 +1,8 @@
 describe('K. Search courses', () => {
+
     beforeEach(() => {
         cy.login();
+        cy.visit('/learning/courses');
     });
 
     it('select Started Finished and All courses', function () {
@@ -15,15 +17,15 @@ describe('K. Search courses', () => {
 
     it('go to curriculums', function () {
         cy.xpath("//a[@name='Curriculums']").click();
-        cy.xpath("//span[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
+        // cy.xpath("//span[text()='" + Cypress.env('curriculumName') + "']").should('be.visible').click();
     });
 
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            Cypress.runner.stop();
-            cy.setCookie(skipCookie, 'true');
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         Cypress.runner.stop();
+    //         cy.setCookie(skipCookie, 'true');
+    //     }
+    // });
 });
 
 // describe('Search curriculums', function () {

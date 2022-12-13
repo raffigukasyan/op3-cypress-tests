@@ -1,21 +1,21 @@
 describe('N. Clear all created learning items', () => {
-    const skipCookie = Cypress.env('shouldSkipEduTests');
+    // const skipCookie = Cypress.env('shouldSkipEduTests');
 
-    before(() => {
-        if ( Cypress.browser.isHeaded ) {
-            cy.clearCookie(skipCookie)
-        } else {
-            cy.getCookie(skipCookie).then(cookie => {
-                if (
-                    cookie &&
-                    typeof cookie === 'object' &&
-                    cookie.value === 'true'
-                ) {
-                    Cypress.runner.stop();
-                }
-            });
-        }
-    });
+    // before(() => {
+    //     if ( Cypress.browser.isHeaded ) {
+    //         cy.clearCookie(skipCookie)
+    //     } else {
+    //         cy.getCookie(skipCookie).then(cookie => {
+    //             if (
+    //                 cookie &&
+    //                 typeof cookie === 'object' &&
+    //                 cookie.value === 'true'
+    //             ) {
+    //                 Cypress.runner.stop();
+    //             }
+    //         });
+    //     }
+    // });
 
     beforeEach(() => {
         cy.admin();
@@ -73,9 +73,9 @@ describe('N. Clear all created learning items', () => {
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
 
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            cy.setCookie(skipCookie, 'true');
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         cy.setCookie(skipCookie, 'true');
+    //     }
+    // });
 });
