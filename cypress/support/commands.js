@@ -7,14 +7,13 @@ Cypress.Commands.add('login', (username = Cypress.env('username'), password = Cy
         cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
     
         cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
-    
-        cy.xpath("//h2[text()='Learning center']").click();
     });
+    cy.visit('/');
 });
 
 Cypress.Commands.add('admin', () => {
     cy.login();
-
+    cy.visit('/admin');
     cy.xpath("(//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'])[1]").click();
     cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "admin']").click();
     cy.wait(1500);
