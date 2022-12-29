@@ -46,6 +46,7 @@ describe('H. Create curriculum', () => {
 
         // delete curriculum
         cy.xpath("//div[text()='QA Test Curriculum']/../../../../following-sibling::th[3]/div/div[2]").last().click();
+        cy.get('button').contains('Delete').click();
 
         // Assert curriculum created
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');

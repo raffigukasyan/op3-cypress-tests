@@ -33,7 +33,7 @@ Cypress.Commands.add('question', (questionName, questionType) => {
     cy.wait(1500);
     cy.xpath("//h2[text()='Edit lesson']").click();
     cy.xpath("//div[@class='flex items-center cursor-pointer mb-3']").click();
-    cy.wait(2500);
+    cy.wait(1500);
     // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
     cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
@@ -60,7 +60,7 @@ Cypress.Commands.add('addAnswers', (answer) => {
     cy.xpath("(//button[@role='switch'])[1]").click();
     cy.xpath("//button[text()='Save']").click();
 
-    cy.wait(2500);
+    cy.wait(1500);
     cy.xpath("//button[text()='Cancel']").click();
     cy.xpath("//*[text()='Edit lesson']");
 });

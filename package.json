@@ -12,12 +12,11 @@
     "allure:clear": "rm -r allure-results/ allure-report cypress/screenshots || true",
     "allure:history": "mv -f allure-report/history allure-results/history && rm -r allure-report || true",
     "open": "npx as-a op3 npx cypress open --env allure=true",
-    "test": "npx as-a op3 npx cypress run --env allure=true --browser chromium && yarn allure:report && allure open"
+    "test": "npx as-a op3 npx cypress run --env allure=true --browser chromium"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^12.0.0",
     "cypress-recurse": "^1.23.0",
     "dotenv": "^16.0.3",
     "imapflow": "^1.0.113",
@@ -27,6 +26,8 @@
   },
   "devDependencies": {
     "@cypress/xpath": "^2.0.3",
-    "@shelex/cypress-allure-plugin": "^2.33.1"
+    "@shelex/cypress-allure-plugin": "^2.33.1",
+    "cypress": "^12.1.0",
+    "imap-mailbox": "^1.0.1"
   }
 }

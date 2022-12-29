@@ -1,10 +1,11 @@
 const nodemailer = require('nodemailer')
-const { ImapFlow } = require('imapflow');
-const simpleParser = require('mailparser').simpleParser
+const Imap = require('imap-mailbox').default;
 
 const makeEmailAccount = async () => {
     // Generate a new Ethereal email inbox account
     const testAccount = await nodemailer.createTestAccount()
+
+    console.log(111, testAccount);
 
     console.log('created new email account %s', testAccount.user)
     console.log('for debugging, the password is %s', testAccount.pass)
@@ -20,8 +21,11 @@ const makeEmailAccount = async () => {
          * for the Ethereal email account using ImapFlow.
          */
         async getLastEmail() {
-            // Create imap client to connect later to the ethereal inbox and retrieve emails using ImapFlow
-            let client = new ImapFlow({
+            debugger
+            console.log(111, testAccount);
+
+            // make an imap client and run it on the INBOX before getting the mails
+            const imap = new Imap({
                 host: 'ethereal.email',
                 port: 993,
                 secure: true,
@@ -30,36 +34,23 @@ const makeEmailAccount = async () => {
                     pass: testAccount.pass
                 }
             });
-            // Wait until client connects and authorizes
-            await client.connect();
+            await imap.run();
+            const mailboxPath = 'INBOX';
+            const mails = await imap.getAllMails(mailboxPath);
 
-            let message;
+            const latestDate = new Date(
+                Math.max.apply(null, mails.map(function (mail) {
+                        return new Date(mail.parsedMail.date);
+                    }),
+                ),);
 
-            // Select and lock a mailbox. Throws if mailbox does not exist
-            let lock = await client.getMailboxLock('INBOX');
-            try {
-                // fetch latest message source
-                // client.mailbox includes information about currently selected mailbox
-                // "exists" value is also the largest sequence number available in the mailbox
-                message = await client.fetchOne(client.mailbox.exists, { source: true });
-                console.log("The message: %s", message.source.toString());
-
-                // list subjects for all messages
-                // uid value is always included in FETCH response, envelope strings are in unicode.
-                for await (let message of client.fetch('1:*', { envelope: true })) {
-                    console.log(`${message.uid}: ${message.envelope.subject}`);
+            let mail = mails.find((mail) => mail.parsedMail.date.getTime() === latestDate.getTime()) ?? {
+                        parsedMail: { textAsHtml: '<div>No email</div>',
+                        html: 'no email'
+                    },
                 }
-            } finally {
-                // Make sure lock is released, otherwise next `getMailboxLock()` never returns
-                lock.release();
-            }
-
-            // log out and close connection
-            await client.logout();
-
-            const mail = await simpleParser(
-                message.source
-            )
+            
+            console.log('FFFFFFF')
             console.log(mail.subject)
             console.log(mail.text)
 

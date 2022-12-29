@@ -1,4 +1,4 @@
-describe("A. Categories List", () => {
+describe("C1. Categories List", () => {
     let catName ="Test category 1";
 
     before(() => {
@@ -21,7 +21,7 @@ describe("A. Categories List", () => {
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
         // check active 
-        cy.xpath(`//div[text()='${catName}']/../../../../../th[2]`).last().contains('Inactive');
+        cy.xpath(`//div[text()='${catName}']/../../../../../th[3]`).last().contains('Inactive');
     });
 
     it('should edit Category)', function () {
@@ -38,7 +38,7 @@ describe("A. Categories List", () => {
         cy.wait(1000);
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
-        cy.xpath(`//div[text()='${catName}']/../../../../../th[2]`).last().contains('Active');
+        cy.xpath(`//div[text()='${catName}']/../../../../../th[3]`).last().contains('Active');
     });
 
     it('should delete Category)', function () {
@@ -50,6 +50,7 @@ describe("A. Categories List", () => {
 
         // delete
         cy.xpath(`//div[text()='${catName}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
         
     });

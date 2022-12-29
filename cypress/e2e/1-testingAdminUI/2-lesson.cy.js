@@ -1,14 +1,19 @@
 describe("D. Create lessons", () => {
-    const skipCookie = Cypress.env('shouldSkipEduTests');
+    // const skipCookie = Cypress.env('shouldSkipEduTests');
+    beforeEach(() => {
+        cy.admin();
+    });
 
     it('should create lesson(checkbox + radio)', function () {
-        cy.admin();
+        const lName = Cypress.env('lessonCheckboxRadio');
+        const qNameR = Cypress.env('questionRadio');
+        const qNameCB = Cypress.env('questionCheckbox');
 
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()
         cy.xpath("//button[text()='Add lesson']").click();
 
-        cy.xpath("//input[@type='text']").type(Cypress.env('lessonCheckboxRadio'));
+        cy.xpath("//input[@type='text']").first().type(lName);
         cy.xpath("//button[@role='switch']").click();
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -16,28 +21,36 @@ describe("D. Create lessons", () => {
         //// Edit lesson ////
         // Getting access to lesson
         cy.accessAllItems();
-        cy.xpath("(//div[text()='" + Cypress.env('lessonCheckboxRadio') + "'])[1]").click();
+        cy.xpath("(//div[text()='" + lName + "'])[1]").click();
 
         // Create radio question
-        cy.question(Cypress.env('questionRadio'), 2);
+        cy.question(qNameR, 2);
         cy.addAnswers(1);
 
         // Create checkbox question
-        cy.question(Cypress.env('questionCheckbox'), 3);
+        cy.question(qNameCB, 3);
         cy.addAnswers(2);
 
         // Assert question added
         cy.xpath("//span[text()='Active']").should('be.visible');
+
+        // delete lesson
+        // cy.visit('/admin/lc/lessons');
+        // cy.xpath(`//div[text()='${lName}']/../../../../../th[4]/div/div[2]`).last().click();
+        // cy.get('button').contains('Delete').click();
+        // cy.xpath("//p[text()='Success!']").should('be.visible');
+        
     });
 
     it('should create lesson(text)', function () {
-        cy.admin();
+        const lName = Cypress.env('lessonText');
+        const qName = Cypress.env('questionText');
 
         //// Create lesson ////
         cy.xpath("//a[text()='Lessons']").click()
         cy.xpath("//button[text()='Add lesson']").click();
 
-        cy.xpath("//input[@type='text']").type(Cypress.env('lessonText'));
+        cy.xpath("//input[@type='text']").first().type(lName);
         cy.xpath("//button[@role='switch']").click();
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -45,18 +58,25 @@ describe("D. Create lessons", () => {
         //// Edit lesson ////
         // Getting access to lesson
         cy.accessAllItems();
-        cy.xpath("(//div[text()='" + Cypress.env('lessonText') + "'])[1]").click();
+        cy.xpath("(//div[text()='" + lName + "'])[1]").click();
 
         // Create text question
-        cy.question(Cypress.env('questionText'), 1);
+        cy.question(qName, 1);
 
         // Assert question added
         cy.xpath("//span[text()='Active']").should('be.visible');
+
+        // delete lesson
+        // cy.visit('/admin/lc/lessons');
+        // cy.xpath(`//div[text()='${lName}']/../../../../../th[4]/div/div[2]`).last().click();
+        // cy.get('button').contains('Delete').click();
+        // cy.xpath("//p[text()='Success!']").should('be.visible');
+        
     });
 
     afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            cy.setCookie(skipCookie, 'true');
-        }
+        // if (this.currentTest.state === 'failed') {
+        //     cy.setCookie(skipCookie, 'true');
+        // }
     });
 });

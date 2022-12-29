@@ -1,9 +1,12 @@
-const { recurse } = require('cypress-recurse')
+const { recurse } = require('cypress-recurse');
+const Imap = require('imap-mailbox').default;
 
-describe("C. Invite user by 2 ways", () => {
+describe("C2. Invite user by 2 ways", () => {
     let userEmail;
     let userName;
     let confirmationLink;
+
+    let userPass;
 
     before(() => {
         cy.task("getUserEmail").then((user) => {
@@ -11,6 +14,7 @@ describe("C. Invite user by 2 ways", () => {
             cy.log(user.pass);
             userEmail = user.email;
             userName = user.email.replace("@ethereal.email", "");
+            userPass = user.pass;
         })
     })
 
@@ -31,18 +35,70 @@ describe("C. Invite user by 2 ways", () => {
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
     });
 
-    it('getting last email', function () {
-        cy.wait(2500);
+    it('getting last email', async function () {
+        cy.wait(1000);
+        const getLastEmail = async () => {
+            debugger
+
+            // make an imap client and run it on the INBOX before getting the mails
+            const imap = new Imap({
+                mailboxesToWatch: [userEmail],
+                host: 'ethereal.email',
+                port: 993,
+                secure: true,
+                auth: {
+                    user: userEmail,
+                    pass: userPass
+                }
+            });
+            await imap.run();
+            const mailboxPath = 'INBOX';
+            const mails = await imap.getAllMails(mailboxPath);
+
+            const latestDate = new Date(
+                Math.max.apply(null, mails.map(function (mail) {
+                        return new Date(mail.parsedMail.date);
+                    }),
+                ),);
+
+            let mail = mails.find((mail) => mail.parsedMail.date.getTime() === latestDate.getTime()) ?? {
+                        parsedMail: { textAsHtml: '<div>No email</div>',
+                        html: 'no email'
+                    },
+                }
+            
+            console.log('FFFFFFF')
+            console.log(mail.subject)
+            console.log(mail.text)
+
+            // and returns the main fields + attachments array
+            return {
+                subject: mail.subject,
+                text: mail.text,
+                html: mail.html,
+                attachments: mail.attachments
+            }
+        };
+
+        let res = await getLastEmail();
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
-                timeout: 60000, // retry up to 1 minute
+                timeout: 30000, // retry up to 1 minute
                 delay: 5000, // wait 5 seconds between attempts
             },
         )
+        .then((res) => {
+            debugger
+            console.log(res);
+            // cy.log(res);
+            return res;
+        })
         .its('html')
         .then((html) => {
+            console.log(html);
+            cy.log(html);
             cy.document({ log: false }).invoke({ log: false }, 'write', html)
         })
         cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {

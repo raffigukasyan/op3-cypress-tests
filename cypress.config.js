@@ -1,6 +1,6 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
-const makeEmailAccount = require('./cypress/plugins/email-account')
+const makeEmailAccount = require('./cypress/support/email-account new')
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
@@ -33,9 +33,11 @@ module.exports = defineConfig({
 
       on('task', {
         getUserEmail() {
+          debugger
           return emailAccount.user
         },
         getLastEmail() {
+          debugger
           return emailAccount.getLastEmail()
         },
         sendEmail() {

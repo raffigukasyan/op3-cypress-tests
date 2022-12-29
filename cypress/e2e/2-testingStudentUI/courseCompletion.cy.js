@@ -9,7 +9,7 @@ describe('J. Complete the course which we have created in previous tests', () =>
         // Find the course by name
         cy.xpath("//input[@id='search']").type(Cypress.env('courseName'));
         // Go to the course
-        cy.xpath("//h3[text()='" + Cypress.env('courseName') + "']").click();
+        cy.xpath("//h3[text()='" + Cypress.env('courseName') + "']").first().click();
         // Assert that we're in the course
         cy.xpath("//h1[text()='" + Cypress.env('courseName') + "']");
         // Start the course (click on run)
