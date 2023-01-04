@@ -1,22 +1,48 @@
 describe("E. Profile editing", () => {
+    const newPassword = 'fg5fHe4$fg_56fG';
+
+    beforeEach(() => {
+        cy.login();
+    });
 
     it('should assert profile page', function () {
-        cy.login();
-
         cy.visit('/profile');
 
-        // Go to editing profile page
-        // cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
-        // cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "profile']").click();
-
-        // Input credentials
+        // change names
         cy.xpath("//h1[text()='User Profile']").should('be.visible');
+        cy.xpath("//input[@id='first-name']").clear().type('first-name');
+        cy.xpath("//input[@id='last-name']").clear().type('last-name');
+
+        // change password
+        cy.xpath("//input[@id='new_password']").clear().type(newPassword, {log:false});
+        cy.xpath("//button[@type='submit']").should('be.disabled');
+        cy.xpath("//input[@id='password']").clear().type(newPassword, {log:false});
+
+        cy.xpath("//button[@type='submit']").click();
+        cy.wait(1000);
+    });
+
+    it('should login with new password and change it back', function () {
+        Cypress.session.clearAllSavedSessions();
+        cy.login(Cypress.env('username'), newPassword);
+        cy.visit('/profile');
+
+        // change password back
         cy.xpath("//input[@id='new_password']").clear().type(Cypress.env("password"), {log:false});
         cy.xpath("//button[@type='submit']").should('be.disabled');
         cy.xpath("//input[@id='password']").clear().type(Cypress.env("password"), {log:false});
-        cy.xpath("//button[@type='submit']").click();
 
-        // Assert user registered
-        cy.contains("Success", { timeout: 5000 });
+        cy.xpath("//button[@type='submit']").click();
+        cy.wait(1000);
+
     });
+
+    it('should have new name', function () {
+        cy.visit('/profile');
+
+        cy.xpath("//h1[text()='User Profile']").should('be.visible');
+        cy.xpath("//input[@id='first-name']").should('have.value','first-name');
+        cy.xpath("//input[@id='last-name']").should('have.value', 'last-name');
+    });
+
 });
