@@ -1,7 +1,7 @@
 const {MailSlurp} = require("mailslurp-client");
 const {recurse} = require("cypress-recurse");
 
-describe('B. Register user', () => {
+describe('A2. Register user', () => {
     let userEmail;
     let userName;
     let confirmationLink;

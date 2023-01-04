@@ -1,4 +1,4 @@
-describe('K. Search courses', () => {
+describe('LC.B2. Search courses', () => {
 
     beforeEach(() => {
         cy.login();

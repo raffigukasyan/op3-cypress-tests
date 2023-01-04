@@ -1,4 +1,4 @@
-describe('F. Create course', () => {
+describe('LC2.A2. Create course', () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
@@ -45,31 +45,31 @@ describe('F. Create course', () => {
         cy.contains("Success").should('be.visible');
     });
 
-    it('should delete course', function () {
-        cy.visit('/admin');
-
-        cy.visit('/admin/lc/courses');
-        cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
-        cy.get('button').contains('Delete').click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
-
-    });
-
-    it('should delete lessons', function () {
-        cy.visit('/admin');
-
-        cy.visit('/admin/lc/lessons');
-        cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
-        cy.get('button').contains('Delete').click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
-
-        cy.visit('/admin/lc/lessons');
-        cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']/../../../../../th[4]/div/div[2]`).last().click();
-        cy.get('button').contains('Delete').click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
-
-
-    });
+    // it('should delete course', function () {
+    //     cy.visit('/admin');
+    //
+    //     cy.visit('/admin/lc/courses');
+    //     cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
+    //     cy.get('button').contains('Delete').click();
+    //     cy.xpath("//p[text()='Success!']").should('be.visible');
+    //
+    // });
+    //
+    // it('should delete lessons', function () {
+    //     cy.visit('/admin');
+    //
+    //     cy.visit('/admin/lc/lessons');
+    //     cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
+    //     cy.get('button').contains('Delete').click();
+    //     cy.xpath("//p[text()='Success!']").should('be.visible');
+    //
+    //     cy.visit('/admin/lc/lessons');
+    //     cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']/../../../../../th[4]/div/div[2]`).last().click();
+    //     cy.get('button').contains('Delete').click();
+    //     cy.xpath("//p[text()='Success!']").should('be.visible');
+    //
+    //
+    // });
 
     // afterEach(function onAfterEach() {
     //     if (this.currentTest.state === 'failed') {

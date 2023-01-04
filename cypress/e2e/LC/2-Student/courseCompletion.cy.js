@@ -1,11 +1,11 @@
-describe('J. Complete the course which we have created in previous tests', () => {
+describe('LC.B1. Complete the course which we have created in previous tests', () => {
 
     beforeEach(() => {
         cy.login();
-        cy.visit('/learning/courses');
     });
 
-    it('should ', function () {
+    it('Student should answer the lesson', function () {
+        cy.visit('/learning/courses');
         // Find the course by name
         cy.xpath("//input[@id='search']").type(Cypress.env('courseName'));
         // Go to the course
@@ -25,7 +25,7 @@ describe('J. Complete the course which we have created in previous tests', () =>
         cy.xpath("(//input[@type='checkbox'])[1]").click();
         // Go to the next lesson
         cy.wait(2000)
-        cy.xpath("//button[@type='submit']").dblclick();
+        cy.xpath('//button[text()=\'Check\']').click();
 
         //// SECOND LESSON ////
         // Assert we're in the third lesson
@@ -35,12 +35,13 @@ describe('J. Complete the course which we have created in previous tests', () =>
             "adipisicing elit. Accusamus aspernatur dolorem dolorum eligendi esse facilis impedit ipsa maxime minus " +
             "molestiae nostrum odit provident quam ratione, sequi similique, tempore. Nemo, sunt?");
         // Go to the next lesson
-        cy.xpath("//button[@type='submit']").click();
+        cy.xpath('//button[text()=\'Check\']').click();
+
+        cy.get('div').contains('The lesson is awaiting teacher review').should('be.visible')
+
+        //// BACK TO THE FIRST LESSON
+        cy.get('p').contains('QA Test lesson (checkbox + radio)').click();
+        cy.get('div').contains('Lesson successfully completed!').should('be.visible')
     });
 
-    // afterEach(function onAfterEach() {
-    //     if (this.currentTest.state === 'failed') {
-    //         cy.setCookie(skipCookie, 'true');
-    //     }
-    // });
 });

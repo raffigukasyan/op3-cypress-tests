@@ -1,4 +1,4 @@
-describe("C1. Categories List", () => {
+describe("CP1. Categories List", () => {
     let catName ="Test category 1";
 
     before(() => {

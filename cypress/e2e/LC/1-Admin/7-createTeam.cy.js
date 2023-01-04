@@ -1,4 +1,4 @@
-describe("I. Create team", () => {
+describe("LC.A5. Create team", () => {
     const tName = "QA Test Team" + Math.random() * 100;
 
     beforeEach(() => {

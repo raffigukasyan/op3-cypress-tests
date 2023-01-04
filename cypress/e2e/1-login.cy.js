@@ -1,4 +1,4 @@
-describe('A. Login test', () => {
+describe('A1. Login test', () => {
     beforeEach(() => {
         cy.visit(Cypress.config().baseUrl);
     });

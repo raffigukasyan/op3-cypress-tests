@@ -1,4 +1,4 @@
-describe('G. Create course group', () => {
+describe('LC.A3. Create course group', () => {
     beforeEach(() => {
         cy.admin();
     });

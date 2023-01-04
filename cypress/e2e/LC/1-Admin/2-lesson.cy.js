@@ -1,4 +1,4 @@
-describe("D. Create lessons", () => {
+describe("LC.A1. Create lessons", () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
     beforeEach(() => {
         cy.admin();
@@ -10,9 +10,10 @@ describe("D. Create lessons", () => {
         const qNameCB = Cypress.env('questionCheckbox');
 
         //// Create lesson ////
-        cy.xpath("//a[text()='Lessons']").click()
-        cy.xpath("//button[text()='Add lesson']").click();
+        // cy.xpath("//a[text()='Lessons']").click()
+        cy.visit('/admin/lc/lessons')
 
+        cy.xpath("//button[text()='Add lesson']").click();
         cy.xpath("//input[@type='text']").first().type(lName);
         cy.xpath("//button[@role='switch']").click();
         cy.xpath("//button[text()='Save']").should('be.visible').click();

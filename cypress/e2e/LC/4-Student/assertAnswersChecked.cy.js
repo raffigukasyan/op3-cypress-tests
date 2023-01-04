@@ -1,4 +1,4 @@
-describe('M. Assert answers were checked by teacher', () => {
+describe('LC.D1. Assert answers were checked by teacher', () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
@@ -17,11 +17,12 @@ describe('M. Assert answers were checked by teacher', () => {
     //     }
     // });
 
-    before(() => {
+    beforeEach(() => {
         cy.login()
     })
 
     it('assert that answers were created', function () {
+        cy.visit('/learning/courses');
         // Find the course by name
         cy.xpath("//input[@id='search']").type(Cypress.env('courseName'));
         // Go to the course
@@ -37,8 +38,8 @@ describe('M. Assert answers were checked by teacher', () => {
         cy.xpath("//div[text()='" + Cypress.env('lessonSuccess') + "']").should('be.visible').click();
         // Go to success page
         cy.wait(1500);
-        cy.xpath("//p[text()='SuccessScreen']").click();
-        cy.xpath("//div[text()='Congratulations!']").should('be.visible').click();
+        cy.xpath("//p[text()='Result']").click();
+        cy.xpath("//div[text()='Congratulations']").should('be.visible').click();
     });
 
     // afterEach(function onAfterEach() {

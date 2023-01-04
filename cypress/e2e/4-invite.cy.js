@@ -1,7 +1,7 @@
 const { recurse } = require('cypress-recurse');
 const Imap = require('imap-mailbox').default;
 
-describe("C2. Invite user by 2 ways", () => {
+describe("A4. Invite user by 2 ways", () => {
     let userEmail;
     let userName;
     let confirmationLink;

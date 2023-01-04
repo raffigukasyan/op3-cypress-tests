@@ -1,4 +1,4 @@
-describe('L. Check student answers', () => {
+describe('LC.C1. Check student answers', () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
@@ -30,24 +30,21 @@ describe('L. Check student answers', () => {
         cy.xpath("//h2[text()=\"Student' answers\"]");
 
         // Go to the lesson
-        cy.xpath("//div[text()='" + Cypress.env('userName') + "']").click();
+        // cy.xpath("//div[text()='" + Cypress.env('userName') + "']").click();
+        cy.get('button').contains('Check').first().click()
         // Assert we're in the lesson
-        cy.xpath("//h2[text()='Проверка урока']");
+        cy.xpath("//h2[text()='Checking the lesson']");
         // Input comment for the student
         cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium " +
             "ad beatae consectetur consequuntur dicta est et incidunt magni maxime minima natus nihil numquam " +
             "perferendis rem sequi, temporibus, totam. Eligendi, eos?");
         // Set answer as correct
-        cy.xpath("//button[@role='switch']").click();
+        // cy.xpath("//button[@role='switch']").click();
+        cy.get('span').contains('Success').parent().click()
         // Save answer
         cy.xpath("//button[text()='Save']").click();
         // Assert answer saved
-        // cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+        cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
     });
 
-    // afterEach(function onAfterEach() {
-    //     if (this.currentTest.state === 'failed') {
-    //         cy.setCookie(skipCookie, 'true');
-    //     }
-    // });
 });
