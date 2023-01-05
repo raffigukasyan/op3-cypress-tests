@@ -65,7 +65,7 @@ Cypress.Commands.add('addAnswers', (answer) => {
 });
 
 Cypress.Commands.add('accessAllItems', () => {
-    cy.wait(4000);
+    cy.wait(1000);
     // cy.xpath('(//button/span[starts-with(text(), \'Show\')])[last()]').click();
     cy.xpath('//button[@data-test-id="pageCountButton"]').click();
     cy.wait(1000);

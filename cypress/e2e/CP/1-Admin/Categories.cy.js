@@ -16,6 +16,8 @@ describe("CP1. Categories List", () => {
         // create post
         cy.get('ul li:first input').type(catName);
         cy.xpath("//button[@role='switch']").click();
+        cy.wait(500);
+
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.wait(1000);
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -33,9 +35,11 @@ describe("CP1. Categories List", () => {
         cy.contains('Edit category');
         
         cy.xpath("//button[@role='switch']").click();
+        cy.wait(500);
 
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.wait(1000);
+
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
         cy.xpath(`//div[text()='${catName}']/../../../../../th[3]`).last().contains('Active');

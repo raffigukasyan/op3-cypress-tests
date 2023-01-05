@@ -25,7 +25,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 3000,
   requestTimeout: 30000,
   viewportHeight: 800,
-  viewportWidth: 800,
+  viewportWidth: 1000,
   e2e: {
     baseUrl:process.env.URL,
     setupNodeEvents: async (on, config) => {
