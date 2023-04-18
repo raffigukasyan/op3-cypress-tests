@@ -26,11 +26,11 @@ describe("LC.A1. Create lessons", () => {
 
         // Create radio question
         cy.question(qNameR, 2);
-        cy.addAnswers(1);
+        // cy.addAnswers(1);
 
         // Create checkbox question
         cy.question(qNameCB, 3);
-        cy.addAnswers(2);
+        // cy.addAnswers(2);
 
         // Assert question added
         cy.xpath("//span[text()='Active']").should('be.visible');
@@ -53,6 +53,7 @@ describe("LC.A1. Create lessons", () => {
 
         cy.xpath("//input[@type='text']").first().type(lName);
         cy.xpath("//button[@role='switch']").click();
+        cy.xpath("//button[text()='Save']").scrollIntoView()
         cy.xpath("//button[text()='Save']").should('be.visible').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
 

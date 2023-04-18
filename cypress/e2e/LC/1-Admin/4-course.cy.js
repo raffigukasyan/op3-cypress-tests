@@ -1,4 +1,4 @@
-describe('LC2.A2. Create course', () => {
+describe('LC.A2. Create course', () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
@@ -22,7 +22,7 @@ describe('LC2.A2. Create course', () => {
     });
 
     it('should create course', function () {
-        cy.visit('/admin');
+        cy.admin();
 
         // Go to add courses page
         cy.xpath("//a[text()='Courses']").click();
