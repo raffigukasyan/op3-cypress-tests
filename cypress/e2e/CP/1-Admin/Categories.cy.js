@@ -23,13 +23,13 @@ describe("CP1. Categories List", () => {
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
         // check active 
-        cy.xpath(`//div[text()='${catName}']/../../../../../th[3]`).last().contains('Inactive');
+        cy.xpath(`//div[text()='${catName}']/../../../../../td[4]`).last().contains('Inactive');
     });
 
     it('should edit Category)', function () {
         cy.visit('admin/cp/category');
 
-        cy.accessAllItems();
+        // cy.accessAllItems();
         cy.xpath(`(//div[text()='${catName}'])`).last().click();
 
         cy.contains('Edit category');
@@ -42,18 +42,18 @@ describe("CP1. Categories List", () => {
 
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
-        cy.xpath(`//div[text()='${catName}']/../../../../../th[3]`).last().contains('Active');
+        cy.xpath(`//div[text()='${catName}']/../../../../../td[4]`).last().contains('Active');
     });
 
     it('should delete Category)', function () {
       
         cy.visit('admin/cp/category');
 
-        cy.accessAllItems();
+        // cy.accessAllItems();
         cy.contains(catName);
 
         // delete
-        cy.xpath(`//div[text()='${catName}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.xpath(`//div[text()='${catName}']/../../../../../td[5]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
         

@@ -26,7 +26,34 @@ Cypress.Commands.add('admin', () => {
     cy.login();
     cy.visit('/admin');
     cy.wait(500);
+    cy.get('body').then(($body) => {
+        if($body.find('.inline-block.align-bottom.bg-white button').length) {
+            return '.inline-block.align-bottom.bg-white button';
+        }
+
+        return 'body';
+    })
+    .then(selector => {
+        cy.get(selector).click();
+    })
+    
+    cy.wait(500);
 });
+
+Cypress.Commands.add('createAnswerForQuestion', (questionName) => {
+    cy.wait(1500);
+    cy.xpath("//span[text()='Add answer']").click();
+    cy.wait(500);
+     /* cy.xpath("(//div[text()='" + lName + "'])[1]") */
+    cy.xpath("(//button[text()='Save'])[2]").click();
+    cy.wait(500);
+    cy.xpath("//*[text()='Create answer']").should('be.visible');
+    cy.xpath("//input[@type='text']").type(questionName + ' answer');
+    cy.xpath("(//button[@role='switch'])[1]").click();
+    cy.xpath("(//button[@role='switch'])[2]").click();
+    cy.xpath("//button[text()='Save']").click();
+    cy.xpath("//p[text()='Success!']").should('be.visible');
+})
 
 Cypress.Commands.add('question', (questionName, questionType) => {
     cy.wait(1500);
@@ -36,8 +63,12 @@ Cypress.Commands.add('question', (questionName, questionType) => {
     // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
     cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
-    cy.xpath("//button[@role='switch']").click();
     cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({force:true});
+    questionType === 1 && cy.xpath("//button[@role='switch']").click()
+    if(questionType !== 1) {
+        cy.createAnswerForQuestion(questionName)
+        cy.xpath("//button[@role='switch']").click()
+    }
     cy.xpath("//input[@type='number']").type(10);
     cy.xpath("//button[text()='Save']").click();
 });
@@ -46,14 +77,14 @@ Cypress.Commands.add('addAnswers', (answer) => {
     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-indigo-600 hover:text-indigo-900 cursor-pointer'])[" + answer + "]").click();
     cy.xpath("//*[text()='Edit question']");
 
-    cy.xpath("//*[@class='w-6 h-6 mb-1 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
+    cy.xpath("//*[@class='w-6 h-6 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
     cy.xpath("//*[text()='Create answer']").should('be.visible');
     cy.xpath("//input[@type='text']").type(Cypress.env('answer1'));
     cy.xpath("(//button[@role='switch'])[1]").click();
     cy.xpath("(//button[@role='switch'])[2]").click();
     cy.xpath("//button[text()='Save']").click();
 
-    cy.xpath("//*[@class='w-6 h-6 mb-1 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
+    cy.xpath("//*[@class='w-6 h-6 text-blue-600 hover:text-blue-900 cursor-pointer']").click();
     cy.xpath("//*[text()='Create answer']").should('be.visible');
     cy.xpath("//input[@type='text']").type(Cypress.env('answer2'));
     cy.xpath("(//button[@role='switch'])[1]").click();
