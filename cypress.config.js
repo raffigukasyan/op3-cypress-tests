@@ -33,11 +33,9 @@ module.exports = defineConfig({
 
       on('task', {
         getUserEmail() {
-          debugger
           return emailAccount.user
         },
         getLastEmail() {
-          debugger
           return emailAccount.getLastEmail()
         },
         sendEmail() {
