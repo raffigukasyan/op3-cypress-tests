@@ -15,6 +15,7 @@ jobs:
         with:
           browser: chrome
           spec: cypress/e2e/**/*.cy.js
+          install-command: yarn
         env:
           CYPRESS_allure: true
           URL: ${{secrets.RELEASE_URL}}
