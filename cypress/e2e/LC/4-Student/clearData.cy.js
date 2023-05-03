@@ -1,4 +1,4 @@
-describe('LC.A6. Clear all created learning items', () => {
+describe('LC.Z. Clear all created learning items', () => {
 
     beforeEach(() => {
         cy.admin();
