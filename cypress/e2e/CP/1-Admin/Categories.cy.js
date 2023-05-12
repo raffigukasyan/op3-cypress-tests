@@ -25,7 +25,7 @@ describe("CP1. Categories List", () => {
         // check active 
         cy.xpath(`//div[text()='${catName}']/../../../../../td[4]`).last().contains('Inactive');
     });
-
+   
     it('should edit Category)', function () {
         cy.visit('admin/cp/category');
 
