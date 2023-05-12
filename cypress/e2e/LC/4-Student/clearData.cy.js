@@ -1,4 +1,4 @@
-describe('LC.A6. Clear all created learning items', () => {
+describe('LC.Z. Clear all created learning items', () => {
 
     beforeEach(() => {
         cy.admin();
@@ -6,6 +6,7 @@ describe('LC.A6. Clear all created learning items', () => {
 
     it('should delete course', function () {
         cy.visit('/admin/lc/courses');
+        cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -13,6 +14,7 @@ describe('LC.A6. Clear all created learning items', () => {
 
     it('should delete lessons', function () {
         cy.visit('/admin/lc/lessons');
+        cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -36,5 +38,6 @@ describe('LC.A6. Clear all created learning items', () => {
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
+  
 
 });

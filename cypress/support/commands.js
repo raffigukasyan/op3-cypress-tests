@@ -25,7 +25,7 @@ Cypress.Commands.add('login', (username = Cypress.env('username'), password = Cy
 Cypress.Commands.add('admin', () => {
     cy.login();
     cy.visit('/admin');
-    cy.wait(500);
+    cy.wait(3000);
     cy.get('body').then(($body) => {
         if($body.find('.inline-block.align-bottom.bg-white button').length) {
             return '.inline-block.align-bottom.bg-white button';

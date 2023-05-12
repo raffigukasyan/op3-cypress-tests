@@ -40,8 +40,8 @@ describe('LC.B1. Complete the course which we have created in previous tests', (
         cy.get('div').contains('The lesson is awaiting teacher review').should('be.visible')
 
         //// BACK TO THE FIRST LESSON
-        cy.get('p').contains('QA Test lesson (checkbox + radio)').click();
-        cy.get('div').contains('Lesson successfully completed!').should('be.visible')
+      cy.get('p').contains('QA Test lesson (checkbox + radio)').click();
+      cy.get('div').contains('Lesson successfully completed!').should('be.visible')
     });
 
 });

@@ -18,11 +18,10 @@ describe('LC.A2. Create course', () => {
     // });
     
     beforeEach(() => {
-        cy.login();
+        cy.admin();
     });
 
     it('should create course', function () {
-        cy.admin();
 
         // Go to add courses page
         cy.xpath("//a[text()='Courses']").click();

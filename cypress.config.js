@@ -21,6 +21,7 @@ module.exports = defineConfig({
     answer1: "answer 1",
     answer2: "answer 2",
     shouldSkipEduTests: 'shouldSkipEduTests',
+    articleName: 'Test article 1'
   },
   defaultCommandTimeout: 3000,
   requestTimeout: 30000,
