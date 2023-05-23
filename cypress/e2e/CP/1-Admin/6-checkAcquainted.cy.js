@@ -1,4 +1,4 @@
-describe("CP5. Check Not Acquainted", () => {
+describe("CP6. Check Not Acquainted", () => {
 
   const userNames = 'first-name last-name';
 

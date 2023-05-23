@@ -1,4 +1,4 @@
-describe("CP4. Familiarization with the article", () => {
+describe("CP5. Familiarization with the article", () => {
 
   const article = Cypress.env('articleName');
 
