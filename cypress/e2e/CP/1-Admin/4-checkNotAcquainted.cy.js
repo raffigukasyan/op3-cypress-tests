@@ -1,4 +1,4 @@
-describe("CP3. Check Not Acquainted", () => {
+describe("CP4. Check Not Acquainted", () => {
 
   const userNames = Cypress.env('usersArticle');
 

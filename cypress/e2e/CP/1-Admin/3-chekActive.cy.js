@@ -1,4 +1,4 @@
-describe("CP3. Article List", () => {
+describe("CP3. Check Active Article", () => {
 
   let articleName = Cypress.env('articleName');
   const userNames = Cypress.env('usersArticle');
@@ -17,7 +17,7 @@ describe("CP3. Article List", () => {
     cy.xpath('//span[text()="Active"]/../span[2]/button').click();
     cy.wait(500);
     cy.xpath('//button[text()="Save"]').click();
-    cy.xpath("//p[text()='Success!']").should('be.visible');
+    cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
   });
 
   it('checkDeactive Article', function () {
@@ -39,7 +39,7 @@ describe("CP3. Article List", () => {
     cy.xpath('//span[text()="Active"]/../span[2]/button').click();
     cy.wait(500);
     cy.xpath('//button[text()="Save"]').click();
-    cy.xpath("//p[text()='Success!']").should('be.visible');
+    cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
   })
 
   it('checkActive Article', function () {
