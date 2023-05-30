@@ -1,7 +1,8 @@
 describe('LC.B1. Complete the course which we have created in previous tests', () => {
-
     beforeEach(() => {
-        cy.login();
+        cy.task("getUserEmail").then((user) => {
+            cy.login(user.email, Cypress.env('password'));
+        })
     });
 
     it('Student should answer the lesson', function () {
