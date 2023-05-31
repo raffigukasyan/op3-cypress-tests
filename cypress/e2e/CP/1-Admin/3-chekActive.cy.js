@@ -23,6 +23,7 @@ describe("CP3. Check Active Article", () => {
   it('checkDeactive Article', function () {
     cy.visit('admin/cp/report');
     cy.xpath('//button[text()="Show results"]').click();
+    cy.wait(1500);
 
     for (let i = 0; i < userNames.length; i++) {
       cy.contains(userNames[i]).prev().click();
@@ -45,6 +46,7 @@ describe("CP3. Check Active Article", () => {
   it('checkActive Article', function () {
     cy.visit('admin/cp/report');
     cy.xpath('//button[text()="Show results"]').click();
+    cy.wait(1500);
 
     for (let i = 0; i < userNames.length; i++) {
       cy.contains(userNames[i]).prev().click();

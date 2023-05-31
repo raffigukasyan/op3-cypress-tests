@@ -14,7 +14,7 @@ describe("CP6. Check Not Acquainted", () => {
     cy.contains('Report').click();
 
     cy.xpath('//button[text()="Show results"]').click();
-    cy.wait(500);
+    cy.wait(1500);
     
     //cy.xpath(`//span[text()='${userNames}']/../div`).click();
     cy.contains(userNames).prev().click();
