@@ -60,11 +60,13 @@ Cypress.Commands.add('question', (questionName, questionType) => {
     cy.xpath("//h2[text()='Edit lesson']").click();
     cy.xpath("//div[@class='flex items-center cursor-pointer mb-3']").click();
     cy.wait(1500);
-    // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
+   // // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
-    cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
-    cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({force:true});
-    questionType === 1 && cy.xpath("//button[@role='switch']").click()
+  cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
+  cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
+  cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
+  
+    questionType === 1 && cy.xpath("//button[@role='switch']").click();
     if(questionType !== 1) {
         cy.createAnswerForQuestion(questionName)
         cy.xpath("//button[@role='switch']").click()
@@ -106,7 +108,8 @@ Cypress.Commands.add('accessAllItems', () => {
 
 Cypress.Commands.add('logout', () => {
     cy.wait(1500);
-    cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
+  cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50]'").click();
+  cy.wait(500);
     cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "logout']").click();
     cy.wait(1500);
 });

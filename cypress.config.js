@@ -22,7 +22,7 @@ module.exports = defineConfig({
     answer2: "answer 2",
     shouldSkipEduTests: 'shouldSkipEduTests',
     articleName: 'Test article 1',
-    usersArticle: ["Sigrid Sauer", "first-name last-name"]
+    usersArticle: ["my Test", "first-name last-name"]
   },
   defaultCommandTimeout: 3000,
   requestTimeout: 30000,
