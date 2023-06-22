@@ -30,7 +30,12 @@ describe('LC.A2. Create course', () => {
         cy.xpath("(//input[@type='text'])[1]").type(Cypress.env('courseName'));
         cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
         // Set course as active
-
+      cy.xpath("//button[text()='Select']").click();
+      cy.wait(500);
+      cy.xpath("//div[text()='Others']").click();
+      cy.wait(500);
+      cy.xpath("//li[text()='All Users']").click();
+      cy.contains('Select Others').parent().parent().contains('Save').click();
         // Add lessons for course
         cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonCheckboxRadio'));
         cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "'][1]").click();

@@ -18,7 +18,9 @@ describe('LC.D1. Assert answers were checked by teacher', () => {
     // });
 
     beforeEach(() => {
-        cy.login()
+      cy.task("getUserEmail").then((user) => {
+        cy.login(user.email, Cypress.env('password'));
+      })
     })
 
     it('assert that answers were created', function () {

@@ -29,7 +29,7 @@ describe("CP5. Familiarization with the article", () => {
   });
 
   it('checking the ignorance of the article USER', () => {
-    cy.login('mytest123@mail.ru', 'myTest123');
+    cy.login('mytest123@mail.ru', '123456');
     cy.visit('/cp');
 
     cy.xpath('//div[text()="Not acquainted"]').click();

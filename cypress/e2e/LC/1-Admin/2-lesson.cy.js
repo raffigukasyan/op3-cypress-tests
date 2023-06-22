@@ -1,7 +1,11 @@
 describe("LC.A1. Create lessons", () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
+    let userName;
     beforeEach(() => {
-        cy.admin();
+      cy.admin();
+      cy.task("getUserEmail").then((user) => {
+        userName = user.email.replace("@ethereal.email", "");
+      });
     });
 
     it('should create lesson(checkbox + radio)', function () {
