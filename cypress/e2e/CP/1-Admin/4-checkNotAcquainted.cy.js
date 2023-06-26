@@ -14,7 +14,7 @@ describe("CP4. Check Not Acquainted", () => {
     cy.contains('Report').click();
 
     cy.xpath('//button[text()="Show results"]').click();
-    cy.wait(500);
+    cy.wait(5000);
 
     for (let i = 0; i < userNames.length; i++) {
       cy.contains(userNames[i]).prev().click();
@@ -23,7 +23,7 @@ describe("CP4. Check Not Acquainted", () => {
       cy.wait(500);
       cy.visit('admin/cp/report');
       cy.xpath('//button[text()="Show results"]').click();
-      cy.wait(500);
+      cy.wait(5000);
     }
   })
 })
