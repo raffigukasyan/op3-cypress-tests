@@ -28,7 +28,7 @@ describe('LC.C1. Check student answers', () => {
     it('Check first answer', function () {
         // Go to the students answers page
         cy.wait(1500);
-        cy.xpath("//a[text()='Student`s answers']").click();
+        cy.xpath("/html/body/div[2]/div/div/div[1]/div/div/div/div[2]/nav/div[2]/div/div/div/p/a[5]").click();
         cy.xpath("//h2[text()=\"Student' answers\"]");
 
         // Go to the lesson
@@ -45,6 +45,7 @@ describe('LC.C1. Check student answers', () => {
         cy.get('span').contains('Success').parent().click()
         // Save answer
         cy.xpath("//button[text()='Save']").click();
+        cy.xpath(1500);
         // Assert answer saved
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
     });

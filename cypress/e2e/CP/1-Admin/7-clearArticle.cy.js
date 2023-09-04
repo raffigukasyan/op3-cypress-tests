@@ -1,5 +1,5 @@
 describe("CP7. Clear Data", () => {
-  let articleName = 'Test article 1';
+  let articleName = Cypress.env('articleName');
   
   beforeEach(() => {
     cy.admin();

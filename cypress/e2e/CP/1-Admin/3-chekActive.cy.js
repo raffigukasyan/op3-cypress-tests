@@ -52,7 +52,7 @@ describe("CP3. Article List", () => {
     cy.wait(5000);
     for (let i = 0; i < userNames.length; i++) {
       cy.contains(userNames[i]).prev().click();
-      cy.contains(userNames[i]).parent().parent().next().contains('Test article 1').should('exist');
+      cy.contains(userNames[i]).parent().parent().next().contains(articleName).should('exist');
       cy.wait(500);
     }
   })

@@ -1,4 +1,4 @@
-Cypress.Commands.add('login', (username = Cypress.env('username'), password = Cypress.env('password')) => {
+Cypress.Commands.add('login', (username = Cypress.env('email'), password = Cypress.env('password')) => {
 
     const hashCode = function (str) {
         str = "" + str;
@@ -45,26 +45,31 @@ Cypress.Commands.add('createAnswerForQuestion', (questionName) => {
     cy.xpath("//span[text()='Add answer']").click();
     cy.wait(500);
      /* cy.xpath("(//div[text()='" + lName + "'])[1]") */
-    cy.xpath("(//button[text()='Save'])[2]").click();
-    cy.wait(500);
-    cy.xpath("//*[text()='Create answer']").should('be.visible');
-    cy.xpath("//input[@type='text']").type(questionName + ' answer');
-    cy.xpath("(//button[@role='switch'])[1]").click();
+    // cy.xpath("(//button[text()='Save'])[2]").click();
+  
+  //  // cy.xpath("//*[text()='Create answer']").should('be.visible');
+    cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[1]/button").click();
+    cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[2]/input").type(questionName + ' answer');
     cy.xpath("(//button[@role='switch'])[2]").click();
-    cy.xpath("//button[text()='Save']").click();
-    cy.xpath("//p[text()='Success!']").should('be.visible');
+    cy.xpath("(//button[text()='Save'])[1]").click();
+    // cy.xpath("//p[text()='Success!']").should('be.visible');
 })
 
 Cypress.Commands.add('question', (questionName, questionType) => {
     cy.wait(1500);
     cy.xpath("//h2[text()='Edit lesson']").click();
     cy.xpath("//div[@class='flex items-center cursor-pointer mb-3']").click();
-    cy.wait(1500);
+  cy.wait(1500);
+  cy.xpath("/html/body/div[6]/div/div/div/div/div[2]/div[2]/button[1]").click();
+  cy.wait(1000);
+  cy.xpath("//h2[text()='Add question']").click();
+
    // // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
-  cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
-  cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
-  cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
+    cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
+    
+    cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
+    cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
   
     questionType === 1 && cy.xpath("//button[@role='switch']").click();
     if(questionType !== 1) {

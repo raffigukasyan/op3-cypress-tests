@@ -67,6 +67,7 @@ describe("C. Invite user by 2 ways", () => {
         cy.admin();
 
         cy.xpath("//a[text()='Users']").click();
+        cy.wait(500);
         cy.accessAllItems();
 
         cy.xpath("//div[text()='QA TEST']");
