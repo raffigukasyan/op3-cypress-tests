@@ -25,14 +25,14 @@ module.exports = defineConfig({
     shouldSkipEduTests: 'shouldSkipEduTests',
     categoryName: 'QA Test Category',
     articleName: 'QA Test Article',
-    usersArticle: ["my Test", "first-name last-name"]
+    usersArticle: "Kasandra Fay",
   },
   defaultCommandTimeout: 3000,
   requestTimeout: 30000,
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl:process.env.URL,
+    baseUrl: 'http://tenant1.prog8.local:8001',
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 
