@@ -32,18 +32,21 @@ describe('LC.A2. Create course', () => {
         // Set course as active
       cy.xpath("//button[text()='Select']").click();
       cy.wait(500);
-      cy.xpath("//div[text()='Others']").click();
-      cy.wait(500);
-      cy.xpath("//li[text()='All Users']").click();
-      cy.contains('Select Others').parent().parent().contains('Save').click();
+      cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/input").type('QA');
+      cy.wait(1500);
+      cy.xpath("//*[text()='" + Cypress.env('courseUser') + "'][1]").click();
+      cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/button").click();
         // Add lessons for course
         cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonCheckboxRadio'));
         cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "'][1]").click();
         cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonText'));
         cy.xpath("//*[text()='" + Cypress.env('lessonText') + "'][1]").click();
+        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonTimer'));
+        cy.xpath("//*[text()='" + Cypress.env('lessonTimer') + "'][1]").click();
 
         // Save course
         cy.xpath("//button[text()='Save']").click();
+        cy.wait(2000);
 
         // Assert course created
         cy.contains("Success").should('be.visible');

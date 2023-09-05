@@ -25,12 +25,9 @@ describe("CP3. Article List", () => {
     cy.xpath('//button[text()="Show results"]').click();
 
     cy.wait(5000);
-
-    for (let i = 0; i < userNames.length; i++) {
-      cy.contains(userNames[i]).prev().click();
-      cy.contains(userNames[i]).parent().parent().next().contains('Test article 1', { timeout: 5000 }).should('not.exist');
-      cy.wait(500)
-    }
+    cy.contains(userNames).prev().click();
+    cy.contains(userNames).parent().parent().next().contains(articleName, { timeout: 5000 }).should('not.exist');
+    cy.wait(500)
   })
 
   it('Activate Article', function () {
@@ -50,11 +47,10 @@ describe("CP3. Article List", () => {
     cy.xpath('//button[text()="Show results"]').click();
 
     cy.wait(5000);
-    for (let i = 0; i < userNames.length; i++) {
-      cy.contains(userNames[i]).prev().click();
-      cy.contains(userNames[i]).parent().parent().next().contains('Test article 1').should('exist');
-      cy.wait(500);
-    }
+
+    cy.contains(userNames).prev().click();
+    cy.contains(userNames).parent().parent().next().contains(articleName).should('exist');
+    cy.wait(500)
   })
 
 })

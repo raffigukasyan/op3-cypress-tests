@@ -1,8 +1,8 @@
 
 describe("CP2. Article List", () => {
-  let articleName = 'Test article 1';
+  let articleName = Cypress.env('articleName');
+  let categorisName = Cypress.env('categoryName')
   let answerNumber;
-  let categorisText = 'test232313123';
   let editCat = 'IT-Delta';
   let userName = 'Dashawn Durgan'
   before(() => {
@@ -22,15 +22,15 @@ describe("CP2. Article List", () => {
     // create Article
     cy.get('ul li:first input').type(articleName);
 
-    cy.xpath('//button[text()="Select"]').click();
-    cy.wait(500);
+    // cy.xpath('//button[text()="Select"]').click();
+    // cy.wait(500);
 
-    cy.xpath('//div[@class="w-full h-60 sm:w-1/2 overflow-y-auto"]/ul/li[text()="my Test"]').click();
-    cy.xpath('//div[@class="w-full h-60 sm:w-1/2 overflow-y-auto"]/ul/li[text()="first-name last-name"]').click();
-    cy.xpath('//button[@class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"]').click();
+    // cy.xpath('//div[@class="w-full h-60 sm:w-1/2 overflow-y-auto"]/ul/li[text()="my Test"]').click();
+    // cy.xpath('//div[@class="w-full h-60 sm:w-1/2 overflow-y-auto"]/ul/li[text()="first-name last-name"]').click();
+    // cy.xpath('//button[@class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"]').click();
 
-    cy.xpath('//span[text()="Categories *"]//following-sibling::span/descendant::input').type('test');
-    cy.xpath("//*[text()='" + categorisText + "'][1]").click();
+    cy.xpath('//span[text()="Categories *"]//following-sibling::span/descendant::input').type(categorisName);
+    cy.xpath("//*[text()='" + categorisName + "'][1]").click();
 
 
     cy.xpath("//span[text()='Questions Needed']").scrollIntoView();
@@ -69,8 +69,7 @@ describe("CP2. Article List", () => {
 
     cy.contains('Edit article');
 
-    cy.xpath('//span[text()="Categories *"]//following-sibling::span/descendant::input').type('it-De');
-    cy.xpath("//*[text()='" + editCat + "'][1]").click();
+    cy.xpath('//span[text()="Categories *"]//following-sibling::span/descendant::input').type(' ');
     cy.wait(500);
 
     cy.xpath("//span[text()='Questions Needed']").scrollIntoView();

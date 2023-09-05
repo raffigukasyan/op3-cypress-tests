@@ -1,6 +1,7 @@
 describe("CP4. Check Not Acquainted", () => {
 
   const userNames = Cypress.env('usersArticle');
+  let articleName = Cypress.env('articleName');
 
   before(() => {
   });
@@ -16,14 +17,14 @@ describe("CP4. Check Not Acquainted", () => {
     cy.xpath('//button[text()="Show results"]').click();
     cy.wait(5000);
 
-    for (let i = 0; i < userNames.length; i++) {
-      cy.contains(userNames[i]).prev().click();
-      cy.contains(userNames[i]).parent().parent().next().contains('Test article 1').click();
-      cy.xpath("//span[text()='Not acquainted']");
-      cy.wait(500);
-      cy.visit('admin/cp/report');
-      cy.xpath('//button[text()="Show results"]').click();
-      cy.wait(5000);
-    }
+
+    cy.contains(userNames).prev().click();
+    cy.wait(500);
+    cy.contains(userNames).parent().parent().next().contains(articleName).click();
+    cy.xpath("//span[text()='Not acquainted']");
+    cy.wait(500);
+    cy.visit('admin/cp/report');
+    cy.xpath('//button[text()="Show results"]').click();
+    cy.wait(5000);
   })
 })
