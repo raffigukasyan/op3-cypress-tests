@@ -32,7 +32,7 @@ module.exports = defineConfig({
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: 'http://tenant1.prog8.local:8001',
+    baseUrl: process.env.URL,
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 
