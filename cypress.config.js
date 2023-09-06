@@ -16,7 +16,7 @@ module.exports = defineConfig({
     lessonCheckboxRadio: "QA Test lesson (checkbox + radio)",
     lessonText: "QA Test lesson (text)",
     lessonTimer: "QA Test lesson (timer)",
-    courseUser: 'QA TEST',
+    courseUser: 'QA Kiril',
     questionRadio: "radio question",
     questionText: "text question",
     questionCheckbox: "checkbox question",
@@ -25,14 +25,14 @@ module.exports = defineConfig({
     shouldSkipEduTests: 'shouldSkipEduTests',
     categoryName: 'QA Test Category',
     articleName: 'QA Test Article',
-    usersArticle: "Kasandra Fay",
+    usersArticle: "first-name last-name",
   },
   defaultCommandTimeout: 3000,
   requestTimeout: 30000,
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: 'http://tenant1.prog8.local:8001',
+    baseUrl: process.env.URL,
     setupNodeEvents: async (on, config) => {
       const emailAccount = await makeEmailAccount()
 
