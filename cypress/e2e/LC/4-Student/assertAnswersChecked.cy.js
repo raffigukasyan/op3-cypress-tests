@@ -18,9 +18,10 @@ describe('LC.D1. Assert answers were checked by teacher', () => {
     // });
 
     beforeEach(() => {
-      cy.task("getUserEmail").then((user) => {
-        cy.login(user.email, Cypress.env('password'));
-      })
+      // cy.task("getUserEmail").then((user) => {
+      //   cy.login(user.email, Cypress.env('password'));
+      // })
+      cy.login('nagopib486@chambile.com', '123');
     })
 
     it('assert that answers were created', function () {
