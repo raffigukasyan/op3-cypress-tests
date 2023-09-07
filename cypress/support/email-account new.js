@@ -11,6 +11,8 @@ const makeEmailAccount = async () => {
   console.log("created new email account %s", testAccount.user);
   console.log("for debugging, the password is %s", testAccount.pass);
 
+  console.log('env: ', process.env);
+
   const userEmail = {
     user: {
       email: testAccount.user,
