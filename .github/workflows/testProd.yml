@@ -18,10 +18,9 @@ jobs:
           install-command: yarn
         env:
           CYPRESS_allure: true
-          URL: ${{secrets.PRODUCTION_URL}}
+          URL: ${{vars.PRODUCTION_URL}}
           CYPRESS_username: ${{secrets.PRODUCTION_USERNAME}}
           CYPRESS_password: ${{secrets.PRODUCTION_PASSWORD}}
-          CYPRESS_AUTHNAME: '${{secrets.PRODUCTION_AUTHNAME}}'
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master

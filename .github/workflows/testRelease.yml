@@ -21,7 +21,6 @@ jobs:
           URL: ${{vars.RELEASE_URL}}
           USERNAME: ${{vars.RELEASE_USERNAME}}
           PASSWORD: ${{secrets.RELEASE_PASSWORD}}
-#          CYPRESS_AUTHNAME: '${{secrets.RELEASE_AUTHNAME}}'
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
