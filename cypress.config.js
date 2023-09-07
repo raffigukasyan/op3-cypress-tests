@@ -22,6 +22,7 @@ module.exports = defineConfig({
     questionCheckbox: "checkbox question",
     answer1: "answer 1",
     answer2: "answer 2",
+    answer3: "answer 3",
     shouldSkipEduTests: 'shouldSkipEduTests',
     categoryName: 'QA Test Category',
     articleName: 'QA Test Article',
