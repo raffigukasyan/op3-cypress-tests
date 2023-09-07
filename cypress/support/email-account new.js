@@ -6,7 +6,7 @@ const makeEmailAccount = async () => {
   // Generate a new Ethereal email inbox account
   const testAccount = await nodemailer.createTestAccount();
 
-  console.log(111, testAccount);
+  // console.log('test email account: ', testAccount);
 
   console.log("created new email account %s", testAccount.user);
   console.log("for debugging, the password is %s", testAccount.pass);
