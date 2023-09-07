@@ -6,7 +6,8 @@ const makeEmailAccount = async () => {
     // Generate a new Ethereal email inbox account
     const testAccount = await nodemailer.createTestAccount()
 
-    console.log(111, testAccount);
+    console.log('env: ', process.env);
+    // console.log(111, testAccount);
 
     console.log('created new email account %s', testAccount.user)
     console.log('for debugging, the password is %s', testAccount.pass)
@@ -22,8 +23,6 @@ const makeEmailAccount = async () => {
          * for the Ethereal email account using ImapFlow.
          */
         async getLastEmail() {
-            debugger
-            console.log(111, testAccount);
             // Create imap client to connect later to the ethereal inbox and retrieve emails using ImapFlow
             let client = new ImapFlow({
                 host: 'ethereal.email',
