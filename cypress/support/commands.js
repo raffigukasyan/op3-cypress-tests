@@ -109,12 +109,12 @@ Cypress.Commands.add('question', (questionName, questionType) => {
 
 
 Cypress.Commands.add('accessAllItems', () => {
-    cy.wait(1000);
+    cy.wait(2000);
     // cy.xpath('(//button/span[starts-with(text(), \'Show\')])[last()]').click();
     cy.xpath('//button[@data-test-id="pageCountButton"]').click();
-    cy.wait(1000);
+    cy.wait(2000);
     cy.get('span').contains("Show 100 elements").last().click();
-    cy.wait(500);
+    cy.wait(1000);
 });
 
 Cypress.Commands.add('logout', () => {
