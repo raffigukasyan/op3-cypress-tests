@@ -6,7 +6,7 @@ describe('LC.Z. Clear all created learning items', () => {
 
     it('should delete course', function () {
       cy.visit('/admin/lc/courses');
-      cy.wait(1000);
+      cy.wait(1500);
         cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
