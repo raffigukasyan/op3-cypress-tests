@@ -6,17 +6,16 @@ describe('LC.Z. Clear all created learning items', () => {
 
     it('should delete course', function () {
       cy.visit('/admin/lc/courses');
-      cy.wait(1500);
-        cy.accessAllItems();
+      cy.wait(500);
+      
         cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
 
     it('should delete lessons', function () {
-      cy.visit('/admin/lc/lessons');
-      cy.wait(1000);
-        cy.accessAllItems();
+        cy.visit('/admin/lc/lessons');
+        cy.wait(500);
         cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
