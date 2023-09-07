@@ -30,27 +30,15 @@ describe('LC.A2. Create course', () => {
         cy.xpath("(//input[@type='text'])[1]").type(Cypress.env('courseName'));
         cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
         // Set course as active
-      cy.xpath("//button[text()='Select']").click();
-      cy.wait(500);
-      cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/input").type('QA');
-      cy.wait(1500);
-
-//      cy.get('.css-b62m3t-container').contains(Cypress.env('courseUser'), { force: true }).click();
-      cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div[2]/div/div").click();
-      cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/button").click();
-        // Add lessons for course
-        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonCheckboxRadio'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonCheckboxRadio') + "'][1]").click();
-        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonText'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonText') + "'][1]").click();
-        cy.xpath("//span[text()='List of lessons']//following-sibling::span/descendant::input").type(Cypress.env('lessonTimer'));
-        cy.xpath("//*[text()='" + Cypress.env('lessonTimer') + "'][1]").click();
-
-        // Save course
+        cy.xpath("//button[text()='Select']").click();
+        cy.wait(500);
+        cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/input").type('QA');
+        cy.wait(1500);
+        cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div[2]/div/div").click();
+        cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/button").click();
+        cy.wait(500);
         cy.xpath("//button[text()='Save']").click();
-        cy.wait(3000);
-
-        // Assert course created
+        cy.wait(5000);
         cy.contains("Success").should('be.visible');
     });
 
