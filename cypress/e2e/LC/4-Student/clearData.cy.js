@@ -5,7 +5,8 @@ describe('LC.Z. Clear all created learning items', () => {
     });
 
     it('should delete course', function () {
-        cy.visit('/admin/lc/courses');
+      cy.visit('/admin/lc/courses');
+      cy.wait(1500);
         cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
@@ -13,7 +14,8 @@ describe('LC.Z. Clear all created learning items', () => {
     });
 
     it('should delete lessons', function () {
-        cy.visit('/admin/lc/lessons');
+      cy.visit('/admin/lc/lessons');
+      cy.wait(1000);
         cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
