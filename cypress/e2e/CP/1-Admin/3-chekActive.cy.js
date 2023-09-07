@@ -24,7 +24,7 @@ describe("CP3. Article List", () => {
     cy.visit('admin/cp/report');
     cy.xpath('//button[text()="Show results"]').click();
 
-    cy.wait(5000);
+    cy.wait(3000);
     cy.contains(userNames).prev().click();
     cy.contains(userNames).parent().parent().next().contains(articleName, { timeout: 5000 }).should('not.exist');
     cy.wait(500)
