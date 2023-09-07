@@ -5,7 +5,7 @@ const makeEmailAccount = require('./cypress/support/email-account new')
 module.exports = defineConfig({
   chromeWebSecurity: false,
   env: {
-    userName: process.env.AUTHNAME,
+    // userName: process.env.AUTHNAME,
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email:  process.env.USERNAME,
