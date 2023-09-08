@@ -18,9 +18,12 @@ describe('LC.Z. Clear all created learning items', () => {
         cy.wait(500);
         cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
+        cy.wait(500);
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
+        cy.wait(500);
         cy.visit('/admin/lc/lessons');
+        cy.wait(500);
         cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']/../../../../../th[4]/div/div[2]`).last().click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
