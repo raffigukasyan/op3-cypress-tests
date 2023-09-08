@@ -4,21 +4,20 @@
   "description": "App for testing Learning Center",
   "main": "index.js",
   "scripts": {
-    "cy:open": "npx cypress open --env allure=true --config specPattern=cypress/e2e/examples/** --browser chrome",
-    "cy:cucumber:open": "npx cypress open --env allure=true --config specPattern=cypress/e2e/cucumber/*.feature,excludeSpecPattern=*.js --browser chrome",
-    "cy:run": "DEBUG=allure-plugin* npx cypress run --config specPattern=cypress/e2e/examples/* --env allure=true --browser chrome",
+    "cy:open": "npx cypress open allure=true --browser chromium --e2e",
+    "cy:run": "DEBUG=allure-plugin* npx cypress run --env allure=true --browser chromium",
     "cy:cucumber:run": "DEBUG=allure-plugin* npx cypress run --config specPattern=cypress/e2e/cucumber/*.feature,excludeSpecPattern=*.js --env allure=true --browser chrome",
     "allure:report": "allure generate allure-results --clean -o allure-report",
     "allure:clear": "rm -r allure-results/ allure-report cypress/screenshots || true",
     "allure:history": "mv -f allure-report/history allure-results/history && rm -r allure-report || true",
-    "open": "npx as-a op3 npx cypress open --env allure=true",
-    "test": "npx as-a op3 npx cypress run --env allure=true --browser chromium"
+    "open": "npx cypress open --env allure=true",
+    "test": "npx cypress run --env allure=true --browser chromium"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cypress-recurse": "^1.23.0",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "imapflow": "^1.0.113",
     "mailparser": "^3.5.0",
     "mailslurp-client": "^15.14.1",
