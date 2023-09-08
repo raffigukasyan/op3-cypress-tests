@@ -1,14 +1,14 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
-const makeEmailAccount = require('./cypress/support/email-account new')
+const makeEmailAccount = require('./cypress/support/email-account new');
+require('dotenv').config();
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
   env: {
-    // userName: process.env.AUTHNAME,
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
-    email:  process.env.USERNAME,
+    email:  process.env.EMAIL,
     password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
