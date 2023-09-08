@@ -19,8 +19,8 @@ jobs:
         env:
           CYPRESS_allure: true
           URL: ${{vars.PRODUCTION_URL}}
-          CYPRESS_username: ${{secrets.PRODUCTION_USERNAME}}
-          CYPRESS_password: ${{secrets.PRODUCTION_PASSWORD}}
+          EMAIL: ${{secrets.PRODUCTION_USERNAME}}
+          PASSWORD: ${{secrets.PRODUCTION_PASSWORD}}
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
