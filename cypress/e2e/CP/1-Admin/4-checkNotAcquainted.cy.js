@@ -21,10 +21,6 @@ describe("CP4. Check Not Acquainted", () => {
     cy.contains(userNames).prev().click();
     cy.wait(500);
     cy.contains(userNames).parent().parent().next().contains(articleName).click();
-    cy.xpath("//span[text()='Not acquainted']");
-    cy.wait(500);
-    cy.visit('admin/cp/report');
-    cy.xpath('//button[text()="Show results"]').click();
-    cy.wait(5000);
+    cy.xpath("//span[text()='Not acquainted']").should('be.visible');
   })
 })

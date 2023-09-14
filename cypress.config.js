@@ -35,17 +35,17 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: process.env.URL,
     setupNodeEvents: async (on, config) => {
-      const emailAccount = await makeEmailAccount()
+      const emailAccount = await makeEmailAccount();
 
       on('task', {
         getUserEmail() {
-          return emailAccount.user
+          return emailAccount.user;
         },
         getLastEmail() {
-          return emailAccount.getLastEmail()
+          return emailAccount.getLastEmail();
         },
         sendEmail() {
-          return emailAccount.sendEmail()
+          return emailAccount.sendEmail();
         }
       });
 

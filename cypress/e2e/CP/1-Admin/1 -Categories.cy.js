@@ -45,20 +45,6 @@ describe("CP1. Categories List", () => {
         cy.xpath(`//div[text()='${catName}']/../../../../../td[4]`).last().contains('Active');
     });
 
-    // it('should delete Category)', function () {
-      
-    //     cy.visit('admin/cp/category');
-
-    //     // cy.accessAllItems();
-    //     cy.contains(catName);
-
-    //     // delete
-    //     cy.xpath(`//div[text()='${catName}']/../../../../../td[5]/div/div[2]`).last().click();
-    //     cy.get('button').contains('Delete').click();
-    //     cy.xpath("//p[text()='Success!']").should('be.visible');
-        
-    // });
-
     after(() => {
         cy.clearCookies();
     });
