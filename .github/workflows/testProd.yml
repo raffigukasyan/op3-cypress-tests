@@ -19,7 +19,7 @@ jobs:
         env:
           CYPRESS_allure: true
           URL: ${{vars.PRODUCTION_URL}}
-          EMAIL: ${{secrets.PRODUCTION_USERNAME}}
+          EMAIL: ${{vars.PRODUCTION_USERNAME}}
           PASSWORD: ${{secrets.PRODUCTION_PASSWORD}}
 
       - name: Generate Allure Report
