@@ -41,5 +41,5 @@ jobs:
           username: company-policy_1
           password: ${{ secrets.ftp_password }}
           local-dir: allure-report/
-          server-dir: public_html/test/
-          state-name: ../.test_ftp-deploy-sync-state.json
+          server-dir: public_html/cloudStage/
+          state-name: ../.cloudStage_ftp-deploy-sync-state.json
