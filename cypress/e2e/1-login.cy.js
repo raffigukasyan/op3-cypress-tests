@@ -8,8 +8,8 @@ describe('A1. Login test', () => {
     // });
 
     it('should move to login page and log in', function () {
-        const username = Cypress.env('email')
-        const password = Cypress.env('password')
+        const username = Cypress.env('email');
+        const password = Cypress.env('password');
 
         //cy.xpath("//a[@class='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900']").click();
 
