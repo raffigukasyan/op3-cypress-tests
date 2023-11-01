@@ -7,17 +7,18 @@ jobs:
     timeout-minutes: 120
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+      image: cypress/browsers:node18.12.0-chrome106-ff106
       options: --user 1001
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v5
         with:
-          build: npm run build
-          start: npm test
           browser: chrome
+          spec: cypress/e2e/**/*.cy.js
+          install-command: yarn
         env:
           CYPRESS_allure: true
           URL: ${{vars.RELEASE_URL}}
