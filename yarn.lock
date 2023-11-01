@@ -1407,14 +1407,14 @@ cypress-recurse@^1.23.0:
   dependencies:
     humanize-duration "^3.27.3"
 
-cypress@^13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.3.0.tgz#d00104661b337d662c5a4280a051ee59f8aa1e31"
-  integrity sha512-mpI8qcTwLGiA4zEQvTC/U1xGUezVV4V8HQCOYjlEOrVmU1etVvxOjkCXHGwrlYdZU/EPmUiWfsO3yt1o+Q2bgw==
+cypress@^12.3.0:
+  version "12.3.0"
+  resolved "https://registry.npmjs.org/cypress/-/cypress-12.3.0.tgz"
+  integrity sha512-ZQNebibi6NBt51TRxRMYKeFvIiQZ01t50HSy7z/JMgRVqBUey3cdjog5MYEbzG6Ktti5ckDt1tfcC47lmFwXkw==
   dependencies:
-    "@cypress/request" "^3.0.0"
+    "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
-    "@types/node" "^18.17.5"
+    "@types/node" "^14.14.31"
     "@types/sinonjs__fake-timers" "8.1.1"
     "@types/sizzle" "^2.3.2"
     arch "^2.2.0"
@@ -1426,10 +1426,10 @@ cypress@^13.3.0:
     check-more-types "^2.24.0"
     cli-cursor "^3.1.0"
     cli-table3 "~0.6.1"
-    commander "^6.2.1"
+    commander "^5.1.0"
     common-tags "^1.8.0"
     dayjs "^1.10.4"
-    debug "^4.3.4"
+    debug "^4.3.2"
     enquirer "^2.3.6"
     eventemitter2 "6.4.7"
     execa "4.1.0"
@@ -1444,13 +1444,12 @@ cypress@^13.3.0:
     listr2 "^3.8.3"
     lodash "^4.17.21"
     log-symbols "^4.0.0"
-    minimist "^1.2.8"
+    minimist "^1.2.6"
     ospath "^1.2.2"
     pretty-bytes "^5.6.0"
-    process "^0.11.10"
     proxy-from-env "1.0.0"
     request-progress "^3.0.0"
-    semver "^7.5.3"
+    semver "^7.3.2"
     supports-color "^8.1.1"
     tmp "~0.2.1"
     untildify "^4.0.0"
