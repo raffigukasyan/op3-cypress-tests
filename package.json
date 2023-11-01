@@ -11,7 +11,7 @@
     "allure:clear": "rm -r allure-results/ allure-report cypress/screenshots || true",
     "allure:history": "mv -f allure-report/history allure-results/history && rm -r allure-report || true",
     "open": "npx cypress open --env allure=true",
-    "test": "npx cypress run --env allure=true --browser chromium"
+    "test": "npx cypress run --env allure=true --browser chrome"
   },
   "author": "",
   "license": "ISC",
