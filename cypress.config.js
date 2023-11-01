@@ -8,7 +8,7 @@ module.exports = defineConfig({
   env: {
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
-    email: process.env.EMAIL,
+    email:  process.env.EMAIL,
     password: process.env.PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",

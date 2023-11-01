@@ -24,7 +24,7 @@ describe("A3. Profile editing", () => {
 
     it('should login with new password and change it back', function () {
         Cypress.session.clearAllSavedSessions();
-        cy.login(Cypress.env('username'), newPassword);
+        cy.login(Cypress.env('email'), newPassword);
         cy.visit('/profile');
 
         // change password back
