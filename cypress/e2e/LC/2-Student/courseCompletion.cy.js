@@ -1,9 +1,9 @@
 describe('LC.B1. Complete the course which we have created in previous tests', () => {
     beforeEach(() => {
-        // cy.task("getUserEmail").then((user) => {
-        //     cy.login(user.email, Cypress.env('password'));
-        // })
-      cy.login('nagopib486@chambile.com', '123');
+        cy.task("getUserEmail").then((user) => {
+            cy.login(user.email, Cypress.env('password'));
+        })
+      // cy.login('nagopib486@chambile.com', '123');
     });
 
     it('Student should answer the lesson', function () {

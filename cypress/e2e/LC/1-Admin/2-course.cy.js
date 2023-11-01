@@ -1,3 +1,4 @@
+const { recurse } = require('cypress-recurse');
 describe('LC.A2. Create course', () => {
     // const skipCookie = Cypress.env('shouldSkipEduTests');
 
@@ -34,13 +35,30 @@ describe('LC.A2. Create course', () => {
         cy.wait(500);
         cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div/div[1]/div[2]/input").type('QA');
         cy.wait(1500);
-        cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div[2]/div/div").click();
+        cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/div[2]/div[2]/div/div[text()='QA TEST']").click();
         cy.xpath("/html/body/div[3]/div/div/div/div/div[2]/button").click();
         cy.wait(500);
         cy.xpath("//button[text()='Save']").click();
         cy.wait(5000);
         cy.contains("Success").should('be.visible');
     });
+  
+    it('check get email', function () {
+      cy.wait(2500);
+      recurse(
+        () => cy.task('getLastEmail'), // Cypress commands to retry
+        Cypress._.isObject, // keep retrying until the task returns an object
+        {
+          timeout: 60000, // retry up to 1 minute
+          delay: 5000, // wait 5 seconds between attempts
+        },
+      )
+        .its('html')
+        .then((html) => {
+          cy.document({ log: false }).invoke({ log: false }, 'write', html);
+        });
+      cy.xpath("//span[@class='course-title']").should('be.visible');
+    })
 
     // it('should delete course', function () {
     //     cy.visit('/admin');

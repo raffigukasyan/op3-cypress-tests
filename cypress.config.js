@@ -34,7 +34,9 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
+    registerUrl: "http://prog8.local:8001/register",
     setupNodeEvents: async (on, config) => {
+  
       const emailAccount = await makeEmailAccount();
 
       on('task', {

@@ -16,19 +16,18 @@ describe('A2. Register user', () => {
     })
 
     it('can generate a new email address and sign up', () => {
-        cy.visit(Cypress.config().baseUrl);
-
-        // Click on register button
-        cy.xpath("//a[@href='/register']").click();
-
+      cy.visit(Cypress.config().registerUrl);
+      
         // Type credentials
         cy.xpath("//input[@id='name']").type(String(Math.random() * 100));
+        cy.xpath("//input[@id='last_name']").type(String(Math.random() * 100));
         cy.xpath("//input[@id='email']").type(userEmail);
         cy.xpath("//input[@id='password']").type(Cypress.env('password'), { log: false });
         cy.xpath("//input[@id='password_confirmation']").type(Cypress.env('password'), { log: false });
 
         // Click on submit button
-        cy.xpath("//button[@type='submit']").click();
+       cy.xpath("//button[@type='submit']").click();
+       cy.wait(1000);
         cy.location('pathname').should('eq', '/learning/courses')
     });
 });
