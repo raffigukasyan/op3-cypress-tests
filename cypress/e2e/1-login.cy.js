@@ -17,6 +17,7 @@ describe('A1. Login test', () => {
         cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
 
         cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
+        cy.wait(2500);
 
         cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });

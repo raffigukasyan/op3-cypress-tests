@@ -38,7 +38,6 @@ const makeEmailAccount = async () => {
           imap.openBox("INBOX", false, () => {
             // search by Unseen since current date
             imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
-              console.log("RESULTSSS", results);
               // if we have results, continue fetching msg
               if (!results) {
                 rej('Nothing to fetch');
@@ -50,7 +49,6 @@ const makeEmailAccount = async () => {
                 // get body
                 msg.on("body", (stream) => {
                   // parse mail
-                  console.log('Parsee', stream);
                   simpleParser(stream, async (err, parsed) => {
                     mail = parsed;
                     res(parsed);
@@ -76,7 +74,6 @@ const makeEmailAccount = async () => {
 
       let a = await getEmails;
 
-      console.log(mail.html);
       // and returns the main fields + attachments array
       return {
         subject: mail.headers.subject,

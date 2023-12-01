@@ -19,13 +19,13 @@ describe("CP3. Article List", () => {
     cy.xpath("//p[text()='Success!']", {timeout: 5000}).should('be.visible');
   });
 
-  it('checkDeactive Article', function () {
+  it('Check deactive article', function () {
     cy.visit('admin/cp/report');
     cy.xpath('//button[text()="Show results"]').click();
 
     cy.wait(3000);
-    cy.contains(userNames).prev().click();
-    cy.contains(userNames).parent().parent().next().contains(articleName, { timeout: 5000 }).should('not.exist');
+    cy.contains(userNames).parent().find('div').contains(articleName).should('not.exist');
+   // cy.contains(userNames).parent().parent().next().contains(articleName, { timeout: 5000 }).should('not.exist');
     cy.wait(500)
   })
 
@@ -48,9 +48,10 @@ describe("CP3. Article List", () => {
 
     cy.wait(3000);
 
-    cy.contains(userNames).prev().click();
-    cy.contains(userNames).parent().parent().next().contains(articleName).should('exist');
-    cy.wait(500)
+    cy.contains(userNames).parent().find('div').contains(articleName).should('exist');
+   // cy.contains(userNames).prev().click();
+    //cy.contains(userNames).parent().parent().next().contains(articleName).should('exist');
+    cy.wait(500);
   })
 
 })

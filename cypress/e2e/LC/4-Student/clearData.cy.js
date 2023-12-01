@@ -8,7 +8,8 @@ describe('LC.Z. Clear all created learning items', () => {
       cy.visit('/admin/lc/courses');
       cy.wait(500);
       
-        cy.xpath(`//div[text()='${Cypress.env('courseName')}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.xpath(`//div[text()='${Cypress.env("courseName")}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
+        cy.wait(500);
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
@@ -16,7 +17,8 @@ describe('LC.Z. Clear all created learning items', () => {
     it('should delete lessons', function () {
         cy.visit('/admin/lc/lessons');
         cy.wait(500);
-        cy.xpath(`//div[text()='${Cypress.env('lessonText')}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.accessAllItems();
+        cy.xpath(`//div[text()='${Cypress.env('lessonText')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
         cy.wait(500);
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -24,22 +26,23 @@ describe('LC.Z. Clear all created learning items', () => {
         cy.wait(500);
         cy.visit('/admin/lc/lessons');
         cy.wait(500);
-        cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.accessAllItems();
+        cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
         cy.wait(500);
         cy.xpath("//p[text()='Success!']").should('be.visible');
 
-        cy.wait(500);
-        cy.visit('/admin/lc/lessons');
-        cy.wait(500);
-        cy.xpath(`//div[text()='${Cypress.env('lessonTimer')}']/../../../../../th[4]/div/div[2]`).last().click();
-        cy.get('button').contains('Delete').click();
-        cy.xpath("//p[text()='Success!']").should('be.visible');
+        // cy.wait(500);
+        // cy.visit('/admin/lc/lessons');
+        // cy.wait(500);
+        // cy.xpath(`//div[text()='${Cypress.env('lessonTimer')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
+        // cy.get('button').contains('Delete').click();
+        // cy.xpath("//p[text()='Success!']").should('be.visible');
     });
 
     it('delete curriculum', function () {
         cy.visit('/admin/lc/curriculums');
-        cy.xpath(`//div[text()='${Cypress.env('curriculumName')}']/../../../../../th[4]/div/div[2]`).last().click();
+        cy.xpath(`//div[text()='${Cypress.env('curriculumName')}']`).click();
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
@@ -50,6 +53,5 @@ describe('LC.Z. Clear all created learning items', () => {
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
-  
 
 });

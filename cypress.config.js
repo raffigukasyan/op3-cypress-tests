@@ -16,7 +16,7 @@ module.exports = defineConfig({
     lessonCheckboxRadio: "QA Test lesson (checkbox + radio)",
     lessonText: "QA Test lesson (text)",
     lessonTimer: "QA Test lesson (timer)",
-    courseUser: 'QA Kiril',
+    courseUser: 'QA Test',
     questionRadio: "radio question",
     questionText: "text question",
     questionCheckbox: "checkbox question",
