@@ -57,33 +57,32 @@ Cypress.Commands.add('createAnswerForQuestion', (questionName) => {
 
 Cypress.Commands.add('addAnswers', () => {
 
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[1]/span").click();
+  cy.xpath("//span[text()='Add answer']").click();
 
   // cy.xpath("//input[@type='text']").type(Cypress.env('answer1'));
   // cy.xpath("(//button[@role='switch'])[1]").click();
   // cy.xpath("(//button[@role='switch'])[2]").click();
   // cy.xpath("//button[text()='Save']").click();
 
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[1]/button").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[2]/input").type(Cypress.env('answer1'));
-  cy.xpath("(//button[@role='switch'])[2]").click();
+
+  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[5]/div[2]/div/div[1]/input").type(Cypress.env('answer1'));
+    cy.xpath("//input[@type='checkbox']").click();
+    cy.xpath("(//button[@role='switch'])[2]").click();
+    cy.xpath("(//button[text()='Save'])[1]").click();
+
+  cy.xpath("//span[text()='Add answer']").click();
+  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[5]/div[2]/div/div[1]/input").type(Cypress.env('answer2'));
+  cy.xpath("//input[@type='checkbox']").click();
   cy.xpath("(//button[text()='Save'])[1]").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[1]/span").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[1]/button").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[2]/input").type(Cypress.env('answer2'));
-  cy.xpath("(//button[text()='Save'])[1]").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[1]/span").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[1]/button").click();
-  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/div[2]/div/div[2]/input").type(Cypress.env('answer3'));
+
+  cy.xpath("//span[text()='Add answer']").click();
+  cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[5]/div[2]/div/div[1]/input").type(Cypress.env('answer3'));
+  cy.xpath("//input[@type='checkbox']").click();
   cy.xpath("(//button[text()='Save'])[1]").click();
 
 });
 
 Cypress.Commands.add('question', (questionName, questionType) => {
-    cy.xpath("/html/body/div[2]/div/div/div[2]/div[2]/main/div/ul/li[6]/span[2]/div[1]/span").click();
-    cy.wait(500);
-    cy.xpath("/html/body/div[6]/div/div/div/div/div[2]/div[2]/button[1]").click();
-    cy.wait(1000);
 
    // cy.xpath("//div[@class='flex items-center cursor-pointer mb-3']").click();
     cy.xpath("//h2[text()='Add question']").click();
@@ -91,16 +90,16 @@ Cypress.Commands.add('question', (questionName, questionType) => {
    // // cy.xpath("//*[text()=Создание вопроса']").should('be.visible');
     cy.xpath("(//input[@type='text'])[1]").type(questionName);
     cy.xpath("(//input[@type='text'])[2]").type(questionName + questionType);
-    
+
     cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
     cy.xpath("(//div[@role='radio'])[" + questionType + "]").click({ force: true });
-  
+
     questionType === 1 && cy.xpath("//button[@role='switch']").click();
     if(questionType !== 1) {
         cy.addAnswers();
         cy.xpath("//button[@role='switch']").click();
     }
-    cy.xpath("//input[@type='number']").type(10);
+    // cy.xpath("//input[@type='number']").type(10);
     cy.xpath("//button[text()='Save']").click();
     cy.wait(1500);
     cy.contains("Success").should('be.visible');
@@ -113,7 +112,7 @@ Cypress.Commands.add('accessAllItems', () => {
     // cy.xpath('(//button/span[starts-with(text(), \'Show\')])[last()]').click();
     cy.xpath('//button[@data-test-id="pageCountButton"]').click();
     cy.wait(2000);
-    cy.get('span').contains("Show 100 elements").last().click();
+    cy.get('span').contains("Show 100 elements").click();
     cy.wait(1000);
 });
 

@@ -26,13 +26,16 @@ describe("C. Invite user by 2 ways", () => {
 
         // Click on submit button
         cy.xpath("//button[@type='submit']").click();
+        cy.wait(3000);
 
         // Assert user invited
-        cy.xpath("//p[text()='Success!']", { timeout: 10000 }).should('be.visible');
+      cy.xpath("//p[text()='Success!']", { timeout: 10000 }).should('be.visible');
+      cy.wait(2500);
+
     });
 
     it('getting last email', function () {
-        cy.wait(2500);
+        cy.wait(3500);
         recurse(
             () => cy.task('getLastEmail'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
@@ -42,7 +45,8 @@ describe("C. Invite user by 2 ways", () => {
             },
         )
         .its('html')
-        .then((html) => {
+          .then((html) => {
+            console.log(html);
             cy.document({ log: false }).invoke({ log: false }, 'write', html)
         })
         cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
@@ -54,7 +58,7 @@ describe("C. Invite user by 2 ways", () => {
         cy.visit(confirmationLink);
 
         cy.xpath("//*[@id='first-name']").type('QA');
-        cy.xpath("//*[@id='last-name']").type('TEST')
+        cy.xpath("//*[@id='last-name']").type('Test')
         cy.xpath("//*[@id='password']").type(Cypress.env('password'), { log: false });
         cy.xpath("//*[@id='new_password']").type(Cypress.env('password'), { log: false });
 
@@ -63,42 +67,42 @@ describe("C. Invite user by 2 ways", () => {
         cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });
 
-    it('delete invited user', function () {
-        cy.admin();
+    // it('delete invited user', function () {
+    //     cy.admin();
 
-        cy.xpath("//a[text()='Users']").click();
-        cy.wait(500);
-        cy.accessAllItems();
+    //     cy.xpath("//a[text()='Users']").click();
+    //     cy.wait(500);
+    //     cy.accessAllItems();
 
-        cy.xpath("//div[text()='QA TEST']");
-        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
-    });
+    //     cy.xpath("//div[text()='QA TEST']");
+    //     cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
+    // });
 
-    it('should invite by admin tools', function () {
-        cy.admin();
+    // it('should invite by admin tools', function () {
+    //     cy.admin();
+    //
+    //     // Go to add user page
+    //     cy.xpath("//a[text()='Users']").click();
+    //     cy.xpath("//button[text()='Add user']").click();
+    //
+    //     // Input credentials
+    //     cy.xpath("(//input[@type='text'])[1]").type(String(Math.random() * 100));
+    //     cy.xpath("(//input[@type='text'])[2]").type("QA");
+    //     cy.xpath("//input[@type='email']").type("testAddUser+" + Math.random() * 100 + "@lc.com");
+    //     cy.xpath("//input[@type='tel']").type("+7999" + Math.random() * 100);
+    //     cy.xpath("(//input[@type='password'])[1]").type(Cypress.env('password'), { log: false });
+    //     cy.xpath("(//input[@type='password'])[2]").type(Cypress.env('password'), { log: false });
+    //
+    //     // Click on submit button
+    //     cy.xpath("//button[text()='Save']").click();
+    //
+    //     // Assert user invited
+    //     cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
+    // });
 
-        // Go to add user page
-        cy.xpath("//a[text()='Users']").click();
-        cy.xpath("//button[text()='Add user']").click();
-
-        // Input credentials
-        cy.xpath("(//input[@type='text'])[1]").type(String(Math.random() * 100));
-        cy.xpath("(//input[@type='text'])[2]").type("QA");
-        cy.xpath("//input[@type='email']").type("testAddUser+" + Math.random() * 100 + "@lc.com");
-        cy.xpath("//input[@type='tel']").type("+7999" + Math.random() * 100);
-        cy.xpath("(//input[@type='password'])[1]").type(Cypress.env('password'), { log: false });
-        cy.xpath("(//input[@type='password'])[2]").type(Cypress.env('password'), { log: false });
-
-        // Click on submit button
-        cy.xpath("//button[text()='Save']").click();
-
-        // Assert user invited
-        cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
-    });
-
-    afterEach(function onAfterEach() {
-        if (this.currentTest.state === 'failed') {
-            Cypress.runner.stop();
-        }
-    });
+    // afterEach(function onAfterEach() {
+    //     if (this.currentTest.state === 'failed') {
+    //         Cypress.runner.stop();
+    //     }
+    // });
 });

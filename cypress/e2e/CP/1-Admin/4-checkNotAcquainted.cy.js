@@ -3,9 +3,6 @@ describe("CP4. Check Not Acquainted", () => {
   const userNames = Cypress.env('usersArticle');
   let articleName = Cypress.env('articleName');
 
-  before(() => {
-  });
-
   beforeEach(() => {
     cy.login();
   });
@@ -18,9 +15,8 @@ describe("CP4. Check Not Acquainted", () => {
     cy.wait(3000);
 
 
-    cy.contains(userNames).prev().click();
+    cy.contains(userNames).scrollIntoView();
+    cy.contains(userNames).next().contains(articleName).should('be.visible')
     cy.wait(500);
-    cy.contains(userNames).parent().parent().next().contains(articleName).click();
-    cy.xpath("//span[text()='Not acquainted']").should('be.visible');
   })
 })

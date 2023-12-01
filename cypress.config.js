@@ -16,7 +16,7 @@ module.exports = defineConfig({
     lessonCheckboxRadio: "QA Test lesson (checkbox + radio)",
     lessonText: "QA Test lesson (text)",
     lessonTimer: "QA Test lesson (timer)",
-    courseUser: 'QA Kiril',
+    courseUser: 'QA Test',
     questionRadio: "radio question",
     questionText: "text question",
     questionCheckbox: "checkbox question",
@@ -34,7 +34,9 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
+    registerUrl: "http://prog8.local:8001/register",
     setupNodeEvents: async (on, config) => {
+  
       const emailAccount = await makeEmailAccount();
 
       on('task', {

@@ -7,7 +7,7 @@ const makeEmailAccount = async () => {
   const testAccount = await nodemailer.createTestAccount();
 
   console.log("created new email account %s", testAccount.user);
-  console.log("for debugging, the password is %s", testAccount.pass);
+ console.log("for debugging, the password is %s", testAccount.pass);
 
   const userEmail = {
     user: {
@@ -20,7 +20,6 @@ const makeEmailAccount = async () => {
      * for the Ethereal email account using ImapFlow.
      */
     async getLastEmail() {
-      debugger;
 
       const imapConfig = {
           host: "ethereal.email",
@@ -34,13 +33,13 @@ const makeEmailAccount = async () => {
         
         const getEmails = new Promise((res, rej) => {
         // make an imap client and run it on the INBOX before getting the mails
-        const imap = new Imap(imapConfig);
+          const imap = new Imap(imapConfig);
         imap.once("ready", () => {
           imap.openBox("INBOX", false, () => {
             // search by Unseen since current date
             imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
               // if we have results, continue fetching msg
-              if(!results) {
+              if (!results) {
                 rej('Nothing to fetch');
                 return;
               }
@@ -67,14 +66,14 @@ const makeEmailAccount = async () => {
         });
 
         imap.once("error", (err) => {
-          console.log(err);
           rej(err);
         });
 
         imap.connect();
       });
 
-      await getEmails;
+      let a = await getEmails;
+
       // and returns the main fields + attachments array
       return {
         subject: mail.headers.subject,
