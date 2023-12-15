@@ -13,6 +13,9 @@ describe("A3. Profile editing", () => {
         cy.xpath("//input[@id='first-name']").clear().type('first-name');
         cy.xpath("//input[@id='last-name']").clear().type('last-name');
 
+
+
+
         // change password
         cy.xpath("//input[@id='new_password']").clear().type(newPassword, {log:false});
         cy.xpath("//button[@type='submit']").should('be.disabled');

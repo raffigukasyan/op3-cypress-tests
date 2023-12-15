@@ -35,6 +35,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: process.env.URL,
     registerUrl: process.env.REGISTER_URL,
+    landingUrl: process.env.LANDING_URL,
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();

@@ -12,7 +12,7 @@ Cypress.Commands.add('login', (username = Cypress.env('email'), password = Cypre
     }
 
     cy.session([username, hashCode(password)], () => {
-        cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
+        cy.visit(Cypress.config('baseUrl'), { timeout: 10000 });
 
         cy.xpath("//input[@id='email']", { timeout: 10000 }).type(username);
         cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
