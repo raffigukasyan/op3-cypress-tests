@@ -5,4 +5,3 @@ node_modules/
 cypress/videos/
 cypress/screenshots/
 .env
-cypress/e2e/5-addUser.cy.js
