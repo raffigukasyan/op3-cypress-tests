@@ -24,14 +24,12 @@ const makeEmailAccount = async () => {
         async getLastEmail() {
             // Create imap client to connect later to the ethereal inbox and retrieve emails using ImapFlow
             let client = new ImapFlow({
-                host: 'imap.ethereal.email',
+                host: 'ethereal.email',
                 port: 993,
                 secure: true,
                 auth: {
-                    /*user: testAccount.user,
-                    pass: testAccount.pass*/
-                    user: 'camron.schimmel@ethereal.email',
-                    pass: 'bjBDjhZamcJPY9jEbs'
+                    user: testAccount.user,
+                    pass: testAccount.pass
                 }
             });
             // Wait until client connects and authorizes
@@ -75,6 +73,7 @@ const makeEmailAccount = async () => {
                 attachments: mail.attachments
             }
         },
+
         /**
          * Utility method for sending an email
          * to the Ethereal email account created above.
