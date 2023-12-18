@@ -49,7 +49,7 @@ describe("C. Invite user by 2 ways", () => {
             console.log(html);
             cy.document({ log: false }).invoke({ log: false }, 'write', html)
         })
-        cy.xpath("//html/body/table/tbody/tr/td/table/tbody/tr[2]/td/table/tbody/tr/td/table[2]/tbody/tr/td/p/span/a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
+        cy.xpath("//a[@class='button button-primary']").should('have.attr', 'href').then((href) => {
             confirmationLink = href;
         });
     });
