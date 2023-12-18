@@ -25,8 +25,8 @@ const makeEmailAccount = async () => {
           host: "ethereal.email",
           port: 993,
           tls: true,
-          user: testAccount.user,
-          password: testAccount.pass,
+          user: 'camron.schimmel@ethereal.email',
+          password: 'bjBDjhZamcJPY9jEbs',
         };
         
         let mail = undefined;

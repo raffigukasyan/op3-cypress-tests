@@ -1,7 +1,10 @@
 describe('Landing1. Begin test', () => {
-    beforeEach(() => {
-        cy.visit(Cypress.config().landingUrl);
-    });
+        it('visit the landing page', function () {
+                cy.visit(Cypress.config().landingUrl);
+                cy.wait(3000);
+                cy.contains('Начать').click();
+        })
+});
 
 
     /*it('should move to login page and log in', function () {
@@ -18,4 +21,4 @@ describe('Landing1. Begin test', () => {
 
         cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });*/
-})
+
