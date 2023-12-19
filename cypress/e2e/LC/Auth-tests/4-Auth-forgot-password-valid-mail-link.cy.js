@@ -1,21 +1,21 @@
 const {recurse} = require("cypress-recurse");
 describe('4. check if forgot-password-mail-link-is-valid', () => {
-        let email;
-        before(() => {
-            cy.log('camron.schimmel@ethereal.email');
-            cy.log('bjBDjhZamcJPY9jEbs');
-            let email = 'camron.schimmel@ethereal.email';
-    });
-    /*Host	imap.ethereal.email
+        /*before(() => {
+            //cy.log('');
+            //cy.log('');
+            let email = '';
+    });*/
+
+    /*
+    Host	imap.mail.ru
     Port	993
     Security	TLS
-    Username	camron.schimmel@ethereal.email
-    Password	bjBDjhZamcJPY9jEbs*/
+    Username	proguniversal@mail.ru
+    Password	EYUvahRRYRv02rSJh2DM   // this is imap.mail.ru external app password for proguniversal@mail.ru
+    */
 
-    //https://t-qsa54d2z.org-online.ru/login
+    //https://t-zanj7qw9.org-online.ru/login
 
-    //login: camron.schimmel@ethereal.email
-    //password: 159159
 
 
     it('should move to login page and type wrong login/password', function () {
@@ -26,7 +26,7 @@ describe('4. check if forgot-password-mail-link-is-valid', () => {
 
         cy.wait(1000);
 
-        cy.xpath("//input[@id='email']", { timeout: 10000 }).type('camron.schimmel@ethereal.email');
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).type('forgotPasswordEmail');
         cy.contains("Ссылка для сброса пароля электронной почты").should('be.visible');
         cy.contains("Ссылка для сброса пароля электронной почты").click();
     });
@@ -34,7 +34,7 @@ describe('4. check if forgot-password-mail-link-is-valid', () => {
     it('getting last email', function () {
         cy.wait(3500);
         recurse(
-            () => cy.task('getLastEmail'), // Cypress commands to retry
+            () => cy.task('getLastEmailFromMailRu'), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
                 timeout: 180000, // retry up to 3 minutes

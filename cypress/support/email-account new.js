@@ -22,18 +22,80 @@ const makeEmailAccount = async () => {
     async getLastEmail() {
 
       const imapConfig = {
-          host: "ethereal.email",
-          port: 993,
-          tls: true,
-          user: 'camron.schimmel@ethereal.email',
-          password: 'bjBDjhZamcJPY9jEbs',
-        };
+        host: "ethereal.email",
+        port: 993,
+        tls: true,
+        user: testAccount.user,
+        password: testAccount.pass,
+      };
         
         let mail = undefined;
         
         const getEmails = new Promise((res, rej) => {
         // make an imap client and run it on the INBOX before getting the mails
           const imap = new Imap(imapConfig);
+        imap.once("ready", () => {
+          imap.openBox("INBOX", false, () => {
+            // search by Unseen since current date
+            imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
+              // if we have results, continue fetching msg
+              if (!results) {
+                rej('Nothing to fetch');
+                return;
+              }
+              const f = imap.fetch(results, { bodies: "", markSeen: true });
+              // execute when we have a message
+              f.on("message", (msg) => {
+                // get body
+                msg.on("body", (stream) => {
+                  // parse mail
+                  simpleParser(stream, async (err, parsed) => {
+                    mail = parsed;
+                    res(parsed);
+                  });
+                });
+              });
+              f.once("error", (ex) => {
+                return rej(ex);
+              });
+              f.once("end", () => {
+                imap.end();
+              });
+            });
+          });
+        });
+
+        imap.once("error", (err) => {
+          rej(err);
+        });
+
+        imap.connect();
+      });
+
+      let a = await getEmails;
+
+      // and returns the main fields + attachments array
+      return {
+        subject: mail.headers.subject,
+        html: mail.html,
+      };
+    },
+
+    async getLastEmailFromMailRu() {
+
+      const imapConfig = {
+        host: "imap.mail.ru",
+        port: 993,
+        tls: true,
+        user: 'proguniversal@mail.ru',
+        password: 'EYUvahRRYRv02rSJh2DM',
+      };
+
+      let mail = undefined;
+
+      const getEmails = new Promise((res, rej) => {
+        // make an imap client and run it on the INBOX before getting the mails
+        const imap = new Imap(imapConfig);
         imap.once("ready", () => {
           imap.openBox("INBOX", false, () => {
             // search by Unseen since current date
