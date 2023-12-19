@@ -1,24 +1,7 @@
 const {recurse} = require("cypress-recurse");
-describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
-        /*before(() => {
-            //cy.log('');
-            //cy.log('');
-            let email = '';
-    });*/
+describe('6-Auth-reset-password-valid.cy.js', () => {
 
-    /*
-    Host	imap.mail.ru
-    Port	993
-    Security	TLS
-    Username	proguniversal@mail.ru
-    Password	EYUvahRRYRv02rSJh2DM   // this is imap.mail.ru external app password for proguniversal@mail.ru
-    */
-
-    //https://t-zanj7qw9.org-online.ru/login
-
-
-
-    it('should move to login page and type wrong login/password', function () {
+    it('requesting reset-password-email', function () {
         cy.visit(Cypress.config().forgotPassURL);
 
         cy.contains("Забыли пароль?").should('be.visible');
@@ -31,7 +14,7 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
         cy.contains("Ссылка для сброса пароля электронной почты").click();
     });
 
-    it('getting last email', function () {
+    it('getting last email at proguniversal@mail.ru', function () {
         cy.wait(3500);
         recurse(
             () => cy.task('getLastEmailFromMailRu'), // Cypress commands to retry
@@ -49,5 +32,24 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
         cy.get('[class="button button-primary"]').should('have.attr', 'href').then(($btn) => {
             cy.visit($btn);
         });
+    });
+    it('try valid passwords', function () {
+        cy.wait(3500);
+
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
+
+
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(password);
+
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(password);
+
+        cy.get('button').should('be.visible').click();
+        cy.wait(2000);
+
+        cy.contains("Войти").should('be.visible');
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
     });
 })

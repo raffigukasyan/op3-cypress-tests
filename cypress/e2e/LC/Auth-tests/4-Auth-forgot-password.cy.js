@@ -1,5 +1,5 @@
 const {recurse} = require("cypress-recurse");
-describe('3. Auth-forgot-password', () => {
+describe('4-Auth-forgot-password.cy.js', () => {
 
     it('should move to login page and click "forgot password"', function () {
         cy.visit(Cypress.config().authUrl);

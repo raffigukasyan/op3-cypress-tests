@@ -1,4 +1,4 @@
-describe('2. Auth-invalid', () => {
+describe('3-Auth-login-invalid.cy.js', () => {
     beforeEach(() => {
         cy.visit(Cypress.config().authUrl);
     });

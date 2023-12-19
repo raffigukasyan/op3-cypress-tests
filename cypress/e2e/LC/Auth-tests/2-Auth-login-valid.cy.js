@@ -1,4 +1,4 @@
-describe('1. Auth-valid', () => {
+describe('2-Auth-login-valid.cy.js', () => {
     beforeEach(() => {
         cy.visit(Cypress.config().authUrl);
     });

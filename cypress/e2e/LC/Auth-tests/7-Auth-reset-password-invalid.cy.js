@@ -1,24 +1,7 @@
 const {recurse} = require("cypress-recurse");
-describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
-        /*before(() => {
-            //cy.log('');
-            //cy.log('');
-            let email = '';
-    });*/
+describe('7-Auth-reset-password-invalid.cy.js', () => {
 
-    /*
-    Host	imap.mail.ru
-    Port	993
-    Security	TLS
-    Username	proguniversal@mail.ru
-    Password	EYUvahRRYRv02rSJh2DM   // this is imap.mail.ru external app password for proguniversal@mail.ru
-    */
-
-    //https://t-zanj7qw9.org-online.ru/login
-
-
-
-    it('should move to login page and type wrong login/password', function () {
+    it('', function () {
         cy.visit(Cypress.config().forgotPassURL);
 
         cy.contains("Забыли пароль?").should('be.visible');
@@ -49,5 +32,11 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
         cy.get('[class="button button-primary"]').should('have.attr', 'href').then(($btn) => {
             cy.visit($btn);
         });
+        cy.wait(5000);
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
+        cy.get('button').should('be.visible');
+
     });
 })
