@@ -1,7 +1,7 @@
 const {recurse} = require("cypress-recurse");
 describe('7-Auth-reset-password-invalid.cy.js', () => {
 
-    it('', function () {
+    it('requesting reset-password-email', function () {
         cy.visit(Cypress.config().forgotPassURL);
 
         cy.contains("Забыли пароль?").should('be.visible');
@@ -37,6 +37,32 @@ describe('7-Auth-reset-password-invalid.cy.js', () => {
         cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
         cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
         cy.get('button').should('be.visible');
+    });
+    it('try in-valid passwords', function () {
+        cy.wait(3500);
 
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
+
+
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password);
+
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).type(wrong_password);
+
+        cy.get('button').should('be.visible').click();
+        cy.wait(1000);
+        //cy.contains
+        cy.wait(2000);
+
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).clear();
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(wrong_password);
+
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).clear();
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).type(password);
+
+        cy.get('button').click();
+        cy.wait(1000);
+        //cy.contains
     });
 })

@@ -22,12 +22,12 @@ const makeEmailAccount = async () => {
     async getLastEmail() {
 
       const imapConfig = {
-        host: "ethereal.email",
-        port: 993,
-        tls: true,
-        user: testAccount.user,
-        password: testAccount.pass,
-      };
+          host: "imap.mail.ru",
+          port: 993,
+          tls: true,
+          user: 'proguniversal@mail.ru',
+          password: 'EYUvahRRYRv02rSJh2DM',
+        };
         
         let mail = undefined;
         
@@ -84,11 +84,11 @@ const makeEmailAccount = async () => {
     async getLastEmailFromMailRu() {
 
       const imapConfig = {
-        host: "imap.mail.ru",
+        host: "imap.ethereal.email",
         port: 993,
         tls: true,
-        user: 'proguniversal@mail.ru',
-        password: 'EYUvahRRYRv02rSJh2DM',
+        user: 'gerard.west@ethereal.email',
+        password: 'rVG9SktGZEVJnraw2M',
       };
 
       let mail = undefined;
@@ -105,7 +105,7 @@ const makeEmailAccount = async () => {
                 rej('Nothing to fetch');
                 return;
               }
-              const f = imap.fetch(results, { bodies: "", markSeen: true });
+              const f = imap.fetch(results, {bodies: "", markSeen: true});
               // execute when we have a message
               f.on("message", (msg) => {
                 // get body

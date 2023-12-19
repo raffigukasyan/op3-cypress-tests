@@ -18,7 +18,7 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
 
 
 
-    it('should move to login page and type wrong login/password', function () {
+    it('requesting reset-password-email', function () {
         cy.visit(Cypress.config().forgotPassURL);
 
         cy.contains("Забыли пароль?").should('be.visible');
@@ -31,7 +31,7 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
         cy.contains("Ссылка для сброса пароля электронной почты").click();
     });
 
-    it('getting last email', function () {
+    /*it('getting last email', function () {
         cy.wait(3500);
         recurse(
             () => cy.task('getLastEmailFromMailRu'), // Cypress commands to retry
@@ -49,5 +49,30 @@ describe('5-Auth-forgot-password-valid-mail-link.cy.js', () => {
         cy.get('[class="button button-primary"]').should('have.attr', 'href').then(($btn) => {
             cy.visit($btn);
         });
+    });*/
+    it('getting last email', function () {
+        cy.wait(3500);
+        recurse(
+            () => cy.task('getLastEmail'), // Cypress commands to retry
+            Cypress._.isObject, // keep retrying until the task returns an object
+            {
+                timeout: 180000, // retry up to 3 minutes
+                delay: 5000, // wait 5 seconds between attempts
+            },
+        )
+            .its('html')
+            .then((html) => {
+                console.log(html);
+                cy.document({ log: false }).invoke({ log: false }, 'write', html)
+            })
+        cy.get('[class="button button-primary"]').should('have.attr', 'href').then(($btn) => {
+            cy.visit($btn);
+        });
+        cy.wait(5000);
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
+        cy.get('button').should('be.visible');
+
     });
 })

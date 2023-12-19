@@ -40,10 +40,10 @@ describe('6-Auth-reset-password-valid.cy.js', () => {
 
 
         cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
-        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(password);
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password);
 
         cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible');
-        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(password);
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).type(password);
 
         cy.get('button').should('be.visible').click();
         cy.wait(2000);
