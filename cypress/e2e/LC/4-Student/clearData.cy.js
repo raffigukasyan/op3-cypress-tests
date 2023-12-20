@@ -43,7 +43,6 @@ describe('LC.Z. Clear all created learning items', () => {
     it('delete curriculum', function () {
         cy.visit('/admin/lc/curriculums');
         cy.xpath(`//div[text()='${Cypress.env('curriculumName')}']`).click();
-        cy.wait(500);
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
@@ -51,20 +50,8 @@ describe('LC.Z. Clear all created learning items', () => {
     it('delete course group', function () {
         cy.visit('/admin/lc/groups');
         cy.xpath(`//div[text()='${Cypress.env('courseGroupName')}']/../../../../../th[5]/div/div[2]`).last().click();
-        cy.wait(500);
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
-    });
-
-    it('delete invited user', function () {
-        cy.admin();
-
-        cy.xpath("//a[text()='Users']").click();
-        cy.wait(500);
-        cy.accessAllItems();
-
-        cy.xpath("//div[text()='QA Test']");
-        cy.xpath("(//*[@class='w-5 h-5 mx-1 text-red-600 hover:text-red-900 cursor-pointer'])[last()]").click();
     });
 
 });
