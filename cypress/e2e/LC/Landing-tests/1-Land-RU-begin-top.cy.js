@@ -1,17 +1,10 @@
-describe('1. Auth-login-page', () => {
+describe('1. Land-RU-begin-top', () => {
     beforeEach(() => {
-        cy.visit(Cypress.config().landingUrl);
+        cy.visit('https://org-online.ru/');
     });
 
-    it('should move to login page', function () {
-        cy.wait(1000);
-        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
-
-        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
-
-        cy.xpath("//button[@type='submit']", { timeout: 10000}).should('be.visible');
-
-        cy.xpath("//h2[text()='Войти']").should('be.visible');
-
+    it('should click top begin button', function () {
+        cy.wait(2000);
+        cy.get('a[href*="register"]').eq(1).should('be.visible').click();
     });
 })

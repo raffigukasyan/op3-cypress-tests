@@ -1,13 +1,19 @@
 const {recurse} = require("cypress-recurse");
 describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
+    beforeEach(() => {
+        cy.visit('login');
+        cy.wait(1000);
+        cy.get('[id="headlessui-menu-button-:r0:"]').click();
+        cy.wait(1000);
+        // Switch to RU
+        cy.get('[id="headlessui-menu-item-:r4:"]').click();
+        cy.wait(1000);
+    });
 
     it('requesting reset-password-email', function () {
-        const email = Cypress.env('mailRuEmail');
+        const email = Cypress.env('authEmail')
 
-        cy.visit(Cypress.config().authUrl);
-
-        cy.contains("Забыли пароль?").should('be.visible');
-        cy.contains("Забыли пароль?").click();
+        cy.contains("Забыли пароль?").should('be.visible').click();
 
         cy.wait(65000); //временное решение - org-online.ru высылает письмо сброса пароля с ограничением, 1 раз в минуту
 
@@ -20,7 +26,7 @@ describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
 
     it('get last email && try invalid passwords', function () {
         const password = Cypress.env('password')
-        const wrong_password = Cypress.env('wrong_password')
+        const wrong_password = 'wrong_wrong_wrong_wrong_wrong_'
         cy.wait(1000);
         recurse( //эта рекурсия не работает - таск возвращает таймаут
             () => cy.task('getLastEmailFromMailRu'), // Cypress commands to retry

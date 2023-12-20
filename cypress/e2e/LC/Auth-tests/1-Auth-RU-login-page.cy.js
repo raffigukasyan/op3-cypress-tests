@@ -1,6 +1,12 @@
 describe('1. Auth-login-page', () => {
     beforeEach(() => {
-        cy.visit(Cypress.config().authUrl);
+        cy.visit('login');
+        cy.wait(1000);
+        cy.get('[id="headlessui-menu-button-:r0:"]').click();
+        cy.wait(1000);
+        // Switch to RU
+        cy.get('[id="headlessui-menu-item-:r4:"]').click();
+        cy.wait(1000);
     });
 
     it('should move to login page', function () {

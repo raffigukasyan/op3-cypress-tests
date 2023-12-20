@@ -1,11 +1,19 @@
 const {recurse} = require("cypress-recurse");
 describe('5-Auth-RU-forgot-password-valid-mail-link.cy.js', () => {
-    it('requesting reset-password-email', function () {
-        const email = Cypress.env('mailRuEmail');
-        cy.visit(Cypress.config().authUrl);
+    beforeEach(() => {
+        cy.visit('login');
+        cy.wait(1000);
+        cy.get('[id="headlessui-menu-button-:r0:"]').click();
+        cy.wait(1000);
+        // Switch to RU
+        cy.get('[id="headlessui-menu-item-:r4:"]').click();
+        cy.wait(1000);
+    });
 
-        cy.contains("Забыли пароль?").should('be.visible');
-        cy.contains("Забыли пароль?").click();
+    it('requesting reset-password-email', function () {
+        const email = Cypress.env('authEmail')
+
+        cy.contains("Забыли пароль?").should('be.visible').click();
 
         cy.wait(65000); //временное решение - org-online.ru высылает письмо сброса пароля  с ограничением, 1 раз в минуту
 

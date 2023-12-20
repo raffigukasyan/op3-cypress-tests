@@ -1,17 +1,12 @@
-Подробнееdescribe('1. Auth-login-page', () => {
+describe('4. Land-RU-contact-sales', () => {
     beforeEach(() => {
-        cy.visit(Cypress.config().authUrl);
+        cy.visit('https://org-online.ru/');
     });
 
     it('should move to login page', function () {
+        cy.wait(2000);
+        //cy.get(" →").eq(0).should('be.visible').click();
         cy.wait(1000);
-        cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
-
-        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible');
-
-        cy.xpath("//button[@type='submit']", { timeout: 10000}).should('be.visible');
-
-        cy.xpath("//h2[text()='Войти']").should('be.visible');
-
+        cy.contains(" →");
     });
 })
