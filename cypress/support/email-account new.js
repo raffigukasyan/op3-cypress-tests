@@ -88,7 +88,7 @@ const makeEmailAccount = async () => {
       port: 993,
       tls: true,
       user: 'proguniversal@mail.ru',
-      password: 'EYUvahRRYRv02rSJh2DM',
+      password: 'EYUvahRRYRv02rSJh2DM', //external app password /пароль от почты для внешних приложений
       };
 
       let mail = undefined;
