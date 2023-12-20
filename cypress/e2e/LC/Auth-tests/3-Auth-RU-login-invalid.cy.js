@@ -1,11 +1,7 @@
-describe('3-Auth-login-invalid.cy.js', () => {
+describe('3-Auth-RU-login-invalid.cy.js', () => {
     beforeEach(() => {
         cy.visit(Cypress.config().authUrl);
     });
-
-    // it('should show landing page', function () {
-    //     cy.xpath("//span[@class='block text-white']").should('be.visible');
-    // });
 
     it('should move to login page and type wrong login/password', function () {
         const username = Cypress.env('email')

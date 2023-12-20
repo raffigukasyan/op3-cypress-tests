@@ -22,11 +22,11 @@ const makeEmailAccount = async () => {
     async getLastEmail() {
 
       const imapConfig = {
-          host: "imap.mail.ru",
-          port: 993,
-          tls: true,
-          user: 'proguniversal@mail.ru',
-          password: 'EYUvahRRYRv02rSJh2DM',
+            host: "ethereal.email",
+            port: 993,
+            tls: true,
+            user: testAccount.user,
+            password: testAccount.pass,
         };
         
         let mail = undefined;
@@ -84,11 +84,11 @@ const makeEmailAccount = async () => {
     async getLastEmailFromMailRu() {
 
       const imapConfig = {
-        host: "imap.ethereal.email",
+        host: "imap.mail.ru",
         port: 993,
         tls: true,
-        user: 'gerard.west@ethereal.email',
-        password: 'rVG9SktGZEVJnraw2M',
+        user: 'proguniversal@mail.ru',
+        password: 'EYUvahRRYRv02rSJh2DM',
       };
 
       let mail = undefined;
@@ -101,8 +101,15 @@ const makeEmailAccount = async () => {
             // search by Unseen since current date
             imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
               // if we have results, continue fetching msg
-              if (!results) {
-                rej('Nothing to fetch');
+              console.log(results);
+              /*if(results.length === 0) {
+                console.log('MAIL NOT FOUND')
+                return;
+              }*/
+              if (results === null
+                  || results === undefined
+                  || results.length === 0) {
+                console.log('MAIL NOT FOUND')
                 return;
               }
               const f = imap.fetch(results, {bodies: "", markSeen: true});
