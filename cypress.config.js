@@ -48,6 +48,9 @@ module.exports = defineConfig({
         },
         sendEmail() {
           return emailAccount.sendEmail();
+        },
+        getAccount(params) {
+          return emailAccount.openMessage(params);
         }
       });
 
