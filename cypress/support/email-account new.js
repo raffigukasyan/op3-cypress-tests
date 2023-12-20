@@ -84,11 +84,11 @@ const makeEmailAccount = async () => {
     async getLastEmailFromMailRu() {
 
       const imapConfig = {
-        host: "imap.mail.ru",
-        port: 993,
-        tls: true,
-        user: 'proguniversal@mail.ru',
-        password: 'EYUvahRRYRv02rSJh2DM',
+      host: "imap.mail.ru",
+      port: 993,
+      tls: true,
+      user: 'proguniversal@mail.ru',
+      password: 'EYUvahRRYRv02rSJh2DM',
       };
 
       let mail = undefined;
