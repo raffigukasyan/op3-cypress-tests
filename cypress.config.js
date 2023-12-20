@@ -10,10 +10,6 @@ module.exports = defineConfig({
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email:  process.env.EMAIL,
     password: process.env.PASSWORD,
-    mailRuEmail: process.env.MAIL_RU,
-    external_password: process.env.EXTERNAL_MAIL_RU_PASSWORD,
-    wrong_email: process.env.WRONG_EMAIL,
-    wrong_password: process.env.WRONG_PASSWORD,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
     courseName: "QA Test Course",
@@ -38,9 +34,7 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
-    registerUrl: process.env.REGISTER_URL,
-    landingUrl: process.env.LANDING_URL,
-    authUrl: process.env.AUTH_URL,
+    registerUrl: "http://prog8.local:8001/register",
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
@@ -51,9 +45,6 @@ module.exports = defineConfig({
         },
         getLastEmail() {
           return emailAccount.getLastEmail();
-        },
-        getLastEmailFromMailRu() {
-          return emailAccount.getLastEmailFromMailRu();
         },
         sendEmail() {
           return emailAccount.sendEmail();

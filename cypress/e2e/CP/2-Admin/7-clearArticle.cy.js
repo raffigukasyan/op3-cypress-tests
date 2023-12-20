@@ -9,7 +9,6 @@ describe("CP7. Clear Data", () => {
         cy.visit('admin/cp/category');
         cy.contains(catName);
         cy.xpath(`//div[text()='${catName}']/../../../../../td[5]/div/div[2]`).last().click();
-        cy.wait(500);
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
@@ -18,7 +17,6 @@ describe("CP7. Clear Data", () => {
     cy.visit('admin/cp/post');
     cy.wait(500);
     cy.xpath(`//div[text()="${articleName}"]/../../../../../th[3]/div/div[3]`).first().click();
-    cy.wait(500);
     cy.get('button').contains('Delete').click();
     cy.xpath("//p[text()='Success!']").should('be.visible');
   });
