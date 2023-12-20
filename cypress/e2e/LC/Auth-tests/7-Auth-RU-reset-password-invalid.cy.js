@@ -2,7 +2,7 @@ const {recurse} = require("cypress-recurse");
 describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
 
     it('requesting reset-password-email', function () {
-        const email = Cypress.env('email');
+        const email = Cypress.env('mailRuEmail');
 
         cy.visit(Cypress.config().authUrl);
 

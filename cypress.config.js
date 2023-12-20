@@ -10,6 +10,8 @@ module.exports = defineConfig({
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email:  process.env.EMAIL,
     password: process.env.PASSWORD,
+    mailRuEmail: process.env.MAIL_RU,
+    external_password: process.env.EXTERNAL_MAIL_RU_PASSWORD,
     wrong_email: process.env.WRONG_EMAIL,
     wrong_password: process.env.WRONG_PASSWORD,
     courseGroupName: "QA Test Course Group",

@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const Imap = require("imap");
 const { simpleParser } = require("mailparser");
+require('dotenv').config();
 
 const makeEmailAccount = async () => {
   // Generate a new Ethereal email inbox account
@@ -82,13 +83,15 @@ const makeEmailAccount = async () => {
     },
 
     async getLastEmailFromMailRu() {
+      const email = process.env.MAIL_RU;
+      const password = process.env.EXTERNAL_MAIL_RU_PASSWORD;
 
       const imapConfig = {
       host: "imap.mail.ru",
       port: 993,
       tls: true,
-      user: 'proguniversal@mail.ru',
-      password: 'EYUvahRRYRv02rSJh2DM', //external app password /пароль от почты для внешних приложений
+      user: email,
+      password: password,
       };
 
       let mail = undefined;
