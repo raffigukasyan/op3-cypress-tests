@@ -83,14 +83,14 @@ const makeEmailAccount = async () => {
     },
 
 
-    async getLastEmail() {
+    async getLastEmail({port = 993, host = "ethereal.email", user = testAccount.user, pass = testAccount.pass}) {
 
       const imapConfig = {
-            host: "ethereal.email",
-            port: 993,
+            host: host,
+            port: port,
             tls: true,
-            user: testAccount.user,
-            password: testAccount.pass,
+            user: user,
+            password: pass,
         };
         
         let mail = undefined;
