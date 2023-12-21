@@ -33,6 +33,7 @@ describe('LC.Z. Clear all created learning items', () => {
 
         cy.wait(500);
         cy.visit('/admin/lc/lessons');
+        cy.accessAllItems();
         cy.wait(500);
         cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
