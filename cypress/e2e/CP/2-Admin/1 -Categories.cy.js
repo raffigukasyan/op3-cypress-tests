@@ -1,9 +1,6 @@
 describe("CP1. Categories List", () => {
     let catName = Cypress.env('categoryName');
 
-    before(() => {
-    });
-
     beforeEach(() => {
         cy.login();
     });
@@ -27,13 +24,14 @@ describe("CP1. Categories List", () => {
     });
    
     it('should edit Category)', function () {
+
         cy.visit('admin/cp/category');
 
         // cy.accessAllItems();
         cy.xpath(`(//div[text()='${catName}'])`).last().click();
-
+        //
         cy.contains('Edit category');
-        
+
         cy.xpath("//button[@role='switch']").click();
         cy.wait(500);
 
@@ -45,8 +43,8 @@ describe("CP1. Categories List", () => {
         cy.xpath(`//div[text()='${catName}']/../../../../../td[4]`).last().contains('Active');
     });
 
-    after(() => {
-        cy.clearCookies();
-    });
+    // after(() => {
+    //     cy.clearCookies();
+    // });
   
 });

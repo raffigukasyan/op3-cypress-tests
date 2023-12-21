@@ -12,7 +12,8 @@ describe("CP6. Check Acquainted", () => {
     cy.visit('admin/cp/report');
     cy.xpath('//button[text()="Show results"]').click();
     cy.wait(1500);
+
     cy.contains(userNames).next().next().click();
-    cy.contains(articleName).click({force: true});
+    cy.contains(articleName).scrollIntoView().click({force: true});
   });
 });

@@ -1,22 +1,30 @@
 const { recurse } = require('cypress-recurse');
 describe('LC.A2. Create course', () => {
-    // const skipCookie = Cypress.env('shouldSkipEduTests');
+   //  const skipCookie = Cypress.env('shouldSkipEduTests');
+    let main = Cypress.config('baseUrl').split('.')[1];
+    let subject = 'Learning Center | Course has been assigned to you.';
+    let userEmail;
+    before(() => {
 
-    // before(() => {
-    //     if ( Cypress.browser.isHeaded ) {
-    //         cy.clearCookie(skipCookie)
-    //     } else {
-    //         cy.getCookie(skipCookie).then(cookie => {
-    //             if (
-    //                 cookie &&
-    //                 typeof cookie === 'object' &&
-    //                 cookie.value === 'true'
-    //             ) {
-    //                 Cypress.runner.stop();
-    //             }
-    //         });
-    //     }
-    // });
+        cy.task("getUserEmail").then((user) => {
+            cy.log(user.email);
+            cy.log(user.pass);
+            userEmail = user.email;
+        })
+        // if ( Cypress.browser.isHeaded ) {
+        //     cy.clearCookie(skipCookie)
+        // } else {
+        //     cy.getCookie(skipCookie).then(cookie => {
+        //         if (
+        //             cookie &&
+        //             typeof cookie === 'object' &&
+        //             cookie.value === 'true'
+        //         ) {
+        //             Cypress.runner.stop();
+        //         }
+        //     });
+        // }
+    });
     
     beforeEach(() => {
         cy.admin();
@@ -48,7 +56,10 @@ describe('LC.A2. Create course', () => {
     it('check get email', function () {
       cy.wait(2500);
       recurse(
-        () => cy.task('getLastEmail'), // Cypress commands to retry
+        () => {
+            if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
+            if(main === 'org-online') return cy.task('getLastEmail')
+        }, // Cypress commands to retry
         Cypress._.isObject, // keep retrying until the task returns an object
         {
           timeout: 60000, // retry up to 1 minute

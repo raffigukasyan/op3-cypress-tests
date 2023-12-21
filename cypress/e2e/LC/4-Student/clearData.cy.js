@@ -1,14 +1,22 @@
 describe('LC.Z. Clear all created learning items', () => {
+    let userEmail;
+    before(() => {
+        cy.task("getUserEmail").then((user) => {
+            cy.log(user.email);
+            cy.log(user.pass);
+            userEmail = user.email;
+        })
+    });
 
     beforeEach(() => {
         cy.admin();
-    });
+    })
 
     it('should delete course', function () {
       cy.visit('/admin/lc/courses');
-      cy.wait(500);
-      
-        cy.xpath(`//div[text()='${Cypress.env("courseName")}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
+      cy.wait(1000);
+
+        cy.xpath(`//div[text()='${Cypress.env("courseName")}']`).parent().parent().parent().parent().parent().scrollIntoView().find('.tooltip').last().click();
         cy.wait(500);
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
@@ -53,5 +61,13 @@ describe('LC.Z. Clear all created learning items', () => {
         cy.get('button').contains('Delete').click();
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
+
+    it('delete invite user', function() {
+        cy.visit('/admin/user');
+        cy.accessAllItems();
+
+        cy.contains(userEmail).parent().parent().last().find('div').last().click();
+        cy.wait(1500);
+    })
 
 });

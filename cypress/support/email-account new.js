@@ -20,14 +20,77 @@ const makeEmailAccount = async () => {
      * Utility method for getting the last email
      * for the Ethereal email account using ImapFlow.
      */
+
+    async fetchParam(url)  {
+      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
+      return await fetch(url, options)
+    },
+
+    async getAccount() {
+      const url = 'https://mailtrap.io/api/accounts';
+
+      try {
+        const response = await this.fetchParam(url);
+        const data = await response.json();
+        return data[0].id;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async getInbox() {
+      const accountId = await this.getAccount();
+      const url = `https://mailtrap.io/api/accounts/${accountId}/inboxes`;
+
+      try {
+        const response = await this.fetchParam(url);
+        const data = await response.json();
+        return {accountId: accountId, inboxId: data[0].id};
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async getMessage(subject, email) {
+      const inbox = await this.getInbox();
+      const url = `https://mailtrap.io/api/accounts/${inbox.accountId}/inboxes/${inbox.inboxId}/messages/`;
+
+      try {
+        const response = await this.fetchParam(url);
+        const data = await response.json();
+        return data.find((obj) => obj.subject === subject && obj.to_email === email);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+
+    async openMessage({ subject, userEmail }) {
+
+      const {accountId, inboxId} = await this.getInbox();
+      const message = await this.getMessage(subject, userEmail);
+
+      const url = `https://mailtrap.io/api/accounts/${accountId}/inboxes/${inboxId}/messages/${message.id}/body.html`;
+      try {
+        const response = await this.fetchParam(url);
+        const data = await response.text();
+        return {
+          html:data
+        };
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+
     async getLastEmail() {
 
       const imapConfig = {
-            host: "ethereal.email",
-            port: 993,
+            host: "sandbox.smtp.mailtrap.io",
+            port: 2525,
             tls: true,
-            user: testAccount.user,
-            password: testAccount.pass,
+            user: 'gerzon@it-delta.ru',
+            password: 'ZrJ95!aR!$aoGN',
         };
         
         let mail = undefined;
@@ -125,5 +188,7 @@ const makeEmailAccount = async () => {
   };
   return userEmail;
 };
+
+
 
 module.exports = makeEmailAccount;
