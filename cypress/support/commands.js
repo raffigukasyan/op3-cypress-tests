@@ -110,9 +110,9 @@ Cypress.Commands.add('question', (questionName, questionType) => {
 Cypress.Commands.add('accessAllItems', () => {
     cy.wait(2000);
     // cy.xpath('(//button/span[starts-with(text(), \'Show\')])[last()]').click();
-    cy.xpath('//button[@data-test-id="pageCountButton"]').click();
+    cy.xpath('//button[@data-test-id="pageCountButton"]').scrollIntoView().click();
     cy.wait(2000);
-    cy.get('span').contains("Show 100 elements").click();
+    cy.xpath("//li/span[text()='Show 100 elements']").click()
     cy.wait(1000);
 });
 
