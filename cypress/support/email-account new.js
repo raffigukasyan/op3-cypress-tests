@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const Imap = require("imap");
 const { simpleParser } = require("mailparser");
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 const makeEmailAccount = async () => {
