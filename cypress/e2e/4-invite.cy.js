@@ -38,6 +38,7 @@ describe("C. Invite user by 2 ways", () => {
 
     it('getting last email', function () {
         cy.wait(3500);
+        cy.log(main);
         recurse(
             () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
