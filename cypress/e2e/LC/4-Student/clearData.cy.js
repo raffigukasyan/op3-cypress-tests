@@ -34,7 +34,6 @@ describe('LC.Z. Clear all created learning items', () => {
         cy.wait(500);
         cy.visit('/admin/lc/lessons');
         cy.wait(500);
-        cy.accessAllItems();
         cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
         cy.wait(500);
@@ -50,8 +49,10 @@ describe('LC.Z. Clear all created learning items', () => {
 
     it('delete curriculum', function () {
         cy.visit('/admin/lc/curriculums');
-        cy.xpath(`//div[text()='${Cypress.env('curriculumName')}']`).click();
+        cy.wait(500);
+        cy.xpath(`//div[text()='${Cypress.env('curriculumName')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
+        cy.wait(500);
         cy.xpath("//p[text()='Success!']").should('be.visible');
     });
 
