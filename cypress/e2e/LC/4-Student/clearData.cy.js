@@ -33,7 +33,6 @@ describe('LC.Z. Clear all created learning items', () => {
 
         cy.wait(500);
         cy.visit('/admin/lc/lessons');
-        cy.accessAllItems();
         cy.wait(500);
         cy.xpath(`//div[text()='${Cypress.env('lessonCheckboxRadio')}']`).parent().parent().parent().parent().parent().find('.tooltip').last().click();
         cy.get('button').contains('Delete').click();
@@ -66,7 +65,6 @@ describe('LC.Z. Clear all created learning items', () => {
 
     it('delete invite user', function() {
         cy.visit('/admin/user');
-        cy.accessAllItems();
 
         cy.contains(userEmail).parent().parent().last().scrollIntoView().find('.tooltip').last().click();
         cy.wait(500)
