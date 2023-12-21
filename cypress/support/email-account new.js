@@ -86,11 +86,11 @@ const makeEmailAccount = async () => {
     async getLastEmail() {
 
       const imapConfig = {
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+            host: "ethereal.email",
+            port: 993,
             tls: true,
-            user: 'gerzon@it-delta.ru',
-            password: 'ZrJ95!aR!$aoGN',
+            user: testAccount.user,
+            password: testAccount.pass,
         };
         
         let mail = undefined;
