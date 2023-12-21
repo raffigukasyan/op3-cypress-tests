@@ -39,7 +39,7 @@ describe("A3. Profile editing", () => {
 
     it('should have new name', function () {
         cy.visit('/profile');
-
+        cy.wait(500);
         cy.xpath("//h1[text()='User Profile']").should('be.visible');
         cy.xpath("//input[@id='first-name']").should('have.value','first-name');
         cy.xpath("//input[@id='last-name']").should('have.value', 'last-name');

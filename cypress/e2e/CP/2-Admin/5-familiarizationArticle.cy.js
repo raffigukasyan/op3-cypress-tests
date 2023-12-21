@@ -22,7 +22,7 @@ describe("CP5. Familiarization with the article", () => {
     cy.xpath("//label[text()='Answer 3']").click();
     cy.xpath("//button[text()='Check it']").click();
 
-    cy.xpath("//div[text()='Congratulations!']", { timeout: 5000 }).should('be.visible');
+    cy.xpath("//span[text()='Acquainted']", { timeout: 5000 }).should('be.visible');
     cy.wait(500);
 
   });

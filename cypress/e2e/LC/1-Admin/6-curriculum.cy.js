@@ -1,5 +1,5 @@
 describe('LC.A4. Create curriculum', () => {
-    // const skipCookie = Cypress.env('shouldSkipEduTests');
+  //  const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
     //     if ( Cypress.browser.isHeaded ) {
@@ -48,20 +48,6 @@ describe('LC.A4. Create curriculum', () => {
         cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
     });
 
-
-
-
-    // it('should delete curriculum', function () {
-    //     // Go to add curriculums page
-    //     cy.xpath("//a[text()='Curriculums']").click();
-    //
-    //     // delete curriculum
-    //     cy.xpath("//div[text()='QA Test Curriculum']/../../../../following-sibling::th[3]/div/div[2]").last().click();
-    //     cy.get('button').contains('Delete').click();
-    //
-    //     // Assert curriculum created
-    //     cy.xpath("//p[text()='Success!']", { timeout: 5000 }).should('be.visible');
-    // });
 
     // afterEach(function onAfterEach() {
     //     if (this.currentTest.state === 'failed') {

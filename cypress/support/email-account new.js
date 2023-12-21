@@ -21,12 +21,16 @@ const makeEmailAccount = async () => {
      * for the Ethereal email account using ImapFlow.
      */
 
+    async fetchParam(url)  {
+      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
+      return await fetch(url, options)
+    },
+
     async getAccount() {
       const url = 'https://mailtrap.io/api/accounts';
-      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
 
       try {
-        const response = await fetch(url, options);
+        const response = await this.fetchParam(url);
         const data = await response.json();
         return data[0].id;
       } catch (error) {
@@ -37,12 +41,10 @@ const makeEmailAccount = async () => {
     async getInbox() {
       const accountId = await this.getAccount();
       const url = `https://mailtrap.io/api/accounts/${accountId}/inboxes`;
-      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
 
       try {
-        const response = await fetch(url, options);
+        const response = await this.fetchParam(url);
         const data = await response.json();
-        console.log(data);
         return {accountId: accountId, inboxId: data[0].id};
       } catch (error) {
         console.error(error);
@@ -52,10 +54,9 @@ const makeEmailAccount = async () => {
     async getMessage(subject, email) {
       const inbox = await this.getInbox();
       const url = `https://mailtrap.io/api/accounts/${inbox.accountId}/inboxes/${inbox.inboxId}/messages/`;
-      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
 
       try {
-        const response = await fetch(url, options);
+        const response = await this.fetchParam(url);
         const data = await response.json();
         return data.find((obj) => obj.subject === subject && obj.to_email === email);
       } catch (error) {
@@ -70,12 +71,8 @@ const makeEmailAccount = async () => {
       const message = await this.getMessage(subject, userEmail);
 
       const url = `https://mailtrap.io/api/accounts/${accountId}/inboxes/${inboxId}/messages/${message.id}/body.html`;
-      const options = {
-        method: 'GET',
-        headers: { Accept: 'text/html, application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' }
-      };
       try {
-        const response = await fetch(url, options);
+        const response = await this.fetchParam(url);
         const data = await response.text();
         return {
           html:data
