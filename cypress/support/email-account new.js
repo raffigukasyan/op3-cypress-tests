@@ -40,8 +40,10 @@ const makeEmailAccount = async () => {
             // search by Unseen since current date
             imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
               // if we have results, continue fetching msg
-              if (!results) {
-                rej('Nothing to fetch');
+              if (results === null
+                  || results === undefined
+                  || results.length === 0) {
+                console.log('MAIL NOT FOUND')
                 return;
               }
               const f = imap.fetch(results, { bodies: "", markSeen: true });
@@ -83,8 +85,8 @@ const makeEmailAccount = async () => {
     },
 
     async getLastEmailFromMailRu() {
-      const email = process.env.MAIL_RU;
-      const password = process.env.EXTERNAL_MAIL_RU_PASSWORD;
+      const email = process.env.QA_TEST_LOGIN;
+      const password = process.env.QA_TEST_PASSWORD;
 
       const imapConfig = {
       host: "imap.mail.ru",

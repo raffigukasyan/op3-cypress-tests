@@ -25,7 +25,7 @@ describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
     });
 
     it('get last email && try invalid passwords', function () {
-        const password = Cypress.env('password')
+        const authPassword = Cypress.env('authPassword')
         const wrong_password = 'wrong_wrong_wrong_wrong_wrong_'
         cy.wait(1000);
         recurse( //эта рекурсия не работает - таск возвращает таймаут
@@ -48,7 +48,7 @@ describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
 
         cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible');
 
-        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible').type(password);
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).should('be.visible').type(authPassword);
 
         cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).should('be.visible').type(wrong_password);
 
@@ -60,7 +60,7 @@ describe('7-Auth-RU-reset-password-invalid.cy.js', () => {
         cy.xpath("//input[@id='password']", { timeout: 10000 }).clear().type(wrong_password);
 
 
-        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).clear().type(password);
+        cy.xpath("//input[@id='password_confirmation']", { timeout: 10000 }).clear().type(authPassword);
 
 
         cy.xpath("//button[@type='submit']", { timeout: 10000}).should('be.visible').click();

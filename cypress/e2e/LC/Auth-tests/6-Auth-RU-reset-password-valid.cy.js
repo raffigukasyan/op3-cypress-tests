@@ -25,7 +25,7 @@ describe('6-Auth-RU-reset-password-valid.cy.js', () => {
     });
 
     it('getting last email at proguniversal@mail.ru && entering valid reset passwords', function () {
-        const password = Cypress.env('password')
+        const authPassword = Cypress.env('authPassword')
         cy.wait(1000);
         recurse( //эта рекурсия не работает - таск возвращает таймаут
             () => cy.task('getLastEmailFromMailRu'), // Cypress commands to retry
@@ -45,9 +45,9 @@ describe('6-Auth-RU-reset-password-valid.cy.js', () => {
         });
         cy.wait(2000);
 
-        cy.xpath("//input[@id='password']", {timeout: 10000}).should('be.visible').type(password);
+        cy.xpath("//input[@id='password']", {timeout: 10000}).should('be.visible').type(authPassword);
 
-        cy.xpath("//input[@id='password_confirmation']", {timeout: 10000}).should('be.visible').type(password);
+        cy.xpath("//input[@id='password_confirmation']", {timeout: 10000}).should('be.visible').type(authPassword);
 
 
         cy.xpath("//button[@type='submit']", {timeout: 10000}).should('be.visible').click();
