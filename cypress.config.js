@@ -9,7 +9,10 @@ module.exports = defineConfig({
     lessonSuccess: "Lesson successfully completed!",
     registrationEmail: "QAtest+" + Math.random() * 100 + "@lc.com",
     email:  process.env.EMAIL,
+    authEmail: process.env.QA_TEST_LOGIN,
+    authPassword: process.env.QA_TEST_PASSWORD,
     password: process.env.PASSWORD,
+    mailRuEmail: process.env.QA_TEST_LOGIN,
     mailTrapToken: process.env.MAIL_TRAP_TOKEN,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
@@ -35,6 +38,7 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
+    registerUrl: process.env.REGISTER_URL,
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
@@ -45,6 +49,9 @@ module.exports = defineConfig({
         },
         getLastEmail(params) {
           return emailAccount.getLastEmail(params);
+        },
+        getLastEmailFromMailRu() {
+          return emailAccount.getLastEmailFromMailRu();
         },
         sendEmail() {
           return emailAccount.sendEmail();
