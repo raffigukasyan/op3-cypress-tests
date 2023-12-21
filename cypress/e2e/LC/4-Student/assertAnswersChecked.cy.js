@@ -1,5 +1,5 @@
 describe('LC.D1. Assert answers were checked by teacher', () => {
-    // const skipCookie = Cypress.env('shouldSkipEduTests');
+    const skipCookie = Cypress.env('shouldSkipEduTests');
 
     // before(() => {
     //     if ( Cypress.browser.isHeaded ) {
@@ -17,7 +17,7 @@ describe('LC.D1. Assert answers were checked by teacher', () => {
     //     }
     // });
 
-    beforeEach(() => {
+    before(() => {
       cy.task("getUserEmail").then((user) => {
         cy.login(user.email, Cypress.env('password'));
       })

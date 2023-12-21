@@ -23,7 +23,7 @@ describe("LC.A5. Create team", () => {
 
     it('should delete team', function () {
         cy.visit('/admin/teams');
-        cy.xpath(`//div[text()='${tName}']/../../../../following-sibling::th[2]/div/div[2]`).last().click();
+        cy.contains(tName).parent().parent().parent().parent().parent().last().find('div').last().click();
         cy.get('button').contains('Delete').click();
 
         // Assert team deleted

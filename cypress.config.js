@@ -13,6 +13,7 @@ module.exports = defineConfig({
     authPassword: process.env.QA_TEST_PASSWORD,
     password: process.env.PASSWORD,
     mailRuEmail: process.env.QA_TEST_LOGIN,
+    mailTrapToken: process.env.MAIL_TRAP_TOKEN,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
     courseName: "QA Test Course",
@@ -36,7 +37,7 @@ module.exports = defineConfig({
   viewportHeight: 800,
   viewportWidth: 800,
   e2e: {
-    baseUrl: process.env.PRODUCTION_URL,
+    baseUrl: process.env.URL,
     registerUrl: process.env.REGISTER_URL,
     setupNodeEvents: async (on, config) => {
   
