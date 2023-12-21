@@ -43,8 +43,8 @@ module.exports = defineConfig({
         getUserEmail() {
           return emailAccount.user;
         },
-        getLastEmail() {
-          return emailAccount.getLastEmail();
+        getLastEmail(params) {
+          return emailAccount.getLastEmail(params);
         },
         sendEmail() {
           return emailAccount.sendEmail();
