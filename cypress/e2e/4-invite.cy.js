@@ -3,6 +3,7 @@ const { recurse } = require('cypress-recurse')
 describe("C. Invite user by 2 ways", () => {
     let userEmail;
     let userName;
+    let subject = 'Learning Center | Invitation to the Learning Center'
     let confirmationLink;
 
     before(() => {
@@ -37,7 +38,7 @@ describe("C. Invite user by 2 ways", () => {
     it('getting last email', function () {
         cy.wait(3500);
         recurse(
-            () => cy.task('getLastEmail'), // Cypress commands to retry
+            () => cy.task('getAccount', { subject, userEmail }), // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
                 timeout: 60000, // retry up to 1 minute
