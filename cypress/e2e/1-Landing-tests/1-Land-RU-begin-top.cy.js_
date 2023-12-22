@@ -1,6 +1,6 @@
-describe('1. Land-RU-begin-top', () => {
-    beforeEach(() => {
-        cy.visit('https://org-online.ru/');
+describe('LA1. Land-RU-begin-top', () => {
+    before(() => {
+        cy.visit(Cypress.env('landingUrl'));
     });
 
     it('should click top begin button', function () {

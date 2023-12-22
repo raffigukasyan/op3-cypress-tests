@@ -1,6 +1,6 @@
-describe('5. Land-RU-contact-techsupport', () => {
-    beforeEach(() => {
-        cy.visit('https://org-online.ru/');
+describe('LA5. Land-RU-contact-techsupport', () => {
+    before(() => {
+        cy.visit(Cypress.env('landingUrl'));
     });
 
     it('Click contact tech-support to check for modal box', function () {

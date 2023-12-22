@@ -1,6 +1,6 @@
-describe('2. Land-RU-read-more-study', () => {
-    beforeEach(() => {
-        cy.visit('https://org-online.ru/');
+describe('LA2. Land-RU-read-more-study', () => {
+    before(() => {
+        cy.visit(Cypress.env('landingUrl'));
     });
 
     it('should click study button', function () {

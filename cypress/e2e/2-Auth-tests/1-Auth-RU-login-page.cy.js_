@@ -1,7 +1,6 @@
 describe('1. Auth-login-page', () => {
-    beforeEach(() => {
-        cy.visit('login');
-        cy.wait(1000);
+    before(() => {
+        cy.login();
         cy.get('[id="headlessui-menu-button-:r0:"]').click();
         cy.wait(1000);
         // Switch to RU

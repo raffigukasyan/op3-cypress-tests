@@ -1,6 +1,6 @@
-describe('3. Land-RU-read-more-reglaments', () => {
-    beforeEach(() => {
-        cy.visit('https://org-online.ru/');
+describe('LA3. Land-RU-read-more-reglaments', () => {
+    before(() => {
+        cy.visit(Cypress.env('landingUrl'));
     });
 
     it('should move to login page', function () {
