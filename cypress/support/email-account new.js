@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const Imap = require("imap");
 const { simpleParser } = require("mailparser");
+const fetch = require("node-fetch");
 require('dotenv').config();
 
 const makeEmailAccount = async () => {
@@ -147,76 +148,6 @@ const makeEmailAccount = async () => {
       };
     },
 
-    async getLastEmailFromMailRu() {
-      const email = process.env.QA_TEST_LOGIN;
-      const password = process.env.QA_TEST_PASSWORD;
-
-      const imapConfig = {
-      host: "imap.mail.ru",
-      port: 993,
-      tls: true,
-      user: email,
-      password: password,
-      };
-
-      let mail = undefined;
-
-      const getEmails = new Promise((res, rej) => {
-        // make an imap client and run it on the INBOX before getting the mails
-        const imap = new Imap(imapConfig);
-        imap.once("ready", () => {
-          imap.openBox("INBOX", false, () => {
-            // search by Unseen since current date
-            imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
-              // if we have results, continue fetching msg
-              console.log(results);
-              /*if(results.length === 0) {
-                console.log('MAIL NOT FOUND')
-                return;
-              }*/
-              if (results === null
-                  || results === undefined
-                  || results.length === 0) {
-                console.log('MAIL NOT FOUND')
-                return;
-              }
-              const f = imap.fetch(results, {bodies: "", markSeen: true});
-              // execute when we have a message
-              f.on("message", (msg) => {
-                // get body
-                msg.on("body", (stream) => {
-                  // parse mail
-                  simpleParser(stream, async (err, parsed) => {
-                    mail = parsed;
-                    res(parsed);
-                  });
-                });
-              });
-              f.once("error", (ex) => {
-                return rej(ex);
-              });
-              f.once("end", () => {
-                imap.end();
-              });
-            });
-          });
-        });
-
-        imap.once("error", (err) => {
-          rej(err);
-        });
-
-        imap.connect();
-      });
-
-      let a = await getEmails;
-
-      // and returns the main fields + attachments array
-      return {
-        subject: mail.headers.subject,
-        html: mail.html,
-      };
-    },
 
     /**
      * Utility method for sending an email
