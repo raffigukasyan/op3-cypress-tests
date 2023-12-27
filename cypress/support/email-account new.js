@@ -23,7 +23,7 @@ const makeEmailAccount = async () => {
      */
 
     async fetchParam(url)  {
-      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': '6ebd02cab558c012e5c6d1460c578dc0' } };
+      const options = { method: 'GET', headers: { Accept: 'application/json', 'Api-Token': process.env.MAIL_TRAP_TOKEN } };
       return await fetch(url, options)
     },
 

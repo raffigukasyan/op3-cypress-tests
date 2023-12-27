@@ -1,11 +1,7 @@
 describe('1. Auth-login-page', () => {
     before(() => {
-        cy.login();
-        cy.get('[id="headlessui-menu-button-:r0:"]').click();
-        cy.wait(1000);
-        // Switch to RU
-        cy.get('[id="headlessui-menu-item-:r4:"]').click();
-        cy.wait(1000);
+        cy.visit(Cypress.config().baseUrl)
+        cy.changeLang();
     });
 
     it('should move to login page', function () {
