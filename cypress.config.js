@@ -36,7 +36,6 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
-    landingUrl: process.env.LANDING_URL,
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
