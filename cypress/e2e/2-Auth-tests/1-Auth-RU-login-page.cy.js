@@ -1,7 +1,7 @@
 describe('1. Auth-login-page', () => {
     before(() => {
         cy.visit(Cypress.config().baseUrl)
-        cy.changeLang();
+        cy.changeLangAuth();
     });
 
     it('should move to login page', function () {

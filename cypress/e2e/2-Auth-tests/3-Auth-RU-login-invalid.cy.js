@@ -1,20 +1,15 @@
 describe('3-Auth-RU-login-invalid.cy.js', () => {
-    beforeEach(() => {
-        cy.visit('login');
-        cy.wait(1000);
-        cy.get('[id="headlessui-menu-button-:r0:"]').click();
-        cy.wait(1000);
-        // Switch to RU
-        cy.get('[id="headlessui-menu-item-:r4:"]').click();
-        cy.wait(1000);
+    before(() => {
+        cy.visit(Cypress.config().baseUrl)
+        cy.changeLangAuth();
     });
 
     it('should move to login page and type wrong login/password', function () {
-        const username = Cypress.env('authEmail')
-        const password = Cypress.env('authPassword')
+        const username = Cypress.env('email');
+        const password = Cypress.env('password');
 
-        const wrong_username = 'wrong_.ajshd@ajdhajszxmcbnqwdot.wrong'
-        const wrong_password = 'wrong_wrong_wrong_wrong_wrong_'
+        const wrong_username = 'wrong_.ajshd@ajdhajszxmcbnqwdot.wrong';
+        const wrong_password = 'wrong_wrong_wrong_wrong_wrong_';
 
         cy.xpath("//input[@id='email']", { timeout: 10000 }).should('be.visible').clear().type(wrong_username);
 

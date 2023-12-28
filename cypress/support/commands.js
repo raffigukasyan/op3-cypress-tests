@@ -137,6 +137,13 @@ Cypress.Commands.add('changeLang', () => {
     cy.wait(500);
     cy.xpath("/html/body/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div").find('a').last().click();
     cy.wait(500);
+});
+
+Cypress.Commands.add('changeLangAuth', () => {
+    cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div/button").click();
+    cy.wait(500);
+    cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div").find('a').last().click();
+    cy.wait(500);
 })
 
 Cypress.Commands.add('logout', () => {

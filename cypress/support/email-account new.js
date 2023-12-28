@@ -59,7 +59,8 @@ const makeEmailAccount = async () => {
       try {
         const response = await this.fetchParam(url);
         const data = await response.json();
-        return data.find((obj) => obj.subject === subject && obj.to_email === email);
+        console.log(data.find((obj) => obj.to_email === email));
+        return data.find((obj) => obj.to_email === email);
       } catch (error) {
         console.error(error);
       }

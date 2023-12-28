@@ -1,23 +1,18 @@
 const {recurse} = require("cypress-recurse");
 describe('5-Auth-RU-forgot-password-valid-mail-link.cy.js', () => {
     let main = Cypress.config('baseUrl').split('.')[1]
-    let subject = 'Learning Center | Invitation to the Learning Center'
-    beforeEach(() => {
-        cy.visit('login');
-        cy.wait(1000);
-        cy.get('[id="headlessui-menu-button-:r0:"]').click();
-        cy.wait(1000);
-        // Switch to RU
-        cy.get('[id="headlessui-menu-item-:r4:"]').click();
-        cy.wait(1000);
+    let subject = 'Уведомление о сбросе пароля';
+    const email = Cypress.env('authEmail')
+    before(() => {
+        cy.visit(Cypress.config().baseUrl)
+        cy.changeLangAuth();
     });
 
     it('requesting reset-password-email', function () {
-        const email = Cypress.env('authEmail')
 
         cy.contains("Забыли пароль?").should('be.visible').click();
 
-        cy.wait(65000); //временное решение - org-online.ru высылает письмо сброса пароля  с ограничением, 1 раз в минуту
+       // cy.wait(65000); //временное решение - org-online.ru высылает письмо сброса пароля  с ограничением, 1 раз в минуту
 
         cy.xpath("//input[@id='email']", {timeout: 10000}).type(email);
         cy.wait(1000);
@@ -30,7 +25,7 @@ describe('5-Auth-RU-forgot-password-valid-mail-link.cy.js', () => {
         cy.wait(1000);
         recurse( //эта рекурсия не работает - таск возвращает таймаут
             () => {
-                if(main === 'release') return  cy.task('getAccount', {subject, Cypress.env('')})
+                if(main === 'release') return  cy.task('getAccount', {subject, email})
                 if(main === 'org-online') return cy.task('getLastEmail', {});
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
@@ -45,6 +40,7 @@ describe('5-Auth-RU-forgot-password-valid-mail-link.cy.js', () => {
                 cy.document({log: false}).invoke({log: false}, 'write', html)
             })
         cy.get('[class="button button-primary"]').should('have.attr', 'href').then(($btn) => {
+            console.log($btn);
             cy.visit($btn);
         });
     });
