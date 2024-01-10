@@ -7,6 +7,7 @@ describe("LC.A5. Create team", () => {
     it('should create new team', function () {
         // Go to add user page
         cy.xpath("//a[text()='Teams']").click();
+        cy.wait(3000);
         cy.xpath("//button[text()='Add team']").click();
 
         // Input credentials
