@@ -12,7 +12,7 @@ describe('2-Auth-RU-login-valid.cy.js', () => {
     it('should move to login page and log in', function () {
         cy.get('[data-test-id="2"]').should('be.visible').type(username);
 
-        cy.get('[data-test-id="3"]').should('be.visible').type(password);
+        cy.get('[data-test-id="3"]').should('be.visible').type(password, { log: false });
 
         cy.get('[data-test-id="6"]').should('be.visible').click();
         cy.wait(3000);
@@ -24,7 +24,7 @@ describe('2-Auth-RU-login-valid.cy.js', () => {
 
         cy.get('[data-test-id="2"]').should('be.visible').clear().type(wrong_username);
 
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(password);
+        cy.get('[data-test-id="3"]').should('be.visible').clear().type(password, { log: false });
 
         cy.get('[data-test-id="6"]').should('be.visible').click();
 
@@ -33,7 +33,7 @@ describe('2-Auth-RU-login-valid.cy.js', () => {
         cy.wait(1000);
         cy.get('[data-test-id="2"]').should('be.visible').clear().type(username);
 
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(wrong_password);
+        cy.get('[data-test-id="3"]').should('be.visible').clear().type(wrong_password, { log: false });
 
         cy.get('[data-test-id="6"]').should('be.visible').click();
         cy.wait(1000);

@@ -27,11 +27,10 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
         cy.wait(1000);
         recurse( //эта рекурсия не работает - таск возвращает таймаут
             () => {
-                console.log("111111")
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
                 if(main === 'org-online') return cy.task('getLastEmail', {port: 993, host: 'imap.mail.ru', user:userEmail, pass: authPassword })
+                //localhost testing
                 if(Cypress.config('baseUrl').split('.')[0] === 'http://tenant1') return cy.task('getLastEmail', {port: 993, host: 'imap.mail.ru', user:userEmail, pass: authPassword });
-                console.log("2222222222")
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
@@ -50,17 +49,17 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
         cy.wait(2000);
         cy.changeLangAuth();
         // Invalid Data
-        cy.get('[data-test-id="3"]').should('be.visible').type(authPassword);
+        cy.get('[data-test-id="3"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').type(wrong_password);
+        cy.get('[data-test-id="4"]').should('be.visible').clear().type(wrong_password, { log: false });
         cy.wait(500);
         cy.get('[data-test-id="5"]').should('be.visible').click();
         cy.wait(2500);
         cy.contains('Значение поля Пароль не совпадает с подтверждаемым').should('be.visible');
         cy.wait(500);
-        cy.get('[data-test-id="3"]').should('be.visible').type(wrong_password);
+        cy.get('[data-test-id="3"]').should('be.visible').clear().type(wrong_password, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').type(authPassword);
+        cy.get('[data-test-id="4"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
         cy.get('[data-test-id="5"]').should('be.visible').click();
         cy.wait(2500);
@@ -68,9 +67,9 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
         cy.wait(500);
 
         //Valid Data
-        cy.get('[data-test-id="3"]').should('be.visible').type(authPassword);
+        cy.get('[data-test-id="3"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').type(authPassword);
+        cy.get('[data-test-id="4"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
         cy.get('[data-test-id="5"]').should('be.visible').click();
         cy.wait(2500);
