@@ -14,9 +14,9 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
     });
     it('requesting reset-password-email', function () {
         cy.changeLangAuth();
-        cy.get('[data-test-id="5"]').should('be.visible').click();
+        cy.get('[data-test-id="request_password_reset_link"]').should('be.visible').click();
         cy.wait(2500);
-        cy.get('[data-test-id="2"]').should('be.visible').type(userEmail);
+        cy.get('[data-test-id="email_input"]').should('be.visible').type(userEmail);
         cy.wait(500);
         cy.contains("Ссылка для сброса пароля электронной почты").should('be.visible').click();
         cy.contains("Ссылка на сброс пароля была отправлена!").should('be.visible');
@@ -48,29 +48,29 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
         cy.wait(2000);
         cy.changeLangAuth();
         // Invalid Data
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(authPassword, { log: false });
+        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').clear().type(wrong_password, { log: false });
+        cy.get('[data-test-id="password_confirmation_input"]').should('be.visible').clear().type(wrong_password, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="5"]').should('be.visible').click();
+        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
         cy.wait(2500);
         cy.contains('Значение поля Пароль не совпадает с подтверждаемым').should('be.visible');
         cy.wait(500);
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(wrong_password, { log: false });
+        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(wrong_password, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').clear().type(authPassword, { log: false });
+        cy.get('[data-test-id="password_confirmation_input"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="5"]').should('be.visible').click();
+        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
         cy.wait(2500);
         cy.contains('Значение поля Пароль не совпадает с подтверждаемым').should('be.visible');
         cy.wait(500);
 
         //Valid Data
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(authPassword, { log: false });
+        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="4"]').should('be.visible').clear().type(authPassword, { log: false });
+        cy.get('[data-test-id="password_confirmation_input"]').should('be.visible').clear().type(authPassword, { log: false });
         cy.wait(500);
-        cy.get('[data-test-id="5"]').should('be.visible').click();
+        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
         cy.wait(2500);
         cy.login(userEmail, authPassword);
     });
