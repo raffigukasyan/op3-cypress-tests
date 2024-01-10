@@ -11,11 +11,9 @@ describe('Register Ru', () => {
     //let confirmationLink;
 
     before(() => {
-        cy.task("getUserEmail").then((user) => {
-            cy.log(user.email);
-            cy.log(user.pass);
-            userEmail = user.email;
-            pass = user.pass;
+        cy.task("getTestAccount").then((res) => {
+            userEmail = res.user;
+            pass = res.pass;
             //userName = user.email.replace("@ethereal.email", "");
         })
         cy.visit(Cypress.config().registerUrl);
