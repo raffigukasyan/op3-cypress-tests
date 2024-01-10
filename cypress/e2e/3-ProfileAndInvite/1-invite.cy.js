@@ -9,10 +9,10 @@ describe("C. Invite user by 2 ways", () => {
     let confirmationLink;
 
     before(() => {
-        cy.task("getTestAccount").then((res) => {
-            userEmail = res.user;
-            passEmail = res.pass;
-            userName = res.user.replace("@ethereal.email", "");
+        cy.task("getUserEmail").then((user) => {
+            userEmail = user.email;
+            passEmail = user.pass;
+            userName = user.email.replace("@ethereal.email", "");
         })
     })
 
