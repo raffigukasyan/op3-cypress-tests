@@ -14,10 +14,10 @@ Cypress.Commands.add('login', (username = Cypress.env('email'), password = Cypre
     cy.session([username, hashCode(password)], () => {
         cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
 
-        cy.get('[data-test-id="2"]').should('be.visible').clear().type(username);
-        cy.get('[data-test-id="3"]').should('be.visible').clear().type(password, { log: false });
+        cy.get('[data-test-id="email_input"]').should('be.visible').clear().type(username);
+        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(password, { log: false });
 
-        cy.get('[data-test-id="6"]').should('be.visible').click();
+        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
         cy.wait(4000);
     });
 });
@@ -141,7 +141,7 @@ Cypress.Commands.add('changeLang', () => {
 });
 
 Cypress.Commands.add('changeLangAuth', () => {
-    cy.get('[data-header-test-id="2"]').click()
+    cy.get('[data-header-test-id="lang_button"]').click()
     cy.wait(500);
     cy.get('[data-header-test-id="ru"]').click()
     cy.wait(500);

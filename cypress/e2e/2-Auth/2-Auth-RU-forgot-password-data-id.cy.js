@@ -12,7 +12,6 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
         cy.visit(Cypress.config().baseUrl)
         cy.changeLangAuth();
     });
-    //cy.get('[data-test-id="2"]').should('be.visible').clear().type(wrong_username);
     it('requesting reset-password-email', function () {
         cy.changeLangAuth();
         cy.get('[data-test-id="5"]').should('be.visible').click();
