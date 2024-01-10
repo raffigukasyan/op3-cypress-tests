@@ -16,8 +16,7 @@ describe('2-Auth-RU-forgot-password.cy.js', () => {
     it('requesting reset-password-email', function () {
         cy.changeLangAuth();
         cy.get('[data-test-id="5"]').should('be.visible').click();
-       // cy.wait(65000); //временное решение - org-online.ru высылает письмо сброса пароля  с ограничением, 1 раз в минуту
-
+        cy.wait(2500);
         cy.get('[data-test-id="2"]').should('be.visible').type(userEmail);
         cy.wait(500);
         cy.contains("Ссылка для сброса пароля электронной почты").should('be.visible').click();
