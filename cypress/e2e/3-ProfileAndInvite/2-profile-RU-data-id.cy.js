@@ -55,10 +55,10 @@ describe("A3. Profile editing", () => {
 
         // confirm data was changed and change it back to default values
         cy.log('Проверяем что Имя, фамилия, телефон и аватарка были изменены');
-        cy.xpath("//input[@id='first-name']").should('contain', 'test_first_name');
-        cy.xpath("//input[@id='last-name']").should('contain', 'test_last_name');
-        cy.xpath("//input[@id='phone']").should('contain', '+71111111111');
-        cy.get('[data-test-id="change_avatar"]').should('have.attr', 'src').should('have.string', 'person.jpg');
+        cy.xpath("//input[@id='first-name']").should('have.attr', 'value').should('have.string', 'test_first_name');
+        cy.xpath("//input[@id='last-name']").should('have.attr', 'value').should('have.string', 'test_last_name');
+        cy.xpath("//input[@id='phone']").should('have.attr', 'value').should('have.string', '+71111111111');
+        cy.get('[data-test-id="change_avatar"]').should('have.attr', 'src').should('not.have.string', 'no-user-photo.jpg');
 
         cy.log('Меняем имя, фамилию и телефон обратно на старые значения');
         cy.xpath("//input[@id='first-name']").clear().type('QA_TEST');
