@@ -9,8 +9,6 @@ describe("C. Invite user by 2 ways", () => {
     let confirmationLink;
 
     before(() => {
-        cy.log('меняем язык на RU');
-        cy.changeLangAuth();
         cy.task("getUserEmail").then((user) => {
             userEmail = user.email;
             passEmail = user.pass;
@@ -21,10 +19,15 @@ describe("C. Invite user by 2 ways", () => {
     it('should invite by user menu', function () {
         cy.log('Логинимся в админку указанную в .env')
         cy.admin();
+        //дополнительный шаг для тестирования на локалке
+        cy.visit('/admin/lc/');
+        cy.wait(3000);
+        cy.log('меняем язык на RU');
+        cy.changeLangAuth();
 
         // Go to invite user page
         cy.log('Высылаем приглашение')
-        cy.get('[data-test-id="header-menu-button"]').click();
+        cy.get('[data-header-test-id="header_menu_button"]').click();
         cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
         cy.get('[data-test-id="email_input"]').type(userEmail);
@@ -37,7 +40,7 @@ describe("C. Invite user by 2 ways", () => {
         // Assert user invited
         cy.log('Проверяем уведомление об успехе');
         cy.wait(300);
-        cy.contains("Успех").should('be.visible');
+        cy.contains("Успешно").should('be.visible');
         cy.wait(2500);
 
     });
@@ -51,7 +54,7 @@ describe("C. Invite user by 2 ways", () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
                 if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail})
                 //Для локального тестирования на tenant1.localhost, на релизе можно убрать
-                if(Cypress.config('baseUrl').split('.')[0] === 'http://tenant1') return cy.task('getLastEmail', {port: 993, host: 'imap.mail.ru', user:userEmail, pass: authPassword });
+                if(Cypress.config('baseUrl').split('.')[0] === 'http://tenant1') return cy.task('getLastEmail', {user:userEmail, pass: passEmail });
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
@@ -72,6 +75,7 @@ describe("C. Invite user by 2 ways", () => {
     it('accept invitation', function () {
         cy.log('Следуем по ссылке из письма');
         cy.visit(confirmationLink);
+        cy.wait(3000);
         cy.log('Вводим имя');
         cy.get('[data-test-id="name_input"]').type('QA');
         cy.log('Вводим фамилию');
@@ -79,11 +83,13 @@ describe("C. Invite user by 2 ways", () => {
         cy.log('Вводим пароль');
         cy.get('[data-test-id="password_input"]').type(Cypress.env('password'), { log: false });
         cy.log('Вводим подтверждение пароля');
-        cy.get('[data-test-id="repear_password_input"]').type(Cypress.env('password'), { log: false });
+        cy.get('[data-test-id="repeat_password_input"]').type(Cypress.env('password'), { log: false });
         cy.log('Жмем на кнопку сохранить');
         cy.get('[data-test-id="save_button"]').click();
-        cy.log('Проверяем что мы на странице пользователя Learning Center');
-        cy.xpath("//h2[text()='Learning center']").should('be.visible');
+        cy.wait(3000);
+        cy.log('Проверяем что мы на странице курсов пользователя Learning Center');
+        cy.url().should('include', '/learning/courses')
+        //cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });
 });
 
