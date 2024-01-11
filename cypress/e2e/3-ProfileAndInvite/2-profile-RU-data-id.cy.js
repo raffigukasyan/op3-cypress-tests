@@ -40,7 +40,7 @@ describe("A3. Profile editing", () => {
         cy.xpath("//button[@type='submit']").should('be.disabled');
         cy.xpath("//input[@id='password']").clear().type(newPassword, {log:false});
 
-        cy.xpath("//button[@type='submit']").click();
+        cy.get('[data-test-id="save_button"]').click();
         cy.wait(500);
         cy.log('Проверяем уведомление')
         cy.contains("Успешно").should('be.visible');
@@ -71,7 +71,10 @@ describe("A3. Profile editing", () => {
         cy.log('Удаляем аватар');
         cy.get('[data-test-id="delete_avatar_button"]').click();
         cy.wait(500);
-        cy.xpath("//button[@type='submit']").click();
+        cy.get('[data-test-id="save_button"]').click();
+        cy.wait(500);
+        cy.log('Проверяем уведомление')
+        cy.contains("Успешно").should('be.visible');
         cy.wait(4000);
 
     });
