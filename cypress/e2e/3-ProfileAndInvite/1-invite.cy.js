@@ -42,7 +42,9 @@ describe("C. Invite user by 2 ways", () => {
         recurse(
             () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
-                if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail});
+                if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail})
+                //Для локального тестирования на tenant1.localhost, на релизе можно убрать
+                if(Cypress.config('baseUrl').split('.')[0] === 'http://tenant1') return cy.task('getLastEmail', {port: 993, host: 'imap.mail.ru', user:userEmail, pass: authPassword });
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
