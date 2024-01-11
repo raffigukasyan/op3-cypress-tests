@@ -14,7 +14,7 @@ describe("A3. Profile editing", () => {
         cy.wait(1000);
         cy.log('Заходим в профиль')
         cy.get('[data-header-test-id="header_menu_button"]').click();
-        cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "profile']").click();
+        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(0).click();
         cy.wait(2000);
         cy.log('Проверяем что мы находимся в профиле');
         cy.url().should('include', '/profile')
@@ -51,6 +51,9 @@ describe("A3. Profile editing", () => {
         cy.login(Cypress.env('email'), newPassword);
         cy.visit('/profile');
         cy.wait(1500);
+        cy.log('меняем язык на RU');
+        cy.changeLangAuth();
+        cy.wait(1000);
         // cy.closePopup();
 
         // confirm data was changed and change it back to default values
@@ -76,6 +79,29 @@ describe("A3. Profile editing", () => {
         cy.log('Проверяем уведомление')
         cy.contains("Успешно").should('be.visible');
         cy.wait(4000);
+
+        cy.log('Переходим из профиля на страницу админа')
+        cy.get('[data-header-test-id="profile_button"]').click();
+        cy.wait(1000);
+        /*cy.get('[data-header-test-id="header-dropdown-menu"]').then(($test) => {
+          console.log($test);
+        })*/
+        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(1).click();
+        //cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "admin']").click();
+        cy.wait(2500);
+        cy.log('Проверяем что адрес страницы /admin/lc/courses');
+        cy.url().should('include', '/admin/lc/courses');
+        cy.visit('/admin/lc/');
+        cy.wait(2500);
+        cy.log('Переходим из админки в панель пользователя')
+        cy.get('[data-header-test-id="header_menu_button"]').click();
+        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(1).click();
+        cy.log('Проверяем что адрес страницы /learning');
+        cy.url().should('include', '/learning');
+        cy.log('Жмем кнопку выход');
+        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(3).click();
+        cy.log('Проверяем что находимся на странице логина');
+        cy.url().should('include', '/login');
 
     });
 
