@@ -23,11 +23,11 @@ describe("C. Invite user by 2 ways", () => {
         cy.get('[data-test-id="header-menu-button"]').click();
         cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
-        cy.xpath("//*[@id='email']").type(userEmail);
+        cy.get('[data-test-id="email_input"]').type(userEmail);
 
 
         // Click on submit button
-        cy.xpath("//button[@type='submit']").click();
+        cy.get('[data-test-id="send_button"]').click();
         cy.wait(3000);
 
         // Assert user invited
