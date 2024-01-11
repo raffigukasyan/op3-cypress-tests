@@ -36,11 +36,13 @@ module.exports = defineConfig({
   viewportWidth: 800,
   e2e: {
     baseUrl: process.env.URL,
-    registerUrl: 'https://app.org-online.ru/register',
+    //temp register URL for testing
+    registerUrl: 'http://tenant1.localhost:8001/register',
+    //original registerUrl - restore this and delete the previous url
+    //registerUrl: 'https://app.org-online.ru/register',
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
-
       on('task', {
         getUserEmail() {
           return emailAccount.user;
