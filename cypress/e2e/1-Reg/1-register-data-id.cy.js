@@ -55,7 +55,7 @@ describe('Register Ru', () => {
             cy.get('[data-test-id="code_input"]').type(invalid_code);
             cy.wait(200);
             cy.log('Жмем кнопку проверить код');
-            cy.get('[data-test-id="code_input"]').click();
+            cy.get('[data-test-id="check_code_button"]').click();
             cy.wait(500);
             cy.log('Проверяем красное уведомление');
             cy.contains('Выбранное значение для Код некорректно.').should('be.visible');
@@ -64,7 +64,7 @@ describe('Register Ru', () => {
             cy.get('[data-test-id="code_input"]').clear().type(midText.match(/[0-9]+/g)[0]);
         });
         cy.log('Жмем кнопку проверить код');
-        cy.get('[data-test-id="submit_button"]').click();
+        cy.get('[data-test-id="check_code_button"]').click();
         cy.wait(1000);
         cy.log('Проверяем что мы на странице регистрации');
         cy.contains('Регистрация');
