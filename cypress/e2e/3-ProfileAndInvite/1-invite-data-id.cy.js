@@ -9,6 +9,8 @@ describe("C. Invite user by 2 ways", () => {
     let confirmationLink;
 
     before(() => {
+        cy.log('меняем язык на RU');
+        cy.changeLangAuth();
         cy.task("getUserEmail").then((user) => {
             userEmail = user.email;
             passEmail = user.pass;
@@ -17,9 +19,11 @@ describe("C. Invite user by 2 ways", () => {
     })
 
     it('should invite by user menu', function () {
+        cy.log('Логинимся в админку указанную в .env')
         cy.admin();
 
         // Go to invite user page
+        cy.log('Высылаем приглашение')
         cy.get('[data-test-id="header-menu-button"]').click();
         cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
@@ -31,7 +35,9 @@ describe("C. Invite user by 2 ways", () => {
         cy.wait(3000);
 
         // Assert user invited
-        cy.xpath("//p[text()='Success!']", { timeout: 10000 }).should('be.visible');
+        cy.log('Проверяем уведомление об успехе');
+        cy.wait(300);
+        cy.contains("Успех").should('be.visible');
         cy.wait(2500);
 
     });
@@ -39,6 +45,7 @@ describe("C. Invite user by 2 ways", () => {
     it('getting last email', function () {
         cy.wait(3500);
         cy.log(main);
+        cy.log('Ищем ссылку в письме на почте и сохраняем ссылку');
         recurse(
             () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
@@ -63,15 +70,19 @@ describe("C. Invite user by 2 ways", () => {
     });
 
     it('accept invitation', function () {
+        cy.log('Следуем по ссылке из письма');
         cy.visit(confirmationLink);
-
+        cy.log('Вводим имя');
         cy.xpath("//*[@id='first-name']").type('QA');
-        cy.xpath("//*[@id='last-name']").type('Test')
+        cy.log('Вводим фамилию');
+        cy.xpath("//*[@id='last-name']").type('Test');
+        cy.log('Вводим пароль');
         cy.xpath("//*[@id='password']").type(Cypress.env('password'), { log: false });
+        cy.log('Вводим подтверждение пароля');
         cy.xpath("//*[@id='new_password']").type(Cypress.env('password'), { log: false });
-
+        cy.log('Жмем на кнопку сохранить');
         cy.xpath("(//button[@type='submit'])[1]").click();
-
+        cy.log('Проверяем что мы на странице пользователя Learning Center');
         cy.xpath("//h2[text()='Learning center']").should('be.visible');
     });
 });
