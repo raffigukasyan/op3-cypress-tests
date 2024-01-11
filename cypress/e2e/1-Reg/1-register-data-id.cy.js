@@ -6,6 +6,7 @@ describe('Register Ru', () => {
     let name = 'QaRegister';
     let last_name = 'Test';
     let test_password = 'Qatest123';
+    let wrong_password = 'wrong_wrong_wrong';
     //let main = Cypress.config('baseUrl').split('.')[1]
     //let subject = 'Learning Center | Invitation to the Learning Center'
     //let confirmationLink;
@@ -74,10 +75,19 @@ describe('Register Ru', () => {
         cy.get('[data-test-id="last_name_input"]').type(last_name);
         cy.wait(1000);
         cy.log('Вводим пароль');
-        cy.get('[data-test-id="password_input"]').type(test_password);
+        cy.get('[data-test-id="password_input"]').clear().type(test_password);
         cy.wait(1000);
-        cy.log('Вводим подтверждение пароля');
-        cy.get('[data-test-id="password_confirmation_input"]').type(test_password);
+        cy.log('Вводим подтверждение пароля - другой пароль');
+        cy.get('[data-test-id="password_confirmation_input"]').clear().type(wrong_password);
+        cy.wait(1000);
+        cy.log('Проверяем красное уведомление');
+        cy.contains('не совпадает').should('be.visible');
+        cy.wait(1000);
+        cy.log('Вводим пароль');
+        cy.get('[data-test-id="password_input"]').clear().type(test_password);
+        cy.wait(1000);
+        cy.log('Вводим подтверждение пароля - тот же пароль');
+        cy.get('[data-test-id="password_confirmation_input"]').clear().type(wrong_password);
         cy.wait(1000);
         cy.log('Жмем на кнопку');
         cy.get('[data-test-id="submit_button"]').click();
