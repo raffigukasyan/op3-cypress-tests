@@ -20,7 +20,7 @@ describe("A3. Profile editing", () => {
         cy.url().should('include', '/profile')
         //chnage Avatar
         cy.log('Проверяем отсутствие аватара');
-        cy.xpath("//input[@id='avatar']").should('have.value', '/img/no-user-photo.jpg');
+        cy.get('[data-test-id="change_avatar"]').should('have.attr', 'src').should('have.string', 'no-user-photo.jpg');
         cy.log('Меняем аватар');
         cy.xpath("//input[@id='avatar']").selectFile('cypress/image/person.jpg', {force: true})
 
@@ -58,16 +58,19 @@ describe("A3. Profile editing", () => {
         cy.xpath("//input[@id='first-name']").should('contain', 'test_first_name');
         cy.xpath("//input[@id='last-name']").should('contain', 'test_last_name');
         cy.xpath("//input[@id='phone']").should('contain', '+71111111111');
-        cy.xpath("//input[@id='avatar']").should('contain', 'person.jpg');
+        cy.get('[data-test-id="change_avatar"]').should('have.attr', 'src').should('have.string', 'person.jpg');
 
-        cy.log('Меняем имя, фамилию, аватарку и телефон обратно на старые значения');
+        cy.log('Меняем имя, фамилию и телефон обратно на старые значения');
         cy.xpath("//input[@id='first-name']").clear().type('QA_TEST');
         cy.xpath("//input[@id='last-name']").clear().type('QA_TEST');
         cy.xpath("//input[@id='phone']").clear().type('+79999999999');
         cy.xpath("//input[@id='new_password']").clear().type(Cypress.env("password"), {log:false});
         cy.xpath("//button[@type='submit']").should('be.disabled');
         cy.xpath("//input[@id='password']").clear().type(Cypress.env("password"), {log:false});
-
+        cy.wait(500);
+        cy.log('Удаляем аватар');
+        cy.get('[data-test-id="delete_avatar_button"]').click();
+        cy.wait(500);
         cy.xpath("//button[@type='submit']").click();
         cy.wait(4000);
 
