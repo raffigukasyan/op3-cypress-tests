@@ -14,7 +14,7 @@ describe("A3. Profile editing", () => {
         cy.wait(1000);
         cy.log('Заходим в профиль')
         cy.get('[data-header-test-id="header_menu_button"]').click();
-        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(0).click();
+        cy.get('[data-header-test-id="header_menu"]').eq(0).click();
         cy.wait(2000);
         cy.log('Проверяем что мы находимся в профиле');
         cy.url().should('include', '/profile')
@@ -95,10 +95,12 @@ describe("A3. Profile editing", () => {
         cy.wait(2500);
         cy.log('Переходим из админки в панель пользователя')
         cy.get('[data-header-test-id="header_menu_button"]').click();
-        cy.get('[data-header-test-id="header-dropdown-menu"]').eq(1).click();
+        cy.get('[data-header-test-id="header_menu"]').eq(1).click();
         cy.log('Проверяем что адрес страницы /learning');
         cy.url().should('include', '/learning');
         cy.log('Жмем кнопку выход');
+        cy.get('[data-header-test-id="profile_button"]').click();
+        cy.wait(300);
         cy.get('[data-header-test-id="header-dropdown-menu"]').eq(3).click();
         cy.log('Проверяем что находимся на странице логина');
         cy.url().should('include', '/login');
