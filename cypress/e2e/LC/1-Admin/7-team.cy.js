@@ -23,7 +23,7 @@ describe("LC.A5. Create team", () => {
     it('should edit team', function () {
         cy.visit('admin/teams');
 
-        cy.wait(1000);
+        cy.wait(1500);
         // cy.accessAllItems();
         cy.xpath(`(//div[text()='${tName + 'sdadas4rwrwerw542345'}'])`).last().click();
 
