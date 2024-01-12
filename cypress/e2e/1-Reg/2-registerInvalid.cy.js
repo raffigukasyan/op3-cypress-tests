@@ -16,9 +16,12 @@ describe('Register Invalid', () => {
             pass = res.pass;
             //userName = user.email.replace("@ethereal.email", "");
         })
+    });
+
+    beforeEach(() => {
         cy.visit(Cypress.config().registerUrl);
         cy.changeLangAuth();
-    });
+    })
 
     it('Invalid-email_code-input', function () {
         cy.xpath("//input[@id='email']", {timeout: 10000}).type(userEmail);
