@@ -108,7 +108,6 @@ const makeEmailAccount = async () => {
             // search by Unseen since current date
             imap.search(["UNSEEN", ["SINCE", new Date()]], (err, results) => {
               // if we have results, continue fetching msg
-              console.log(results)
               if (results === null
                   || results === undefined
                   || results.length === 0) {

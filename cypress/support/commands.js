@@ -133,7 +133,6 @@ Cypress.Commands.add('accessAllItems', () => {
 });
 
 Cypress.Commands.add('changeLang', () => {
-    //cy.get('[data-header-test-id="2"]').click()
     cy.xpath("/html/body/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div/button").click();
     cy.wait(500);
     cy.xpath("/html/body/div[2]/div/div/div[2]/div[1]/div/div/div[1]/div").find('a').last().click();
