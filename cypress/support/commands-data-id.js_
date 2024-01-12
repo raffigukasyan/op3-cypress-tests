@@ -141,11 +141,11 @@ Cypress.Commands.add('changeLang', () => {
 });
 
 Cypress.Commands.add('changeLangAuth', () => {
-    cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div/button").click();
+    cy.get('[data-header-test-id="lang_button"]').click()
     cy.wait(500);
-    cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div").find('a').last().click();
+    cy.get('[data-header-test-id="ru"]').click()
     cy.wait(500);
-});
+})
 
 Cypress.Commands.add('logout', () => {
     cy.wait(1500);
