@@ -14,10 +14,10 @@ Cypress.Commands.add('login', (username = Cypress.env('email'), password = Cypre
     cy.session([username, hashCode(password)], () => {
         cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
 
-        cy.get('[data-test-id="email_input"]').should('be.visible').clear().type(username);
-        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(password, { log: false });
+        cy.xpath("//input[@id='email']", { timeout: 10000 }).type(username);
+        cy.xpath("//input[@id='password']", { timeout: 10000 }).type(password, { log: false });
 
-        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
+        cy.xpath("//button[@type='submit']", { timeout: 10000}).click();
         cy.wait(4000);
     });
 });
