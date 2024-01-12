@@ -18,12 +18,12 @@ describe("C. Invite user by 2 ways", () => {
 
     it('should invite by user menu', function () {
         cy.log('Логинимся в админку указанную в .env')
-        cy.admin();
+        cy.adminDataId();
         //дополнительный шаг для тестирования на локалке
         cy.visit('/admin/lc/');
         cy.wait(3000);
         cy.log('меняем язык на RU');
-        cy.changeLangAuth();
+        cy.changeLangDataId();
 
         // Go to invite user page
         cy.log('Высылаем приглашение')

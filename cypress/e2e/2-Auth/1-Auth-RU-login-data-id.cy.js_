@@ -7,7 +7,7 @@ describe('2-Auth-RU-login-valid.cy.js', () => {
         cy.log('идем на страницу логина');
         cy.visit(Cypress.config().baseUrl);
         cy.log('Меняем язык на RU');
-        cy.changeLangAuth();
+        cy.changeLangDataId();
     });
 
     it('should move to login page and log in', function () {

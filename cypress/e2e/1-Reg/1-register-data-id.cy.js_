@@ -21,7 +21,7 @@ describe('Register Ru', () => {
         cy.log('Идем на страницу регистрации');
         cy.visit(Cypress.config().registerUrl);
         cy.log('Смена языка на RU');
-        cy.changeLangAuth();
+        cy.changeLangDataId();
     });
 
     it('valid-email-input', function () {

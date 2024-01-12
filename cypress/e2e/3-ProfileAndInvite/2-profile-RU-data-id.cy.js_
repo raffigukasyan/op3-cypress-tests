@@ -2,7 +2,7 @@ describe("A3. Profile editing", () => {
     const newPassword = 'fg5fHe4$fg_56fG';
 
     beforeEach(() => {
-        cy.login();
+        cy.loginDataId();
     });
 
 
@@ -10,7 +10,7 @@ describe("A3. Profile editing", () => {
         cy.visit('/admin/lc/');
         cy.wait(3000);
         cy.log('меняем язык на RU');
-        cy.changeLangAuth();
+        cy.changeLangDataId();
         cy.wait(1000);
         cy.log('Заходим в профиль')
         cy.get('[data-header-test-id="header_menu_button"]').click();
@@ -48,11 +48,11 @@ describe("A3. Profile editing", () => {
 
     it('should login with new password and change it back', function () {
         // Cypress.session.clearAllSavedSessions();
-        cy.login(Cypress.env('email'), newPassword);
+        cy.loginDataId(Cypress.env('email'), newPassword);
         cy.visit('/profile');
         cy.wait(1500);
         cy.log('меняем язык на RU');
-        cy.changeLangAuth();
+        cy.changeLangDataId();
         cy.wait(1000);
         // cy.closePopup();
 
