@@ -42,7 +42,7 @@ describe("C. Invite user by 2 ways", () => {
         recurse(
             () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
-                if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail})
+                if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail});
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {
