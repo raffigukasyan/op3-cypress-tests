@@ -40,6 +40,7 @@ module.exports = defineConfig({
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
+
       on('task', {
         getUserEmail() {
           return emailAccount.user;
