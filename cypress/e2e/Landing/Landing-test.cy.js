@@ -7,7 +7,7 @@ describe('Landing-Test.js', () => {
 
     before(() => {
         const ctx = Cypress.mocha.getRunner().suite.ctx
-        if (Cypress.config().baseUrl != 'https://qa-testing.org-online.ru/') {
+        if (Cypress.config().baseUrl == 'https://qa-testing.org-online.ru/') {
             //continue;
         } else {
             ctx.skip();
