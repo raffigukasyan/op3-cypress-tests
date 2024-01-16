@@ -9,10 +9,21 @@ describe('Landing-Test.js', () => {
         const ctx = Cypress.mocha.getRunner().suite.ctx
         if (Cypress.config().baseUrl == 'https://qa-testing.org-online.ru/') {
             //continue;
+            cy.request({ url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            }).as('content').then((response) => {
+                const content = response.body
+                const result = content.result;
+                cy.log('Пробуем удалить старые тестовые лиды(если такие есть)');
+                console.log('Пробуем удалить старые тестовые лиды(если такие есть)');
+                result.forEach((element) => {
+                    console.log('Лид ' + element.ID + ' удален');
+                    cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                    });
+            });
         } else {
             ctx.skip();
-        };
-    })
+        }
+    });
 
     it('зайти на лэндинг и проверить кнопки', function () {
         cy.visit(landingUrl);
@@ -132,20 +143,15 @@ describe('Landing-Test.js', () => {
         });
     });
     it('перейти на страницу /learning-center , заполнить форму и проверить Лид', function () {
-        //cy.visit('https://org-online.ru');
         cy.visit(landingUrl);
         cy.xpath("//a[text()='Подробнее']", { timeout: 10000 }).eq(0).should('be.visible').click();
         cy.url().should('include', '/learning-center');
         cy.get('[type="text"]').should('be.visible').type(date_in_milliseconds);
         cy.wait(500);
-        //cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
-        //cy.wait(500);
         cy.get('[type="email"]').eq(1).should('be.visible').type(fake_unique_email);
         cy.wait(500);
         cy.get('[type="tel"]').should('be.visible').type('123456789');
         cy.wait(500);
-        //cy.xpath("//span[text()='Сообщение *']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
-        //cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
@@ -227,7 +233,6 @@ describe('Landing-Test.js', () => {
         cy.xpath("//a[text()='Цены']", {timeout: 10000}).should('be.visible').eq(0).click();
         cy.wait(1500);
         cy.url().should('include', '/prices');
-        //Оставить заявку
         cy.get('[type="button"]').eq(2).should('be.visible').click();
         cy.wait(500);
         cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
