@@ -7,7 +7,7 @@ describe('Landing-Test.js', () => {
 
     before(() => {
         const ctx = Cypress.mocha.getRunner().suite.ctx
-        if (Cypress.config().baseUrl == 'https://qa-testing.org-online.ru/') {
+        if (Cypress.config().baseUrl != 'https://qa-testing.org-online.ru/') {
             //continue;
             cy.request({ url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
             }).as('content').then((response) => {
