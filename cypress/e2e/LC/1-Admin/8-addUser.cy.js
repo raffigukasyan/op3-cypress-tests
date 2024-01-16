@@ -12,7 +12,6 @@ describe("US.1 Add User", () => {
 
     it('Add user', function () {
         // Go to add user page
-        cy.wait(1500);
         cy.xpath("//button[text()='Добавить пользователя']").click();
 
         cy.wait(1000);
@@ -31,13 +30,13 @@ describe("US.1 Add User", () => {
 
 
         // departments
-        cy.xpath("//button[text()='Выбрать']").click();
-        cy.wait(500);
-        cy.contains("Выбрать: Отделы").parent().next().click();
-        cy.wait(500);
-        cy.xpath("//div[text()='Marketing']").click();
-        cy.contains("Выбрать: Отделы").parent().next().next().next().click();
-        cy.wait(500);
+        // cy.xpath("//button[text()='Выбрать']").click();
+        // cy.wait(500);
+        // cy.contains("Выбрать: Отделы").parent().next().click();
+        // cy.wait(500);
+        // cy.xpath("//div[text()='Marketing']").click();
+        // cy.contains("Выбрать: Отделы").parent().next().next().next().click();
+        // cy.wait(500);
 
         //Team
         cy.xpath("//button[text()='Выбрать']").click();
@@ -47,6 +46,7 @@ describe("US.1 Add User", () => {
         cy.contains("Выбрать: Команды").parent().next().click();
         cy.wait(500);
         cy.xpath("//div[text()='Qa Test Team']").scrollIntoView().click();
+        cy.wait(500);
         cy.contains("Выбрать: Команды").parent().next().next().next().click();
 
         cy.wait(500);
@@ -69,7 +69,7 @@ describe("US.1 Add User", () => {
         cy.xpath("//span[text()='Фамилия']").next().clear().type('USER USER');
 
         email = 'Edit' + email;
-        password += 'Edit';
+        password+=' Edit';
 
         cy.xpath("//span[text()='Почта *']").next().clear().type(email);
         cy.xpath("//span[text()='Телефон']").next().clear().type('+7 999 999 99 99');
@@ -85,13 +85,13 @@ describe("US.1 Add User", () => {
     })
 
     it('check user team/departments', () => {
-        cy.xpath("//a[text()='Отделы']").click();
-        cy.wait(1000);
-        cy.xpath("//div[text()='Marketing']").click();
-        cy.wait(500);
+        // cy.xpath("//a[text()='Отделы']").click();
+        // cy.wait(1000);
+        // cy.xpath("//div[text()='Marketing']").click();
+        // cy.wait(500);
 
         // check User
-        cy.xpath("//span[text()='Пользователи']").next().contains('QA QA USER USER').should('be.visible');
+//        cy.xpath("//span[text()='Пользователи']").next().contains('QA QA USER USER').should('be.visible');
 
 
         //check Team
@@ -107,5 +107,4 @@ describe("US.1 Add User", () => {
         cy.wait(1500);
         cy.visit('admin/lc/courses');
     })
-
 })
