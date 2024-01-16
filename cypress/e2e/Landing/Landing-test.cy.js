@@ -1,15 +1,17 @@
 describe('Landing-Test.js', () => {
     let landingUrl = 'https://org-online.ru';
     const date_in_milliseconds = new Date().getTime();
-    const secret_key = Cypress.env('bitrixCode');
+    const lead_secret_key = Cypress.env('leadSecretKey');
+    const lead_url = Cypress.env('leadUrl');
+    const lead_user = Cypress.env('leadUserId');
     let fake_unique_email = 'abrakadabra@thisisafakedomainthatdoesntexisthaveanicedayandhereijust.com'
 
 
     before(() => {
         const ctx = Cypress.mocha.getRunner().suite.ctx
-        if (Cypress.config().baseUrl != 'https://qa-testing.org-online.ru/') {
+        if (Cypress.config().baseUrl == 'https://qa-testing.org-online.ru/') {
             //continue;
-            cy.request({ url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            cy.request({ url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
             }).as('content').then((response) => {
                 const content = response.body
                 const result = content.result;
@@ -17,7 +19,7 @@ describe('Landing-Test.js', () => {
                 console.log('Пробуем удалить старые тестовые лиды(если такие есть)');
                 result.forEach((element) => {
                     console.log('Лид ' + element.ID + ' удален');
-                    cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                    cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
                     });
             });
         } else {
@@ -65,7 +67,7 @@ describe('Landing-Test.js', () => {
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -80,15 +82,15 @@ describe('Landing-Test.js', () => {
             } else {
                 cy.log("Проверка лида прошла успешно")
                 console.log("Проверка лида прошла успешно")
-            };
+            }
             result.forEach((element) => {
                 console.log(element.ID);
-                cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
             });
         });
         cy.wait(3000);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -112,7 +114,7 @@ describe('Landing-Test.js', () => {
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -127,15 +129,15 @@ describe('Landing-Test.js', () => {
             } else {
                 cy.log("Проверка лида прошла успешно")
                 console.log("Проверка лида прошла успешно")
-            };
+            }
             result.forEach((element) => {
                 console.log(element.ID);
-                cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
             });
         });
         cy.wait(3000);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -155,7 +157,7 @@ describe('Landing-Test.js', () => {
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -170,15 +172,15 @@ describe('Landing-Test.js', () => {
             } else {
                 cy.log("Проверка лида прошла успешно")
                 console.log("Проверка лида прошла успешно")
-            };
+            }
             result.forEach((element) => {
                 console.log(element.ID);
-                cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
             });
         });
         cy.wait(3000);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -198,7 +200,7 @@ describe('Landing-Test.js', () => {
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -213,15 +215,15 @@ describe('Landing-Test.js', () => {
             } else {
                 cy.log("Проверка лида прошла успешно")
                 console.log("Проверка лида прошла успешно")
-            };
+            }
             result.forEach((element) => {
                 console.log(element.ID);
-                cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
             });
         });
         cy.wait(3000);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -248,7 +250,7 @@ describe('Landing-Test.js', () => {
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
@@ -264,15 +266,14 @@ describe('Landing-Test.js', () => {
                 cy.log("Проверка лида прошла успешно")
                 console.log("Проверка лида прошла успешно")
             }
-            ;
             result.forEach((element) => {
                 console.log(element.ID);
-                cy.request({url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.delete?id=${element.ID}`});
+                cy.request({url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.delete?id=${element.ID}`});
             });
         });
         cy.wait(3000);
         cy.request({
-            url: `https://itdelta.bitrix24.ru/rest/1/${secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
+            url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}&SELECT[]=ID`,
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
