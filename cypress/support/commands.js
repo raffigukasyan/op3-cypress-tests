@@ -22,6 +22,30 @@ Cypress.Commands.add('login', (username = Cypress.env('email'), password = Cypre
     });
 });
 
+Cypress.Commands.add('loginDataId', (username = Cypress.env('email'), password = Cypress.env('password')) => {
+
+    const hashCode = function (str) {
+        str = "" + str;
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            var char = str.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
+    cy.session([username, hashCode(password)], () => {
+        cy.visit(Cypress.config('baseUrl') + 'login', { timeout: 10000 });
+
+        cy.get('[data-test-id="email_input"]').should('be.visible').clear().type(username);
+        cy.get('[data-test-id="password_input"]').should('be.visible').clear().type(password, { log: false });
+
+        cy.get('[data-test-id="submit_button"]').should('be.visible').click();
+        cy.wait(4000);
+    });
+});
+
 Cypress.Commands.add('admin', () => {
     cy.login();
     cy.visit('/admin');
@@ -37,6 +61,24 @@ Cypress.Commands.add('admin', () => {
         cy.get(selector).click();
     })
     
+    cy.wait(500);
+});
+
+Cypress.Commands.add('adminDataId', () => {
+    cy.loginDataId();
+    cy.visit('/admin');
+    cy.wait(3000);
+    cy.get('body').then(($body) => {
+        if($body.find('.inline-block.align-bottom.bg-white button').length) {
+            return '.inline-block.align-bottom.bg-white button';
+        }
+
+        return 'body';
+    })
+        .then(selector => {
+            cy.get(selector).click();
+        })
+
     cy.wait(500);
 });
 
@@ -143,6 +185,13 @@ Cypress.Commands.add('changeLangAuth', () => {
     cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div/button").click();
     cy.wait(500);
     cy.xpath("/html/body/div[2]/div/nav/div/div/div[2]/div/div").find('a').last().click();
+    cy.wait(500);
+});
+
+Cypress.Commands.add('changeLangDataId', () => {
+    cy.get('[data-header-test-id="lang_button"]').click()
+    cy.wait(500);
+    cy.get('[data-header-test-id="ru"]').click()
     cy.wait(500);
 })
 
