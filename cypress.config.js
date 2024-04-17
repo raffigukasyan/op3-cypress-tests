@@ -17,6 +17,7 @@ module.exports = defineConfig({
     leadUserId: process.env.BITRIX24_USER_ID,
     courseGroupName: "QA Test Course Group",
     curriculumName: "QA Test Curriculum",
+    teemName: "Qa Test Team",
     courseName: "QA Test Course",
     lessonCheckboxRadio: "QA Test lesson (checkbox + radio)",
     lessonText: "QA Test lesson (text)",
