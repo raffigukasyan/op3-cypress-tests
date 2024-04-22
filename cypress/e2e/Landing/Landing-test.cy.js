@@ -13,7 +13,6 @@ describe('Landing-Test.js', () => {
             //continue;
             cy.request({ url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
             }).as('content').then((response) => {
-                console.log(response, "RESPONSE");
                 const content = response.body
                 const result = content.result;
                 cy.log('Пробуем удалить старые тестовые лиды(если такие есть)');
@@ -70,15 +69,12 @@ describe('Landing-Test.js', () => {
         cy.request({
             url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
-            console.log(response, "RESS ADD")
             const content = response.body
             const result = content.result;
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
-            console.log(last_lead);
             const last_lead_name = last_lead.NAME;
-            console.log(last_lead_name, "LAST LEAD TEXT");
             if (last_lead_name != "QA_TEST_1") {
                 throw new Error("не найден правильный лид");
             } else {
@@ -123,9 +119,7 @@ describe('Landing-Test.js', () => {
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
-            console.log(last_lead);
             const last_lead_name = last_lead.NAME;
-            console.log(last_lead);
             if (last_lead_name != "QA_TEST_2") {
                 throw new Error("не найден правильный лид");
             } else {
@@ -144,7 +138,6 @@ describe('Landing-Test.js', () => {
             const content = response.body
             const result = content.result;
             expect(Boolean(result.length)).to.be.false;
-            console.log(result);
         });
     });
     it('перейти на страницу /learning-center , заполнить форму и проверить Лид', function () {
@@ -164,11 +157,9 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
-            console.log(result);
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
-            console.log(last_lead);
             const last_lead_name = last_lead.NAME;
             if (last_lead_name != date_in_milliseconds) {
                 throw new Error("не найден правильный лид");
@@ -188,7 +179,6 @@ describe('Landing-Test.js', () => {
             const content = response.body
             const result = content.result;
             expect(Boolean(result.length)).to.be.false;
-            console.log(result);
         });
     });
     it('перейти на страницу /policy , заполнить форму и проверить Лид', function () {
@@ -208,11 +198,9 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
-            console.log(result);
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
-            console.log(last_lead);
             const last_lead_name = last_lead.NAME;
             if (last_lead_name != 'QA_TEST_3') {
                 throw new Error("Не найден правильный лид");
@@ -232,7 +220,6 @@ describe('Landing-Test.js', () => {
             const content = response.body
             const result = content.result;
             expect(Boolean(result.length)).to.be.false;
-            console.log(result);
         });
     });
     it('Перейти на страницу /prices заполнить форму и проверить Лид', function () {
@@ -259,11 +246,9 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
-            console.log(result);
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
-            console.log(last_lead);
             const last_lead_name = last_lead.NAME;
             if (last_lead_name != "QA_TEST_4") {
                 throw new Error("Не найден правильный лид");
@@ -283,7 +268,6 @@ describe('Landing-Test.js', () => {
             const content = response.body
             const result = content.result;
             expect(Boolean(result.length)).to.be.false;
-            console.log(result);
         });
     });
 });
