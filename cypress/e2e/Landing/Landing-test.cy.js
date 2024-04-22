@@ -13,6 +13,7 @@ describe('Landing-Test.js', () => {
             //continue;
             cy.request({ url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
             }).as('content').then((response) => {
+                console.log(response, "RESPONSE");
                 const content = response.body
                 const result = content.result;
                 cy.log('Пробуем удалить старые тестовые лиды(если такие есть)');
@@ -54,30 +55,31 @@ describe('Landing-Test.js', () => {
         cy.visit('https://org-online.ru');
         cy.xpath("//span[text()='Связаться']", { timeout: 10000 }).should('be.visible').eq(1).click();
         cy.wait(500);
-        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_1');
         cy.wait(500);
-        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_1');
         cy.wait(500);
         cy.xpath("//span[text()='email *']", { timeout: 10000 }).should('be.visible').next().type(fake_unique_email);
         cy.wait(500);
         cy.xpath("//span[text()='Телефон *']", { timeout: 10000 }).should('be.visible').next().type('1234567890');
         cy.wait(500);
-        cy.xpath("//span[text()='Сообщение *']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
+        cy.xpath("//span[text()='Сообщение']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
         cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
         cy.request({
             url: `${lead_url}/rest/${lead_user}/${lead_secret_key}/crm.lead.list?FILTER[>DATE_CREATE]=2024-01-01&FILTER[CREATED_BY_ID]=1&FILTER[EMAIL]=${fake_unique_email}`,
         }).as('content').then((response) => {
+            console.log(response, "RESS ADD")
             const content = response.body
             const result = content.result;
             let array_length = result.length;
             let last_index = array_length - 1;
             let last_lead = result[last_index];
             console.log(last_lead);
-            const last_lead_text = last_lead.COMMENTS.toString();
-            console.log(last_lead);
-            if (last_lead_text != date_in_milliseconds) {
+            const last_lead_name = last_lead.NAME;
+            console.log(last_lead_name, "LAST LEAD TEXT");
+            if (last_lead_name != "QA_TEST_1") {
                 throw new Error("не найден правильный лид");
             } else {
                 cy.log("Проверка лида прошла успешно")
@@ -94,22 +96,22 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
-            console.log(result);
+            expect(Boolean(result.length)).to.be.false;
         });
     });
     it('Открыть модалку Продажи на главной и создать & проверить Лид', function () {
         cy.visit('https://org-online.ru');
         cy.xpath("//span[text()='Связаться']", { timeout: 10000 }).should('be.visible').eq(0).click();
         cy.wait(500);
-        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_2');
         cy.wait(500);
-        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_2');
         cy.wait(500);
         cy.xpath("//span[text()='email *']", { timeout: 10000 }).should('be.visible').next().type(fake_unique_email);
         cy.wait(500);
         cy.xpath("//span[text()='Телефон *']", { timeout: 10000 }).should('be.visible').next().type('1234567890');
         cy.wait(500);
-        cy.xpath("//span[text()='Сообщение *']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
+        cy.xpath("//span[text()='Сообщение']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
         cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
@@ -122,9 +124,9 @@ describe('Landing-Test.js', () => {
             let last_index = array_length - 1;
             let last_lead = result[last_index];
             console.log(last_lead);
-            const last_lead_text = last_lead.COMMENTS.toString();
+            const last_lead_name = last_lead.NAME;
             console.log(last_lead);
-            if (last_lead_text != date_in_milliseconds) {
+            if (last_lead_name != "QA_TEST_2") {
                 throw new Error("не найден правильный лид");
             } else {
                 cy.log("Проверка лида прошла успешно")
@@ -141,6 +143,7 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
+            expect(Boolean(result.length)).to.be.false;
             console.log(result);
         });
     });
@@ -152,7 +155,7 @@ describe('Landing-Test.js', () => {
         cy.wait(500);
         cy.get('[type="email"]').eq(1).should('be.visible').type(fake_unique_email);
         cy.wait(500);
-        cy.get('[type="tel"]').should('be.visible').type('123456789');
+        cy.get('[type="tel"]').should('be.visible').type('1234567890');
         cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
@@ -166,8 +169,8 @@ describe('Landing-Test.js', () => {
             let last_index = array_length - 1;
             let last_lead = result[last_index];
             console.log(last_lead);
-            const last_lead_text = last_lead.NAME;
-            if (last_lead_text != date_in_milliseconds) {
+            const last_lead_name = last_lead.NAME;
+            if (last_lead_name != date_in_milliseconds) {
                 throw new Error("не найден правильный лид");
             } else {
                 cy.log("Проверка лида прошла успешно")
@@ -184,6 +187,7 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
+            expect(Boolean(result.length)).to.be.false;
             console.log(result);
         });
     });
@@ -191,11 +195,11 @@ describe('Landing-Test.js', () => {
         cy.visit(landingUrl);
         cy.xpath("//a[text()='Подробнее']", { timeout: 10000 }).eq(1).should('be.visible').click();
         cy.url().should('include', '/policy');
-        cy.get('[type="text"]').should('be.visible').type(date_in_milliseconds);
+        cy.get('[type="text"]').should('be.visible').type('QA_TEST_3');
         cy.wait(500);
         cy.get('[type="email"]').eq(1).should('be.visible').type(fake_unique_email);
         cy.wait(500);
-        cy.get('[type="tel"]').should('be.visible').type('123456789');
+        cy.get('[type="tel"]').should('be.visible').type('1234567890');
         cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
@@ -209,8 +213,8 @@ describe('Landing-Test.js', () => {
             let last_index = array_length - 1;
             let last_lead = result[last_index];
             console.log(last_lead);
-            const last_lead_text = last_lead.NAME;
-            if (last_lead_text != date_in_milliseconds) {
+            const last_lead_name = last_lead.NAME;
+            if (last_lead_name != 'QA_TEST_3') {
                 throw new Error("Не найден правильный лид");
             } else {
                 cy.log("Проверка лида прошла успешно")
@@ -227,6 +231,7 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
+            expect(Boolean(result.length)).to.be.false;
             console.log(result);
         });
     });
@@ -237,15 +242,15 @@ describe('Landing-Test.js', () => {
         cy.url().should('include', '/prices');
         cy.get('[type="button"]').eq(2).should('be.visible').click();
         cy.wait(500);
-        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Имя  *']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_4');
         cy.wait(500);
-        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST');
+        cy.xpath("//span[text()='Фамилия']", { timeout: 10000 }).should('be.visible').next().type('QA_TEST_4');
         cy.wait(500);
         cy.xpath("//span[text()='email *']", { timeout: 10000 }).should('be.visible').next().type(fake_unique_email);
         cy.wait(500);
         cy.xpath("//span[text()='Телефон *']", { timeout: 10000 }).should('be.visible').next().type('1234567890');
         cy.wait(500);
-        cy.xpath("//span[text()='Сообщение *']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
+        cy.xpath("//span[text()='Сообщение']", { timeout: 10000 }).should('be.visible').parent().parent().next().type(date_in_milliseconds);
         cy.wait(500);
         cy.xpath("//button[text()='Отправить']", { timeout: 10000 }).should('be.visible').click();
         cy.wait(5500);
@@ -259,8 +264,8 @@ describe('Landing-Test.js', () => {
             let last_index = array_length - 1;
             let last_lead = result[last_index];
             console.log(last_lead);
-            const last_lead_text = last_lead.COMMENTS.toString();
-            if (last_lead_text != date_in_milliseconds) {
+            const last_lead_name = last_lead.NAME;
+            if (last_lead_name != "QA_TEST_4") {
                 throw new Error("Не найден правильный лид");
             } else {
                 cy.log("Проверка лида прошла успешно")
@@ -277,6 +282,7 @@ describe('Landing-Test.js', () => {
         }).as('content').then((response) => {
             const content = response.body
             const result = content.result;
+            expect(Boolean(result.length)).to.be.false;
             console.log(result);
         });
     });
