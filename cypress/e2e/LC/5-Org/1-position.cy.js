@@ -18,6 +18,7 @@ describe('OrgBoard.A1. Create position', () => {
         cy.visit('ob/admin/positions');
         cy.wait(3000);
         cy.contains('Add').click();
+        cy.wait(1500);
 
         cy.xpath("//span[text()='Name *']").next().type(position);
         cy.xpath("//button[@role='switch']").click();
