@@ -9,10 +9,10 @@ describe("C. Invite user by 2 ways", () => {
     let confirmationLink;
 
     before(() => {
-        cy.task("getUserEmail").then((user) => {
-            userEmail = user.email;
-            passEmail = user.pass;
-            userName = user.email.replace("@ethereal.email", "");
+        cy.task("getEmailAccount").then((user) => {
+            userEmail = user.username;
+            passEmail = user.password;
+            // userName = user.email.replace("@ethereal.email", "");
         })
     })
 
@@ -42,7 +42,7 @@ describe("C. Invite user by 2 ways", () => {
         recurse(
             () => {
                 if(main === 'release') return  cy.task('getAccount', {subject, userEmail})
-                if(main === 'org-online') return cy.task('getLastEmail', {user: userEmail, pass:passEmail});
+                if(main === 'org-online') return cy.task('getEmailData');
             }, // Cypress commands to retry
             Cypress._.isObject, // keep retrying until the task returns an object
             {

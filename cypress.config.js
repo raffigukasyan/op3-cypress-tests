@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 const makeEmailAccount = require('./cypress/support/email-account new');
+const emailApi = require('./cypress/support/emailApi')
 require('dotenv').config();
 
 module.exports = defineConfig({
@@ -45,6 +46,9 @@ module.exports = defineConfig({
     setupNodeEvents: async (on, config) => {
   
       const emailAccount = await makeEmailAccount();
+      const account =  await emailApi();
+
+      console.log(account, 'acc');
 
       on('task', {
         getUserEmail() {
@@ -61,6 +65,12 @@ module.exports = defineConfig({
         },
         getTestAccount() {
           return emailAccount.testAccountCreate();
+        },
+        getEmailAccount() {
+          return account.getEmailAccount();
+        },
+        getEmailData() {
+          return account.getEmailData()
         }
       });
 
