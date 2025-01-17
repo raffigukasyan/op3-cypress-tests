@@ -60,13 +60,20 @@ describe("US.1 Add User", () => {
 
     it('check add User', () => {
         cy.wait(500);
-        cy.contains(email).click()
+        cy.changeLang('en');
+        cy.accessAllItems();
+        cy.contains('div', email).click()
     })
 
     it('edite User', () => {
-        cy.contains(email).parent().parent().last().find('div').first().click();
+        cy.changeLang('en');
+        cy.accessAllItems();
+        cy.wait(500);
+        cy.contains(email).parent().parent().last().find('div').eq(2).click();
         cy.wait(1500);
 
+        cy.changeLang();
+        cy.wait(1500);
         // filling in the fields
         cy.xpath("//span[text()='Имя *']").next().clear().type('QA QA');
         cy.xpath("//span[text()='Фамилия']").next().clear().type('USER USER');
@@ -98,8 +105,8 @@ describe("US.1 Add User", () => {
 
 
         //check Team
-        cy.xpath("//a[text()='Команды']").click();
-        cy.wait(1000);
+        cy.visit("admin/teams");
+        cy.wait(1500);
         cy.changeLang('en');
         cy.accessAllItems();
         cy.xpath("//div[text()='Qa Test Team']").click();
@@ -111,6 +118,6 @@ describe("US.1 Add User", () => {
     it("log in account", () => {
         cy.login(email, password);
         cy.wait(1500);
-        cy.visit('admin/lc/courses');
+        cy.visit('lc/admin/courses');
     })
 })

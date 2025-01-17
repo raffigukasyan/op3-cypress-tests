@@ -37,12 +37,13 @@ describe('LC.C1. Check student answers', () => {
    it('Check first answer', function () {
       //  Go to the students answers page
         cy.wait(1500);
-        cy.visit('admin/lc/teacher/lessons');
+        cy.visit('lc/admin/teacher/lessons');
         cy.wait(1500);
 
         // Go to the lesson
         // cy.xpath("//div[text()='" + Cypress.env('userName') + "']").click();
-        cy.get('button').contains('Check').first().click()
+       cy.contains('QA Test lesson (text)').parent().next().next().click();
+        // cy.get('button').contains('Check').first().click()
         // Assert we're in the lesson
         cy.xpath("//h2[text()='Checking the lesson']");
         // Input comment for the student

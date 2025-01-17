@@ -33,11 +33,10 @@ describe('LC.A2. Create course', () => {
     it('should create course', function () {
 
         // Go to add courses page
-        cy.visit('admin/lc/courses');
+        cy.visit('lc/admin/courses');
         cy.wait(3000);
         cy.contains('Add Course').click();
-
-        cy.xpath("(//input[@type='text'])[1]").type(Cypress.env('courseName'));
+        cy.xpath("//span[text()='Name *']").next().type(Cypress.env('courseName'));
         cy.xpath("//textarea").type("Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
         // Set course as active
         cy.xpath("//button[text()='Select']").click();
