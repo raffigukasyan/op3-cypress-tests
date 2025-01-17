@@ -10,8 +10,7 @@ describe("C. Invite user by 2 ways", () => {
 
     before(() => {
         cy.task("getEmailAccount").then((user) => {
-            userEmail = user.username;
-            passEmail = user.password;
+            userEmail = user;
             // userName = user.email.replace("@ethereal.email", "");
         })
     })
@@ -23,7 +22,7 @@ describe("C. Invite user by 2 ways", () => {
         cy.xpath("//button[@class='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-50']").click();
         cy.xpath("//a[@href='" +Cypress.config('baseUrl') + "invite-user']").click();
         // Input credentials
-        cy.xpath("//*[@id='email']").type(userEmail);
+        cy.xpath("//input[@id='email']").type(userEmail);
 
 
         // Click on submit button

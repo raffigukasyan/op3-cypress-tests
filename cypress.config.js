@@ -48,7 +48,6 @@ module.exports = defineConfig({
       const emailAccount = await makeEmailAccount();
       const account =  await emailApi();
 
-      console.log(account, 'acc');
 
       on('task', {
         getUserEmail() {

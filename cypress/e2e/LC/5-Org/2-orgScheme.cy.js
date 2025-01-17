@@ -3,10 +3,9 @@ describe('OrgBoard.A2. Create department', () => {
     const positionName = 'QA position: User Qa';
     let userEmail
     before(() => {
-        cy.task("getUserEmail").then((user) => {
-            cy.log(user.email);
-            cy.log(user.pass);
-            userEmail = user.email;
+        cy.task("getEmailAccount").then((email) => {
+            cy.log(email);
+            userEmail = email;
         })
     });
 

@@ -1,32 +1,36 @@
-const Mailjs = require("@cemalgnlts/mailjs");
+const { MailSlurp } = require('mailslurp-client');
 
-const mailjs = new Mailjs();
+const emailApi = async() => {
+    try  {
+        const mailslurp = new MailSlurp({ apiKey: "6d7ea33a0265e867786b4b744db25c3f677cab6516818650caefb2517649312c" });
+        const inbox = await mailslurp.inboxController.createInboxWithDefaults();
+        console.log('Временный email:',inbox);
 
-
-const emailApi = async () => {
-    try {
-        const account = await mailjs.createOneAccount();
-
-        console.log(account);
         const getEmailAccount = () => {
-            return account.data
+            return inbox.emailAddress;
         }
 
+
         const getEmailData = async () => {
-           const data = await mailjs.getMessages();
-           console.log(data, 'DATA');
-           return data
+            //2. Ждём письмо (таймаут 30 секунд)
+            console.log('Ожидание письма...');
+            const email = await mailslurp.waitForLatestEmail(inbox.id, 30000);
+
+            return {
+                html:email.body
+            };
+
         }
 
         return {
             getEmailAccount,
             getEmailData
         }
-
     }
     catch (e) {
-        console.log('ERROR', e)
+        console.log("ERROR");
     }
+
 }
 
 module.exports = emailApi

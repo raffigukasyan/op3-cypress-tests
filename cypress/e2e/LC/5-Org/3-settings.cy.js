@@ -1,10 +1,9 @@
 describe('OrgBoard.A4.Settings', () => {
     let userEmail
     before(() => {
-        cy.task("getUserEmail").then((user) => {
-            cy.log(user.email);
-            cy.log(user.pass);
-            userEmail = user.email;
+        cy.task("getEmailAccount").then((email) => {
+            cy.log(email);
+            userEmail = email;
         })
     });
 
