@@ -4,7 +4,7 @@ const { MailSlurp } = require('mailslurp-client');
 const emailApi = async () => {
     try {
         const mailslurp = new MailSlurp({
-            apiKey: "6d7ea33a0265e867786b4b744db25c3f677cab6516818650caefb2517649312c",
+            apiKey: "42b123fc7989e4864f44a7ea91ec0c4e035251bd0b7000efe8214071acc4730a",
             basePath: "https://api.mailslurp.com"
         });
 
