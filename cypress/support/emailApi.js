@@ -4,21 +4,19 @@ const baseUrl = "https://api.mail.tm";
 
 const emailApi = async () => {
     try {
-        console.log("Проверка доступности API Mail.tm...");
+        console.log("Проверка доступности API ");
 
         // Получаем список доступных доменов
         const domainsResponse = await fetch(`${baseUrl}/domains`);
         const domainsData = await domainsResponse.json();
 
         if (!domainsData["hydra:member"] || domainsData["hydra:member"].length === 0) {
-            throw new Error(" Ошибка: Mail.tm не вернул доступные домены.");
+            throw new Error(" Ошибка: API не вернул доступные домены.");
         }
 
         // Берем первый доступный домен
         const domain = domainsData["hydra:member"][0].domain;
-        console.log("📩 Доступный домен:", domain);
 
-        console.log("✅ API Mail.tm доступен. Создаем временный email...");
 
         // Создаем временный email с новым доменом
         const accountResponse = await fetch(`${baseUrl}/accounts`, {
@@ -79,7 +77,7 @@ const emailApi = async () => {
 
 
                     if (!messagesText) {
-                        throw new Error("❌ Mail.tm API вернул пустой ответ при проверке почты.");
+                        throw new Error(" Mail.tm API вернул пустой ответ при проверке почты.");
                     }
 
                     const messages = JSON.parse(messagesText);
@@ -103,12 +101,12 @@ const emailApi = async () => {
                 await new Promise((resolve) => setTimeout(resolve, delay));
             }
 
-            throw new Error("❌ Письмо так и не было получено.");
+            throw new Error(" Письмо так и не было получено.");
         };
 
         return { getEmailAccount, getEmailData };
     } catch (error) {
-        console.log("❌ Ошибка работы с Mail.tm API:", error);
+        console.log(" Ошибка работы с Mail.tm API:", error);
     }
 };
 
